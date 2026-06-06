@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<title>المفضلة</title>
+</head>
+
+<body>
+
+<h1>المفضلة</h1>
+
+<div id="favItems"></div>
+
+<script>
+
+const fav =
+JSON.parse(
+localStorage.getItem("wishlist")
+)||[];
+
+document.getElementById("favItems")
+.innerHTML =
+fav.map(item=>`
+
+<div>
+
+<h3>${item.title}</h3>
+
+<p>${item.price} ريال</p>
+
+</div>
+
+`).join("");
+
+</script>
+
+</body>
+</html>
