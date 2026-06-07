@@ -6,115 +6,35 @@
 <title>المفضلة | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
-<style>
-body{margin:0;background:#030608;color:#fff;font-family:Tajawal,sans-serif}
-a{text-decoration:none;color:inherit}
-
-.page{width:min(1200px,94%);margin:auto;padding:40px 0}
-.header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap}
-.header-top h1{margin:0;font-size:38px}
-.header-top .btn{padding:12px 24px}
-
-.fav-list{display:flex;flex-direction:column;gap:18px}
-.fav-item{
-  display:grid;
-  grid-template-columns:140px minmax(0,1fr) auto;
-  gap:18px;
-  align-items:center;
-  background:linear-gradient(180deg,#151b20,#080b0e);
-  border:1px solid #ffffff20;
-  border-radius:24px;
-  padding:16px;
-  box-shadow:0 24px 70px #0008;
-}
-.fav-item img{
-  width:140px;height:115px;object-fit:contain;border-radius:16px;background:radial-gradient(circle,#d8a64b22,#0b1014 60%);padding:12px;
-}
-.fav-info h3{margin:0 0 8px;font-size:21px;line-height:1.35}
-.fav-info p{margin:0;color:#aaa;line-height:1.6}
-.fav-price{font-size:23px;font-weight:900;color:#f3d18a;margin-top:8px}
-
-.actions{display:flex;flex-direction:column;gap:8px}
-.actions .btn{width:100%;padding:12px 0;font-weight:900;border:0;border-radius:14px;background:linear-gradient(135deg,#f3d18a,#ad762d);color:#111;cursor:pointer;transition:.35s;text-align:center}
-.actions .btn.secondary{background:#ffffff12;color:#fff;border:1px solid #ffffff25}
-.actions .btn:hover{transform:translateY(-3px)}
-
-.empty{padding:44px 22px;text-align:center;color:#aaa}
-footer{text-align:center;color:#aaa;padding:30px 0;border-top:1px solid #ffffff12}
-
-@media(max-width:900px){.fav-item{grid-template-columns:1fr;text-align:center;padding:18px}.fav-item img{width:100%;height:210px}}
-</style>
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/animations.css">
 </head>
 <body>
 
-<main class="page">
+<header class="luxury-header">
+  <div class="header-inner container">
+    <div class="top-brand">
+      <a class="logo" href="../index.html">نُخ<span>بة</span><small>NUKHBA</small></a>
+      <div class="brand-card"><b>المفضلة</b><p>منتجاتك المحفوظة للعودة إليها لاحقًا.</p></div>
+    </div>
+  </div>
+</header>
 
-<div class="header-top">
-<h1>المفضلة</h1>
-<a href="../index.html" class="btn secondary">العودة للمتجر</a>
-</div>
+<main class="container">
+  <div class="section-head">
+    <h2>المفضلة</h2>
+    <a href="../index.html">الرئيسية ‹</a>
+  </div>
 
-<section class="fav-list" id="favItems"></section>
-
+  <section class="products" id="wishItems"></section>
 </main>
 
-<footer>© 2026 نُخبة — المفضلة</footer>
+<footer class="footer">
+  <div class="footer-bottom">© 2026 نُخبة — جميع الحقوق محفوظة</div>
+</footer>
 
-<script>
-let wishlist = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
-let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
-
-function renderFavorites(){
-  const box = document.getElementById("favItems");
-  if(wishlist.length===0){
-    box.innerHTML=`<div class="empty">
-      <h2>لا توجد منتجات مفضلة بعد</h2>
-      <p>أضف منتجاتك المفضلة هنا لتسهيل الوصول إليها لاحقًا.</p>
-      <a href="../index.html" class="btn">تسوق الآن</a>
-    </div>`;
-    return;
-  }
-
-  box.innerHTML = wishlist.map((name,index)=>{
-    // ابحث عن المنتج في السلة أو في صفحة المنتجات
-    const allProducts = JSON.parse(localStorage.getItem("allProducts")) || [];
-    let prod = allProducts.find(p=>p.name===name) || {name:name,price:0,image:"https://via.placeholder.com/200",meta:""};
-    return `
-      <div class="fav-item">
-        <img src="${prod.image}" alt="${prod.name}">
-        <div class="fav-info">
-          <h3>${prod.name}</h3>
-          <p class="meta">${prod.meta}</p>
-          <div class="fav-price">${prod.price.toLocaleString()} ريال</div>
-        </div>
-        <div class="actions">
-          <button class="btn" onclick="moveToCart(${index})">نقل للسلة</button>
-          <button class="btn secondary" onclick="removeFav(${index})">حذف</button>
-        </div>
-      </div>
-    `;
-  }).join("");
-}
-
-function removeFav(index){
-  wishlist.splice(index,1);
-  localStorage.setItem("nukhba_wishlist",JSON.stringify(wishlist));
-  renderFavorites();
-}
-
-function moveToCart(index){
-  const name = wishlist[index];
-  const allProducts = JSON.parse(localStorage.getItem("allProducts")) || [];
-  let prod = allProducts.find(p=>p.name===name) || {name:name,price:0,image:"https://via.placeholder.com/200"};
-  let found = cart.find(c=>c.name===prod.name);
-  if(found){found.qty+=1}else{cart.push({...prod,qty:1})}
-  localStorage.setItem("nukhba_cart",JSON.stringify(cart));
-  removeFav(index);
-  alert("تم نقل المنتج إلى السلة ✅");
-}
-
-renderFavorites();
-</script>
-
+<script src="../js/products.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/wishlist.js"></script>
 </body>
 </html>
