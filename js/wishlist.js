@@ -1,24 +1,10 @@
-let wishlist=[];
+function addToWishlist(name){
+  let wish = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
 
-function addToWishlist(product){
+  if(!wish.includes(name)){
+    wish.push(name);
+  }
 
-wishlist.push(product);
-
-localStorage.setItem(
-"wishlist",
-JSON.stringify(wishlist)
-);
-
-alert("تمت الإضافة للمفضلة");
-
-}
-
-const savedWishlist =
-localStorage.getItem("wishlist");
-
-if(savedWishlist){
-
-wishlist=
-JSON.parse(savedWishlist);
-
+  localStorage.setItem("nukhba_wishlist", JSON.stringify(wish));
+  alert("تمت إضافة المنتج إلى المفضلة ❤️");
 }
