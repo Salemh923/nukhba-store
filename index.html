@@ -125,38 +125,10 @@ button,input{font-family:inherit}
 .meta{color:#aaa;margin:0 0 8px;line-height:1.6;font-size:14px}
 .rating{color:#ffc65a;font-size:14px;margin-top:8px}
 
-.product-info{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:12px;
-}
-.info-pill{
-  background:#ffffff0e;
-  border:1px solid #ffffff14;
-  border-radius:10px;
-  padding:9px 10px;
-  font-size:12px;
-  color:#ddd;
-  min-height:54px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  overflow:hidden;
-}
-.info-pill b{
-  color:var(--gold2);
-  display:block;
-  font-size:11px;
-  margin-bottom:3px;
-  white-space:nowrap;
-}
-.info-pill span{
-  display:block;
-  line-height:1.4;
-  white-space:normal;
-  word-break:break-word;
-}
+.product-info{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.info-pill{background:#ffffff0e;border:1px solid #ffffff14;border-radius:10px;padding:9px 10px;font-size:12px;color:#ddd;min-height:54px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.info-pill b{color:var(--gold2);display:block;font-size:11px;margin-bottom:3px;white-space:nowrap}
+.info-pill span{display:block;line-height:1.4;white-space:normal;word-break:break-word}
 
 .price{font-size:24px;font-weight:900;margin:12px 0;color:#fff}
 .old{color:#777;text-decoration:line-through;font-size:15px;margin-right:8px}
@@ -173,37 +145,27 @@ button,input{font-family:inherit}
 .premium-box h3{color:var(--gold2);margin-top:0}
 .premium-box p{color:#ccc;line-height:1.8}
 
-.footer{
-  margin-top:60px;
-  background:#020406;
-  border-top:1px solid #ffffff12;
-  color:#aaa;
-}
-.footer-grid{
-  display:grid;
-  grid-template-columns:1.4fr 1fr 1fr 1fr;
-  gap:28px;
-  padding:42px 0;
-}
+.footer{margin-top:60px;background:#020406;border-top:1px solid #ffffff12;color:#aaa}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;padding:42px 0}
 .footer h3,.footer h4{color:var(--gold2);margin-top:0}
 .footer p{line-height:1.8}
 .footer a{display:block;color:#bbb;margin:9px 0;transition:.25s}
 .footer a:hover{color:var(--gold2)}
-.payment-icons{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.payment-icons span{
-  background:#ffffff10;
-  border:1px solid #ffffff1c;
-  border-radius:8px;
-  padding:7px 10px;
-  color:#eee;
-  font-size:12px;
-}
-.footer-bottom{
-  border-top:1px solid #ffffff12;
-  padding:18px 0;
-  text-align:center;
-  color:#888;
-}
+.footer-bottom{border-top:1px solid #ffffff12;padding:18px 0;text-align:center;color:#888}
+
+.payment-icons{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.pay-card{height:38px;min-width:78px;padding:0 12px;border-radius:10px;background:#fff;color:#111;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;border:1px solid rgba(255,255,255,.25)}
+.pay-card.mada{color:#159947}
+.pay-card.visa{color:#173b86}
+.pay-card.master{color:#111}
+.pay-card.apple{color:#111}
+.pay-card.stc{color:#4b208c}
+.pay-card.cash,.pay-card.bank{background:#111820;color:#f3d18a;border:1px solid rgba(216,166,75,.45)}
+
+.social-icons{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.social-icons a{width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#ffffff10;border:1px solid #ffffff1c;color:#eee;transition:.25s}
+.social-icons a:hover{background:linear-gradient(135deg,var(--gold2),#ad762d);color:#111;transform:translateY(-3px)}
+.social-icons svg{width:19px;height:19px;fill:currentColor}
 
 .modal{position:fixed;inset:0;background:#000b;z-index:999;display:none;align-items:center;justify-content:center;padding:20px}
 .modal.show{display:flex}
@@ -252,7 +214,7 @@ button,input{font-family:inherit}
   .info-pill{min-height:58px;font-size:11px;padding:8px}
   .actions{grid-template-columns:44px 44px 1fr}
   .footer-grid{grid-template-columns:1fr;text-align:center}
-  .payment-icons{justify-content:center}
+  .payment-icons,.social-icons{justify-content:center}
   .modal-content{grid-template-columns:1fr}
   .modal-content img{height:250px}
 }
@@ -423,12 +385,36 @@ button,input{font-family:inherit}
     <div>
       <h3>نُخبة</h3>
       <p>متجر سعودي فاخر للجديد والمستعمل المضمون، يجمع بين الثقة، الفحص، التسعير العادل، وتجربة شراء راقية.</p>
+
       <div class="payment-icons">
-        <span>مدى</span>
-        <span>Visa</span>
-        <span>Mastercard</span>
-        <span>Apple Pay</span>
-        <span>STC Pay</span>
+        <span class="pay-card mada">mada</span>
+        <span class="pay-card visa">VISA</span>
+        <span class="pay-card master">Mastercard</span>
+        <span class="pay-card apple"> Pay</span>
+        <span class="pay-card stc">STC Pay</span>
+        <span class="pay-card cash">الدفع عند الاستلام</span>
+        <span class="pay-card bank">حوالة بنكية</span>
+      </div>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/yourstore" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A4.5 4.5 0 1 1 12 16.5 4.5 4.5 0 0 1 12 7.5Zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5ZM17.8 6.6a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1Z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@yourstore" target="_blank" aria-label="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M16 2c.4 3 2.2 4.8 5 5v4c-1.9-.1-3.5-.7-5-1.8V16a6 6 0 1 1-6-6c.4 0 .7 0 1 .1v4.1a2.2 2.2 0 1 0 1.7 2.1V2h3.3Z"/></svg>
+        </a>
+        <a href="https://x.com/yourstore" target="_blank" aria-label="X">
+          <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.1l-4.8-6.3L6.6 22H3.5l7.3-8.4L3.3 2h6.3l4.3 5.7L18.9 2Zm-1.1 17.9h1.7L8.7 4H6.8l11 15.9Z"/></svg>
+        </a>
+        <a href="https://www.snapchat.com/add/yourstore" target="_blank" aria-label="Snapchat">
+          <svg viewBox="0 0 24 24"><path d="M12 2c3.4 0 5.5 2.4 5.5 5.8v2.1c0 .5.4.8.9.6l1-.4c.7-.2 1.4.3 1.2 1-.2.8-1.1 1.4-2.3 1.8.4 1.5 1.5 2.7 3.2 3.4.5.2.5.9 0 1.1-1.2.5-2.1.6-2.8.6-.4.7-.9 1.2-1.6 1.2-.6 0-1.1-.3-1.8-.3-.9 0-1.7.8-3.3.8s-2.4-.8-3.3-.8c-.7 0-1.2.3-1.8.3-.7 0-1.2-.5-1.6-1.2-.7 0-1.6-.1-2.8-.6-.5-.2-.5-.9 0-1.1 1.7-.7 2.8-1.9 3.2-3.4-1.2-.4-2.1-1-2.3-1.8-.2-.7.5-1.2 1.2-1l1 .4c.5.2.9-.1.9-.6V7.8C6.5 4.4 8.6 2 12 2Z"/></svg>
+        </a>
+        <a href="https://wa.me/966500000000" target="_blank" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M20.5 3.5A11.8 11.8 0 0 0 2.7 18.2L2 22l3.9-1a11.7 11.7 0 0 0 5.7 1.5h.1A11.8 11.8 0 0 0 20.5 3.5ZM12 20.4a9.4 9.4 0 0 1-4.8-1.3l-.3-.2-2.3.6.6-2.2-.2-.3A9.6 9.6 0 1 1 12 20.4Zm5.3-7.1c-.3-.2-1.7-.9-2-.9s-.5-.1-.7.2-.8.9-.9 1.1-.3.2-.6.1a7.9 7.9 0 0 1-2.3-1.4 8.8 8.8 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5a.5.5 0 0 0 0-.5c-.1-.2-.7-1.6-.9-2.2s-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7c0 1.6 1.2 3.2 1.4 3.4s2.4 3.7 5.9 5.2c.8.3 1.5.5 2 .7a4.7 4.7 0 0 0 2.2.1 3.2 3.2 0 0 0 2.1-1.5 2.7 2.7 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.4Z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@yourstore" target="_blank" aria-label="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31.2 31.2 0 0 0 .5 12a31.2 31.2 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31.2 31.2 0 0 0 .5-4.8 31.2 31.2 0 0 0-.5-4.8ZM9.8 15.5v-7l6.1 3.5-6.1 3.5Z"/></svg>
+        </a>
       </div>
     </div>
 
@@ -442,7 +428,7 @@ button,input{font-family:inherit}
 
     <div>
       <h4>خدمة العملاء</h4>
-      <a href="pages/warranty.html">الضمان والفحص</a>
+      <a href="pages/faq.html">الأسئلة الشائعة</a>
       <a href="pages/returns.html">الاسترجاع والاستبدال</a>
       <a href="pages/terms.html">الشروط والأحكام</a>
       <a href="pages/privacy.html">سياسة الخصوصية</a>
@@ -453,7 +439,7 @@ button,input{font-family:inherit}
       <a href="tel:+966500000000">+966 50 000 0000</a>
       <a href="mailto:info@nukhba.sa">info@nukhba.sa</a>
       <a href="#">الرياض، المملكة العربية السعودية</a>
-      <a href="#">Instagram / X / TikTok</a>
+      <a href="https://wa.me/966500000000" target="_blank">دعم واتساب مباشر</a>
     </div>
   </div>
 
