@@ -6,58 +6,47 @@
 <title>حسابي | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
-<style>
-body{margin:0;background:#030608;color:#fff;font-family:Tajawal,sans-serif}
-a{text-decoration:none;color:inherit}
-.page{width:min(1200px,94%);margin:auto;padding:40px 0}
-.account-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap}
-.account-header h1{margin:0;font-size:38px}
-.account-header .btn{padding:12px 24px}
-
-.account-info, .account-actions{background:linear-gradient(180deg,#151b20,#080b0e);border:1px solid #ffffff20;border-radius:24px;padding:28px;margin-bottom:28px;box-shadow:0 24px 70px #0008}
-.account-info h2, .account-actions h2{margin:0 0 16px;font-size:26px;color:var(--gold2)}
-.account-info p{margin:6px 0;color:#ddd;line-height:1.7}
-
-.action-btn{width:100%;padding:14px 0;margin-top:12px;border-radius:14px;border:0;cursor:pointer;font-weight:900;font-size:16px;color:#111;background:linear-gradient(135deg,#f3d18a,#ad762d);transition:.35s}
-.action-btn.secondary{background:#ffffff12;color:#fff;border:1px solid #ffffff25}
-.action-btn:hover{transform:translateY(-3px)}
-
-.empty{padding:44px 22px;text-align:center;color:#aaa}
-</style>
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/animations.css">
 </head>
 <body>
 
-<main class="page">
+<header class="luxury-header">
+  <div class="header-inner container">
+    <a class="logo" href="../index.html">نُخ<span>بة</span><small>NUKHBA</small></a>
+  </div>
+</header>
 
-<div class="account-header">
-<h1>حسابي</h1>
-<a href="../index.html" class="btn secondary">العودة للمتجر</a>
-</div>
+<main class="container">
+  <div class="section-head">
+    <h2>حسابي</h2>
+    <a href="../index.html">الرئيسية ‹</a>
+  </div>
 
-<section class="account-info">
-<h2>معلومات المستخدم</h2>
-<p>الاسم: أحمد بن خالد</p>
-<p>البريد الإلكتروني: user@example.com</p>
-<p>رقم الهاتف: 0501234567</p>
-</section>
+  <section class="account-layout">
+    <form>
+      <label>الاسم الكامل</label>
+      <input type="text" placeholder="أدخل الاسم الكامل">
 
-<section class="account-actions">
-<h2>إجراءات الحساب</h2>
-<button class="action-btn">تعديل المعلومات</button>
-<button class="action-btn">تغيير كلمة المرور</button>
-<button class="action-btn secondary" onclick="logout()">تسجيل الخروج</button>
-</section>
+      <label>البريد الإلكتروني</label>
+      <input type="email" placeholder="example@mail.com">
 
+      <label>كلمة المرور</label>
+      <input type="password" placeholder="********">
+
+      <label>تأكيد كلمة المرور</label>
+      <input type="password" placeholder="********">
+
+      <button class="btn" type="submit">حفظ التغييرات</button>
+    </form>
+  </section>
 </main>
 
-<footer>© 2026 نُخبة — حساب المستخدم</footer>
+<footer class="footer">
+  <div class="footer-bottom">© 2026 نُخبة — جميع الحقوق محفوظة</div>
+</footer>
 
-<script>
-function logout(){
-  alert("تم تسجيل الخروج ✅");
-  window.location.href = "../index.html";
-}
-</script>
-
+<script src="../js/products.js"></script>
+<script src="../js/storage.js"></script>
 </body>
 </html>
