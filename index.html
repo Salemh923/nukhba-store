@@ -456,6 +456,86 @@ footer{
   .logo{font-size:46px}
   .icon-item{width:76px;height:64px}
 }
+  /* حركات فخمة للواجهة */
+.logo{
+  animation: logoFloat 4s ease-in-out infinite;
+}
+
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+}
+
+.search{
+  animation: softPulse 3.5s ease-in-out infinite;
+}
+
+@keyframes softPulse{
+  0%,100%{box-shadow:0 0 20px rgba(216,166,75,.08)}
+  50%{box-shadow:0 0 35px rgba(216,166,75,.25)}
+}
+
+.hero{
+  animation: heroZoom 12s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom{
+  from{background-size:auto,100%}
+  to{background-size:auto,108%}
+}
+
+.hero h1{
+  animation: titleRise 1.2s ease forwards;
+}
+
+.hero p,.hero-actions{
+  animation: fadeUp 1.6s ease forwards;
+}
+
+@keyframes titleRise{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.cat img{
+  transition:1.2s ease;
+}
+
+.cat:hover img{
+  transform:scale(1.12);
+}
+
+.card{
+  animation: cardFade .9s ease both;
+}
+
+@keyframes cardFade{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.btn{
+  transition:.35s ease;
+}
+
+.btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 45px rgba(216,166,75,.35);
+}
+
+.icon-item{
+  animation: iconBreath 4s ease-in-out infinite;
+}
+
+@keyframes iconBreath{
+  0%,100%{box-shadow:0 0 0 rgba(216,166,75,0)}
+  50%{box-shadow:0 0 25px rgba(216,166,75,.18)}
+}
 </style>
 </head>
 
