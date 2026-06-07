@@ -1,34 +1,56 @@
-// js/compare.js
-const compareContainer = document.getElementById("compareItems");
-
 function renderCompare(){
-  let compare = JSON.parse(localStorage.getItem("nukhba_compare")) || [];
+  const box = document.getElementById("compareItems");
+  if(!box) return;
+
+  const compare = getStorage("nukhba_compare");
+
   if(compare.length === 0){
-    compareContainer.innerHTML = '<p style="text-align:center;color:#aaa;padding:40px;">لا يوجد منتجات للمقارنة</p>';
-    return;
-  }
-  compareContainer.innerHTML = compare.map(id=>{
-    const p = products.find(x=>x.id===id);
-    if(!p) return '';
-    return `
-      <div class="compare-item">
-        <img src="${p.image}" alt="${p.name}" />
-        <h3>${p.name}</h3>
-        <p>${p.meta}</p>
-        <p>${p.price.toLocaleString()} ريال</p>
-        <button onclick="removeCompare(${p.id})" class="btn secondary">حذف</button>
+    box.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;color:#aaa;padding:40px">
+        لا توجد منتجات للمقارنة
       </div>
     `;
-  }).join('');
+    return;
+  }
+
+  box.innerHTML = compare.map(id=>{
+    const p = findProduct(id);
+    if(!p) return "";
+
+    return `
+      <div class="card">
+        <img src="${p.image}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p class="meta">${p.meta}</p>
+
+        <div class="product-info">
+          <div class="info-pill"><b>الحالة</b><span>${p.condition}</span></div>
+          <div class="info-pill"><b>الضمان</b><span>${p.warranty}</span></div>
+          <div class="info-pill"><b>المدينة</b><span>${p.city}</span></div>
+          <div class="info-pill"><b>البائع</b><span>${p.seller}</span></div>
+        </div>
+
+        <p class="price">${money(p.price)}</p>
+
+        <div class="actions" style="grid-template-columns:1fr 1fr">
+          <button class="cart" onclick="addToCart(${p.id})">أضف للسلة</button>
+          <button class="heart" onclick="removeCompare(${p.id})">حذف</button>
+        </div>
+      </div>
+    `;
+  }).join("");
 }
 
 function removeCompare(id){
-  let compare = JSON.parse(localStorage.getItem("nukhba_compare")) || [];
-  compare = compare.filter(i=>i!==id);
-  localStorage.setItem("nukhba_compare",JSON.stringify(compare));
+  let compare = getStorage("nukhba_compare");
+  compare = compare.filter(item=>item !== Number(id));
+  setStorage("nukhba_compare",compare);
   renderCompare();
   updateCounters();
+  showToast("تم حذف المنتج من المقارنة");
 }
 
-renderCompare();
-updateCounters();
+document.addEventListener("DOMContentLoaded",()=>{
+  renderCompare();
+  updateCounters();
+});
