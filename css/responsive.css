@@ -1,0 +1,181 @@
+@media(max-width:1100px){
+  .top-brand,
+  .header-actions,
+  .sell-panel,
+  .product-layout,
+  .checkout-layout,
+  .account-layout,
+  .contact-layout{
+    grid-template-columns:1fr;
+  }
+
+  .products,
+  .categories,
+  .trust-row,
+  .premium-boxes,
+  .page-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .brand-card{
+    display:none;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:650px){
+  .luxury-header{
+    position:relative;
+  }
+
+  .top-brand{
+    display:flex;
+    flex-direction:column;
+    text-align:center;
+    gap:14px;
+  }
+
+  .logo{
+    font-size:38px;
+    margin:auto;
+  }
+
+  .search{
+    height:48px;
+    font-size:13px;
+    text-align:center;
+  }
+
+  .header-actions{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .header-actions>.btn{
+    width:100%;
+  }
+
+  .icons{
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+
+  .icon-item{
+    width:100%;
+    height:64px;
+  }
+
+  .menu .container{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:0;
+    text-align:center;
+  }
+
+  .menu a{
+    font-size:13px;
+    padding:12px 4px;
+  }
+
+  .hero{
+    height:460px;
+    border-radius:22px;
+  }
+
+  .hero-content{
+    right:18px;
+    left:18px;
+    top:45px;
+    text-align:center;
+    max-width:none;
+  }
+
+  .hero h1{
+    font-size:31px;
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+
+  .hero-actions .btn{
+    width:100%;
+  }
+
+  .trust-row,
+  .categories,
+  .products,
+  .premium-boxes,
+  .page-grid{
+    grid-template-columns:1fr;
+  }
+
+  .cat{
+    height:150px;
+  }
+
+  .sell-panel{
+    text-align:center;
+    padding:24px 18px;
+  }
+
+  .steps{
+    grid-template-columns:1fr;
+  }
+
+  .wide-ad{
+    height:310px;
+  }
+
+  .wide-ad div{
+    right:22px;
+    left:22px;
+    top:35px;
+    text-align:center;
+  }
+
+  .wide-ad h2{
+    font-size:30px;
+  }
+
+  .section-head{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .product-info{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .info-pill{
+    min-height:58px;
+    font-size:11px;
+    padding:8px;
+  }
+
+  .actions{
+    grid-template-columns:44px 44px 1fr;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .payment-icons{
+    justify-content:center;
+  }
+
+  .modal-content{
+    grid-template-columns:1fr;
+  }
+
+  .modal-content img{
+    height:250px;
+  }
+}
