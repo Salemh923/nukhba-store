@@ -33,8 +33,18 @@ body{background:#030608;color:#fff;font-family:Tajawal,sans-serif}
   font-size:16px;
 }
 .full{grid-column:1/-1}
+.payment-box{
+  grid-column:1/-1;
+  display:none;
+  margin-top:5px;
+  padding:20px;
+  border-radius:18px;
+  border:1px solid #d8a64b44;
+  background:#0c1115;
+}
+.payment-box.active{display:block}
+.card-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .order-summary{position:sticky;top:120px}
-.order-summary h2{margin-top:0}
 .summary-row{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #ffffff14;color:#ddd}
 .total{font-size:27px;font-weight:900;color:#f3d18a;margin:22px 0}
 .actions{display:grid;gap:12px;margin-top:18px}
@@ -42,7 +52,7 @@ body{background:#030608;color:#fff;font-family:Tajawal,sans-serif}
 .notice{margin-top:18px;color:#aaa;line-height:1.7;font-size:14px}
 @media(max-width:850px){
   .checkout-layout{grid-template-columns:1fr}
-  .form-grid{grid-template-columns:1fr}
+  .form-grid,.card-row{grid-template-columns:1fr}
   .order-summary{position:static}
 }
 </style>
@@ -52,77 +62,112 @@ body{background:#030608;color:#fff;font-family:Tajawal,sans-serif}
 
 <main class="container checkout-page">
 
-  <div class="checkout-layout">
+<div class="checkout-layout">
 
-    <section class="checkout-card">
-      <h1>إتمام الطلب</h1>
+<section class="checkout-card">
+<h1>إتمام الطلب</h1>
 
-      <div class="form-grid">
-        <div class="input-group">
-          <label>الاسم الكامل</label>
-          <input id="name" type="text" placeholder="مثال: سالم محمد">
-        </div>
+<div class="form-grid">
 
-        <div class="input-group">
-          <label>رقم الجوال</label>
-          <input id="phone" type="tel" placeholder="05xxxxxxxx">
-        </div>
+<div class="input-group">
+<label>الاسم الكامل</label>
+<input id="name" type="text" placeholder="مثال: سالم محمد">
+</div>
 
-        <div class="input-group">
-          <label>المدينة</label>
-          <input id="city" type="text" placeholder="الرياض">
-        </div>
+<div class="input-group">
+<label>رقم الجوال</label>
+<input id="phone" type="tel" placeholder="05xxxxxxxx">
+</div>
 
-        <div class="input-group">
-          <label>طريقة الدفع</label>
-          <select id="payment">
-            <option>الدفع عند الاستلام</option>
-            <option>مدى</option>
-            <option>Visa</option>
-            <option>Mastercard</option>
-            <option>Apple Pay</option>
-          </select>
-        </div>
+<div class="input-group">
+<label>المدينة</label>
+<input id="city" type="text" placeholder="الرياض">
+</div>
 
-        <div class="input-group full">
-          <label>العنوان الكامل</label>
-          <input id="address" type="text" placeholder="الحي، الشارع، رقم المبنى">
-        </div>
-      </div>
+<div class="input-group">
+<label>طريقة الدفع</label>
+<select id="payment" onchange="togglePaymentFields()">
+<option value="cash">الدفع عند الاستلام</option>
+<option value="mada">مدى</option>
+<option value="visa">Visa</option>
+<option value="mastercard">Mastercard</option>
+<option value="applepay">Apple Pay</option>
+</select>
+</div>
 
-      <p class="notice">
-        عند تأكيد الطلب سيتم تفريغ السلة وحفظ الطلب كتجربة أولية. الدفع الحقيقي يحتاج ربط بوابة دفع لاحقًا.
-      </p>
-    </section>
+<div class="input-group full">
+<label>العنوان الكامل</label>
+<input id="address" type="text" placeholder="الحي، الشارع، رقم المبنى">
+</div>
 
-    <aside class="order-summary">
-      <h2>ملخص الدفع</h2>
+<div id="cardFields" class="payment-box">
+<h2>بيانات البطاقة</h2>
 
-      <div class="summary-row">
-        <span>عدد المنتجات</span>
-        <b id="count">0</b>
-      </div>
+<div class="input-group full">
+<label>اسم حامل البطاقة</label>
+<input id="cardName" type="text" placeholder="كما هو مكتوب على البطاقة">
+</div>
 
-      <div class="summary-row">
-        <span>الشحن</span>
-        <b>مجاني</b>
-      </div>
+<div class="input-group full">
+<label>رقم البطاقة</label>
+<input id="cardNumber" type="text" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000">
+</div>
 
-      <div class="summary-row">
-        <span>الدفع</span>
-        <b>آمن</b>
-      </div>
+<div class="card-row">
+<div class="input-group">
+<label>تاريخ الانتهاء</label>
+<input id="expiry" type="text" inputmode="numeric" maxlength="5" placeholder="MM/YY">
+</div>
 
-      <div class="total" id="total">0 ريال</div>
+<div class="input-group">
+<label>CVV</label>
+<input id="cvv" type="password" inputmode="numeric" maxlength="4" placeholder="***">
+</div>
+</div>
 
-      <div class="actions">
-        <button class="btn" onclick="finishOrder()">تأكيد الطلب</button>
-        <a class="btn secondary" href="cart.html">العودة للسلة</a>
-        <a class="btn secondary" href="../index.html">متابعة التسوق</a>
-      </div>
-    </aside>
+<p class="notice">هذه حقول تجريبية فقط. لا تدخل بيانات بطاقة حقيقية الآن.</p>
+</div>
 
-  </div>
+<div id="applePayBox" class="payment-box">
+<h2>Apple Pay</h2>
+<p class="notice">سيتم تحويلك إلى Apple Pay عند ربط بوابة دفع حقيقية لاحقًا.</p>
+</div>
+
+</div>
+
+<p class="notice">
+هذه نسخة تشغيل تجريبية. الدفع الحقيقي يحتاج ربط بوابة دفع مثل Moyasar أو Tap أو HyperPay.
+</p>
+</section>
+
+<aside class="order-summary">
+<h2>ملخص الدفع</h2>
+
+<div class="summary-row">
+<span>عدد المنتجات</span>
+<b id="count">0</b>
+</div>
+
+<div class="summary-row">
+<span>الشحن</span>
+<b>مجاني</b>
+</div>
+
+<div class="summary-row">
+<span>طريقة الدفع</span>
+<b id="payLabel">الدفع عند الاستلام</b>
+</div>
+
+<div class="total" id="total">0 ريال</div>
+
+<div class="actions">
+<button class="btn" onclick="finishOrder()">تأكيد الطلب</button>
+<a class="btn secondary" href="cart.html">العودة للسلة</a>
+<a class="btn secondary" href="../index.html">متابعة التسوق</a>
+</div>
+</aside>
+
+</div>
 
 </main>
 
@@ -139,11 +184,32 @@ cart.forEach(item=>{
 document.getElementById("count").innerText = count;
 document.getElementById("total").innerText = total.toLocaleString() + " ريال";
 
+function togglePaymentFields(){
+  const payment = document.getElementById("payment").value;
+  const label = document.getElementById("payment").selectedOptions[0].text;
+  const cardFields = document.getElementById("cardFields");
+  const applePayBox = document.getElementById("applePayBox");
+
+  document.getElementById("payLabel").innerText = label;
+
+  cardFields.classList.remove("active");
+  applePayBox.classList.remove("active");
+
+  if(payment === "mada" || payment === "visa" || payment === "mastercard"){
+    cardFields.classList.add("active");
+  }
+
+  if(payment === "applepay"){
+    applePayBox.classList.add("active");
+  }
+}
+
 function finishOrder(){
   const name = document.getElementById("name").value.trim();
   const phone = document.getElementById("phone").value.trim();
   const city = document.getElementById("city").value.trim();
   const address = document.getElementById("address").value.trim();
+  const payment = document.getElementById("payment").value;
 
   if(cart.length === 0){
     alert("السلة فارغة");
@@ -155,10 +221,24 @@ function finishOrder(){
     return;
   }
 
+  if(payment === "mada" || payment === "visa" || payment === "mastercard"){
+    const cardName = document.getElementById("cardName").value.trim();
+    const cardNumber = document.getElementById("cardNumber").value.trim();
+    const expiry = document.getElementById("expiry").value.trim();
+    const cvv = document.getElementById("cvv").value.trim();
+
+    if(!cardName || !cardNumber || !expiry || !cvv){
+      alert("فضلاً أكمل بيانات البطاقة");
+      return;
+    }
+  }
+
   localStorage.removeItem("nukhba_cart");
   alert("تم تأكيد الطلب بنجاح ✅");
   window.location.href = "../index.html";
 }
+
+togglePaymentFields();
 </script>
 
 </body>
