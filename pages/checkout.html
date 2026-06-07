@@ -4,37 +4,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>إتمام الطلب | نُخبة</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
-
 <style>
-.checkout-box{
-max-width:700px;
-margin:50px auto;
-background:#111;
-padding:30px;
-border-radius:20px;
-border:1px solid #333;
-}
-
-.checkout-box input,
-.checkout-box select{
-width:100%;
-padding:15px;
-margin:10px 0;
-border-radius:10px;
-border:none;
-background:#222;
-color:white;
-}
-
-.checkout-box button{
-width:100%;
-margin-top:15px;
-}
+.checkout-box{max-width:700px;margin:60px auto;background:#111;padding:35px;border-radius:22px;border:1px solid #333}
+.checkout-box input,.checkout-box select{width:100%;padding:16px;margin:10px 0;border:0;border-radius:12px;background:#1c1c1c;color:#fff;font-family:Tajawal}
+.checkout-box button{width:100%;margin-top:15px}
 </style>
+</head>
+<body>
 
+<div class="checkout-box">
+<h1>إتمام الطلب</h1>
+
+<input type="text" placeholder="الاسم الكامل">
+<input type="text" placeholder="رقم الجوال">
+<input type="text" placeholder="المدينة">
+<input type="text" placeholder="العنوان الكامل">
+
+<select>
+<option>الدفع عند الاستلام</option>
+<option>مدى</option>
+<option>Visa</option>
+<option>Mastercard</option>
+<option>Apple Pay</option>
+</select>
+
+<button class="btn" onclick="finishOrder()">تأكيد الطلب</button>
+<a class="btn secondary" href="cart.html">العودة للسلة</a>
+</div>
+
+<script>
+function finishOrder(){
+  localStorage.removeItem("nukhba_cart");
+  alert("تم إرسال الطلب بنجاح ✅");
+  window.location.href = "../index.html";
+}
+</script>
+
+</body>
+</html>
 </head>
 <body>
 
