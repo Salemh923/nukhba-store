@@ -6,155 +6,56 @@
 <title>الدفع | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
-<style>
-body{margin:0;background:#030608;color:#fff;font-family:Tajawal,sans-serif}
-a{text-decoration:none;color:inherit}
-
-.page{width:min(1200px,94%);margin:auto;padding:40px 0}
-.checkout-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap}
-.checkout-header h1{margin:0;font-size:38px}
-.checkout-header .btn{padding:12px 24px}
-
-.checkout-items{display:grid;grid-template-columns:2fr 1fr;gap:24px;align-items:start}
-
-.cart-list{display:flex;flex-direction:column;gap:18px}
-.cart-item{
-  display:grid;
-  grid-template-columns:140px minmax(0,1fr) auto;
-  gap:18px;
-  align-items:center;
-  background:linear-gradient(180deg,#151b20,#080b0e);
-  border:1px solid #ffffff20;
-  border-radius:24px;
-  padding:16px;
-  box-shadow:0 24px 70px #0008;
-}
-.cart-item img{
-  width:140px;height:115px;object-fit:contain;border-radius:16px;background:radial-gradient(circle,#d8a64b22,#0b1014 60%);padding:12px;
-}
-.cart-info h3{margin:0 0 8px;font-size:21px;line-height:1.35}
-.cart-info p{margin:0;color:#aaa;line-height:1.6}
-.cart-price{font-size:23px;font-weight:900;color:#f3d18a;margin-top:8px}
-
-.summary{background:linear-gradient(180deg,#181f24,#090c0f);border:1px solid #d8a64b55;border-radius:24px;padding:24px;box-shadow:0 30px 90px #000;position:sticky;top:20px}
-.summary h2{margin:0 0 18px;font-size:27px;color:var(--gold2)}
-.summary-row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #ffffff14;padding:13px 0;color:#ddd}
-.summary-total{font-size:28px;font-weight:900;color:#f3d18a;margin:22px 0}
-.checkout-actions .btn{width:100%;padding:14px 0;font-weight:900;border:0;border-radius:14px;background:linear-gradient(135deg,#f3d18a,#ad762d);color:#111;cursor:pointer;transition:.35s}
-.checkout-actions .btn.secondary{background:#ffffff12;color:#fff;border:1px solid #ffffff25}
-.checkout-actions .btn:hover{transform:translateY(-3px)}
-
-.empty{padding:44px 22px;text-align:center;color:#aaa}
-footer{text-align:center;color:#aaa;padding:30px 0;border-top:1px solid #ffffff12}
-
-@media(max-width:900px){.checkout-items{grid-template-columns:1fr}.summary{position:static;order:2}}
-@media(max-width:600px){.cart-item{grid-template-columns:1fr;text-align:center;padding:18px}.cart-item img{width:100%;height:210px}}
-</style>
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/animations.css">
 </head>
 <body>
 
-<main class="page">
+<header class="luxury-header">
+  <div class="header-inner container">
+    <a class="logo" href="../index.html">نُخ<span>بة</span><small>NUKHBA</small></a>
+  </div>
+</header>
 
-<div class="checkout-header">
-<h1>الدفع</h1>
-<a href="../cart.html" class="btn secondary">العودة للسلة</a>
-</div>
+<main class="container">
+  <div class="section-head">
+    <h2>إتمام الدفع</h2>
+    <a href="../index.html">الرئيسية ‹</a>
+  </div>
 
-<div class="checkout-items">
+  <section class="page-grid">
+    <form class="checkout-form">
+      <label>الاسم الكامل</label>
+      <input type="text" placeholder="أدخل الاسم الكامل" required>
 
-<section class="cart-list" id="checkoutItems"></section>
+      <label>البريد الإلكتروني</label>
+      <input type="email" placeholder="example@mail.com" required>
 
-<aside class="summary">
-<h2>ملخص الطلب</h2>
-<div class="summary-row">
-<span>عدد المنتجات</span>
-<b id="cartCount">0</b>
-</div>
-<div class="summary-row">
-<span>الشحن</span>
-<b>مجاني</b>
-</div>
-<div class="summary-row">
-<span>الحالة</span>
-<b>جاهز للدفع</b>
-</div>
-<div class="summary-total" id="cartTotal">0 ريال</div>
-<div class="checkout-actions">
-<button class="btn" onclick="payNow()">تأكيد الدفع</button>
-<button class="btn secondary" onclick="clearCart()">تفريغ السلة</button>
-</div>
-</aside>
+      <label>رقم الهاتف</label>
+      <input type="tel" placeholder="05XXXXXXXX" required>
 
-</div>
+      <label>العنوان</label>
+      <textarea placeholder="عنوان الشحن" required></textarea>
 
+      <label>طريقة الدفع</label>
+      <select required>
+        <option value="">اختر الطريقة</option>
+        <option value="credit">بطاقة ائتمان</option>
+        <option value="paypal">PayPal</option>
+        <option value="cash">الدفع عند الاستلام</option>
+      </select>
+
+      <button class="btn" type="submit">إتمام الطلب</button>
+    </form>
+  </section>
 </main>
 
-<footer>© 2026 نُخبة — الدفع</footer>
+<footer class="footer">
+  <div class="footer-bottom">© 2026 نُخبة — جميع الحقوق محفوظة</div>
+</footer>
 
-<script>
-let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
-
-function renderCheckout(){
-  const box = document.getElementById("checkoutItems");
-  const countBox = document.getElementById("cartCount");
-  const totalBox = document.getElementById("cartTotal");
-
-  if(cart.length===0){
-    box.innerHTML=`<div class="empty">
-      <h2>السلة فارغة</h2>
-      <p>لم تقم بإضافة أي منتج بعد. أضف منتجاتك لتتمكن من الدفع.</p>
-      <a href="../index.html" class="btn">تسوق الآن</a>
-    </div>`;
-    countBox.innerText="0";
-    totalBox.innerText="0 ريال";
-    return;
-  }
-
-  let total=0;
-  let count=0;
-
-  box.innerHTML=cart.map((item,index)=>{
-    total+=item.price*item.qty;
-    count+=item.qty;
-    return `
-      <div class="cart-item">
-        <img src="${item.image}" alt="${item.name}">
-        <div class="cart-info">
-          <h3>${item.name}</h3>
-          <p>الكمية: ${item.qty}</p>
-          <p>منتج محفوظ في سلة نُخبة</p>
-          <div class="cart-price">${(item.price*item.qty).toLocaleString()} ريال</div>
-        </div>
-        <button class="remove-btn" onclick="removeItem(${index})">حذف</button>
-      </div>
-    `;
-  }).join("");
-
-  countBox.innerText=count;
-  totalBox.innerText=total.toLocaleString()+" ريال";
-}
-
-function removeItem(index){
-  cart.splice(index,1);
-  localStorage.setItem("nukhba_cart",JSON.stringify(cart));
-  renderCheckout();
-}
-
-function clearCart(){
-  localStorage.removeItem("nukhba_cart");
-  cart=[];
-  renderCheckout();
-}
-
-function payNow(){
-  if(cart.length===0){alert("السلة فارغة");return;}
-  alert("تم الدفع بنجاح ✅ شكراً لتسوقك مع نُخبة!");
-  clearCart();
-  window.location.href="../index.html";
-}
-
-renderCheckout();
-</script>
-
+<script src="../js/products.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/cart.js"></script>
 </body>
 </html>
