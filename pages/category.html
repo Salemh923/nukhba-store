@@ -3,293 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الأقسام | نُخبة</title>
+<title>الفئة | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
-
-<style>
-:root{--gold:#d8a64b;--gold2:#f3d18a;--green:#2ee59d;--blue:#4db5ff}
-*{box-sizing:border-box}
-body{margin:0;background:#030608;color:#fff;font-family:Tajawal,sans-serif;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-.page{width:min(1250px,94%);margin:auto;padding:28px 0 60px}
-
-.cat-top{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,#05090c,#071116);border-bottom:1px solid #ffffff18;padding:16px 0}
-.cat-nav{width:min(1250px,94%);margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px}
-
-.logo{font-size:42px;font-weight:900;line-height:1.1;color:#fff}
-.logo span{color:var(--gold)}
-.logo small{display:block;color:var(--gold2);font-size:9px;letter-spacing:6px;margin-right:6px;margin-top:4px}
-.logo:after{content:"";display:block;width:72px;height:3px;margin-top:7px;border-radius:20px;background:linear-gradient(90deg,var(--gold2),var(--gold))}
-
-.btn{border:0;cursor:pointer;color:#16100a;font-weight:900;border-radius:12px;padding:13px 22px;background:linear-gradient(135deg,var(--gold2),#ad762d);display:inline-block;text-align:center}
-.btn.secondary{background:#ffffff12;color:#fff;border:1px solid #ffffff25}
-
-.cat-hero{margin-bottom:22px;padding:30px;border-radius:26px;background:radial-gradient(circle at 80% 20%,rgba(216,166,75,.18),transparent 28%),linear-gradient(135deg,#151b20,#070a0d);border:1px solid #ffffff18;box-shadow:0 25px 80px #0008}
-.cat-hero h1{margin:0 0 8px;font-size:38px}
-.cat-hero p{margin:0;color:#aaa;line-height:1.8}
-
-.filters{margin-bottom:24px;background:#ffffff0d;border:1px solid #ffffff18;border-radius:22px;padding:18px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:12px}
-.filters input,.filters select{height:48px;border-radius:14px;background:#0b1115;border:1px solid rgba(216,166,75,.24);color:#fff;padding:0 14px;font-family:inherit}
-
-.products{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{position:relative;background:linear-gradient(180deg,#151b20,#080b0e);border:1px solid #ffffff20;border-radius:24px;padding:16px;box-shadow:0 24px 70px #0008;transition:.35s}
-.card:hover{transform:translateY(-7px);border-color:#d8a64b77}
-.card img{width:100%;height:230px;object-fit:contain;border-radius:18px;background:radial-gradient(circle,#d8a64b22,#0b1014 60%);padding:16px;cursor:pointer}
-.badges{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
-.badge{color:#111;padding:5px 9px;border-radius:7px;font-weight:900;font-size:12px;background:var(--gold)}
-.badge.used{background:var(--green)}
-.badge.new{background:var(--blue)}
-.badge.checked{background:#fff}
-.card h3{margin:16px 0 8px;font-size:21px;line-height:1.35;cursor:pointer}
-.meta{color:#aaa;margin:0 0 10px;line-height:1.7}
-.seller{color:#ddd;font-size:14px;margin:0 0 8px}
-.price{font-size:26px;color:var(--gold2);font-weight:900;margin:10px 0 16px}
-
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.action-btn{height:50px;border:0;border-radius:14px;background:linear-gradient(135deg,var(--gold2),#ad762d);color:#111;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-weight:900;font-size:15px}
-.action-btn.secondary{background:linear-gradient(180deg,#ffffff14,#ffffff08);color:var(--gold2);border:1px solid #d8a64b55}
-.details-btn{width:100%;margin-top:12px;height:46px;border-radius:14px;background:#ffffff12;color:#fff;border:1px solid #ffffff25;font-weight:900;cursor:pointer}
-
-.empty{padding:50px;text-align:center;background:#ffffff0d;border:1px solid #ffffff18;border-radius:22px;color:#aaa}
-
-.toast{position:fixed;bottom:25px;right:50%;transform:translateX(50%);background:linear-gradient(135deg,#171d21,#090c0f);color:#fff;border:1px solid rgba(216,166,75,.45);padding:14px 22px;border-radius:14px;z-index:9999;box-shadow:0 20px 60px #000;font-weight:800}
-
-.product-modal{position:fixed;inset:0;background:#000d;display:none;align-items:center;justify-content:center;z-index:9999;padding:18px}
-.modal-content{background:#111820;border:1px solid #ffffff20;border-radius:22px;padding:28px;max-width:680px;width:95%;position:relative;color:#ddd;max-height:90vh;overflow:auto}
-.close-btn{position:absolute;top:14px;left:18px;font-size:30px;cursor:pointer;color:var(--gold2)}
-.modal-content h2{color:var(--gold2);margin-top:0}
-.modal-price{color:var(--gold2);font-size:28px;font-weight:900;margin:12px 0}
-.modal-content ul{line-height:2}
-.modal-content textarea{width:100%;background:#0b1115;color:#fff;border:1px solid #ffffff22;border-radius:12px;padding:12px;font-family:inherit}
-
-footer{text-align:center;color:#aaa;padding:30px 0;border-top:1px solid #ffffff12}
-
-@media(max-width:900px){
-  .products{grid-template-columns:repeat(2,1fr)}
-  .filters{grid-template-columns:1fr 1fr}
-}
-@media(max-width:600px){
-  .logo{font-size:34px}
-  .cat-nav .btn{padding:11px 14px;font-size:13px}
-  .cat-hero{padding:22px 18px}
-  .cat-hero h1{font-size:30px}
-  .filters{grid-template-columns:1fr}
-  .products{grid-template-columns:1fr}
-  .card img{height:220px}
-}
-</style>
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/animations.css">
 </head>
-
 <body>
 
-<header class="cat-top">
-  <div class="cat-nav">
-    <div class="logo">نُخ<span>بة</span><small>NUKHBA</small></div>
-    <a class="btn" href="../index.html">الرئيسية</a>
+<header class="luxury-header">
+  <div class="header-inner container">
+    <a class="logo" href="../index.html">نُخ<span>بة</span><small>NUKHBA</small></a>
   </div>
 </header>
 
-<main class="page">
+<main class="container">
+  <div class="section-head">
+    <h2>المنتجات</h2>
+    <a href="../index.html">الرئيسية ‹</a>
+  </div>
 
-<section class="cat-hero">
-  <h1 id="catTitle">القسم</h1>
-  <p id="catDesc">منتجات مختارة ومنظمة بعناية داخل متجر نُخبة.</p>
-</section>
-
-<section class="filters">
-  <input id="searchInput" placeholder="ابحث داخل القسم...">
-  <select id="conditionFilter">
-    <option value="all">كل الحالات</option>
-    <option value="new">جديد</option>
-    <option value="used">مستعمل</option>
-  </select>
-  <select id="sortFilter">
-    <option value="default">الترتيب الافتراضي</option>
-    <option value="low">الأقل سعراً</option>
-    <option value="high">الأعلى سعراً</option>
-  </select>
-  <select id="cityFilter">
-    <option value="all">كل المدن</option>
-    <option value="الرياض">الرياض</option>
-    <option value="جدة">جدة</option>
-    <option value="الدمام">الدمام</option>
-  </select>
-</section>
-
-<section class="products" id="products"></section>
-
+  <section class="products" id="products"></section>
 </main>
 
-<div class="product-modal" id="productModal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeProduct()">×</span>
-    <h2 id="modalTitle"></h2>
-    <p id="modalMeta"></p>
-    <div class="modal-price" id="modalPrice"></div>
-    <p id="modalDetails"></p>
-    <hr style="border-color:#ffffff18;margin:18px 0;">
-    <h3>مواصفات المنتج</h3>
-    <ul id="modalSpecs"></ul>
-    <h3>تعليق أو استفسار</h3>
-    <textarea id="commentText" rows="4" placeholder="اكتب تعليقك أو سؤالك عن المنتج..."></textarea>
-    <button class="btn" onclick="saveComment()">حفظ التعليق</button>
-    <div id="commentsBox" style="margin-top:18px;line-height:1.8;"></div>
-  </div>
-</div>
+<footer class="footer">
+  <div class="footer-bottom">© 2026 نُخبة — جميع الحقوق محفوظة</div>
+</footer>
 
-<footer>© 2026 نُخبة — الأقسام</footer>
-
-<script>
-const params = new URLSearchParams(window.location.search);
-const cat = params.get("cat") || "electronics";
-
-const titles = {
-  new:["جديد","منتجات جديدة مختارة بضمان وتجربة شراء فاخرة."],
-  used:["مستعمل مضمون","منتجات مستعملة مفحوصة بحالة واضحة قبل الشراء."],
-  electronics:["الإلكترونيات","هواتف، أجهزة لوحية، حواسيب وسماعات مختارة."],
-  cars:["السيارات","سيارات مختارة بحالة واضحة ومعلومات منظمة."],
-  realestate:["العقارات","عقارات وفِلل وشقق مختارة بتفاصيل مرتبة."],
-  watches:["الساعات","ساعات فاخرة وأنيقة جديدة ومستعملة."],
-  fashion:["الأزياء","قطع أزياء مختارة بتجربة عرض راقية."],
-  home:["منزل ومطبخ","منتجات منزلية مختارة بعناية."]
-};
-
-const allProducts = [
-  {cat:"electronics",condition:"used",city:"الرياض",seller:"نُخبة موثّق",name:"iPhone 15 Pro Max",price:3899,meta:"256GB · بطارية 96% · شبه جديد",img:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=900",details:"جهاز مفحوص بحالة ممتازة مع ضمان فحص.",specs:["السعة: 256GB","الحالة: شبه جديد","البطارية: 96%","المدينة: الرياض"]},
-  {cat:"electronics",condition:"used",city:"جدة",seller:"متجر التقنية",name:"iPad Pro 11",price:2299,meta:"256GB · M2 · مفحوص",img:"https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=900",details:"آيباد قوي للدراسة والتصميم والترفيه.",specs:["المعالج: M2","السعة: 256GB","الحالة: مستعمل مفحوص","المدينة: جدة"]},
-  {cat:"electronics",condition:"used",city:"الدمام",seller:"نُخبة موثّق",name:"MacBook Air M2",price:3299,meta:"13 إنش · 256GB · مستعمل ممتاز",img:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=900",details:"لابتوب خفيف وسريع ومناسب للعمل اليومي.",specs:["المعالج: M2","الذاكرة: 8GB","السعة: 256GB","المدينة: الدمام"]},
-  {cat:"electronics",condition:"new",city:"الرياض",seller:"وكيل معتمد",name:"Sony WH-1000XM5",price:1299,meta:"إلغاء ضوضاء · ضمان الوكيل",img:"https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=900",details:"سماعة فاخرة بعزل ضوضاء ممتاز.",specs:["الحالة: جديد","اللون: أسود","الضمان: الوكيل","المدينة: الرياض"]},
-  {cat:"watches",condition:"used",city:"جدة",seller:"ساعات النخبة",name:"ساعة فاخرة",price:8900,meta:"أصلية · علبة وكرت · مفحوصة",img:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=900",details:"ساعة أنيقة أصلية بحالة ممتازة.",specs:["الحالة: ممتازة","الضمان: فحص أصالة","الملحقات: علبة وكرت","المدينة: جدة"]},
-  {cat:"cars",condition:"used",city:"الرياض",seller:"معرض موثّق",name:"تويوتا لاند كروزر 2023",price:315000,meta:"GXR · ممشى قليل · فحص شامل",img:"https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?q=80&w=900",details:"سيارة بحالة ممتازة وفحص شامل.",specs:["الموديل: 2023","الفئة: GXR","الحالة: مستعملة ممتازة","المدينة: الرياض"]},
-  {cat:"realestate",condition:"new",city:"الدمام",seller:"عقارات نُخبة",name:"فيلا حديثة",price:2450000,meta:"تصميم فاخر · مساحة 420م",img:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900",details:"فيلا فاخرة بتصميم حديث ومساحة واسعة.",specs:["المساحة: 420م","الحالة: جديد","النوع: فيلا","المدينة: الدمام"]},
-  {cat:"fashion",condition:"new",city:"جدة",seller:"بوتيك فاخر",name:"قطعة أزياء فاخرة",price:650,meta:"جديدة · تصميم أنيق",img:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=900",details:"قطعة فاخرة بتصميم أنيق.",specs:["الحالة: جديد","الخامة: ممتازة","المدينة: جدة"]},
-  {cat:"home",condition:"new",city:"الرياض",seller:"هوم نُخبة",name:"كنبة منزلية فاخرة",price:2200,meta:"تصميم مريح · جودة عالية",img:"https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=900",details:"كنبة مريحة بتصميم فاخر.",specs:["الحالة: جديد","الخامة: قماش فاخر","المدينة: الرياض"]}
-];
-
-let currentProduct = null;
-
-document.getElementById("catTitle").innerText = titles[cat]?.[0] || "القسم";
-document.getElementById("catDesc").innerText = titles[cat]?.[1] || "منتجات مختارة داخل نُخبة.";
-
-function baseList(){
-  return allProducts.filter(p=>{
-    if(cat==="new") return p.condition==="new";
-    if(cat==="used") return p.condition==="used";
-    return p.cat===cat;
-  });
-}
-
-function renderProducts(){
-  let search = document.getElementById("searchInput").value.toLowerCase();
-  let condition = document.getElementById("conditionFilter").value;
-  let sort = document.getElementById("sortFilter").value;
-  let city = document.getElementById("cityFilter").value;
-
-  let list = baseList().filter(p=>{
-    let matchSearch = p.name.toLowerCase().includes(search) || p.meta.toLowerCase().includes(search);
-    let matchCondition = condition==="all" || p.condition===condition;
-    let matchCity = city==="all" || p.city===city;
-    return matchSearch && matchCondition && matchCity;
-  });
-
-  if(sort==="low") list.sort((a,b)=>a.price-b.price);
-  if(sort==="high") list.sort((a,b)=>b.price-a.price);
-
-  const box = document.getElementById("products");
-
-  if(list.length===0){
-    box.innerHTML = `<div class="empty">لا توجد منتجات مطابقة للفلتر الحالي.</div>`;
-    return;
-  }
-
-  box.innerHTML = list.map((p,i)=>`
-    <div class="card">
-      <div class="badges">
-        <span class="badge ${p.condition==="used" ? "used" : "new"}">${p.condition==="used" ? "مستعمل" : "جديد"}</span>
-        <span class="badge checked">موثّق</span>
-      </div>
-      <img src="${p.img}" alt="${p.name}" onclick="openProductByName('${p.name}')">
-      <h3 onclick="openProductByName('${p.name}')">${p.name}</h3>
-      <p class="meta">${p.meta}</p>
-      <p class="seller">البائع: ${p.seller} · ${p.city}</p>
-      <div class="price">${p.price.toLocaleString()} ريال</div>
-      <div class="actions">
-        <button class="action-btn" onclick="addToCart('${p.name}',${p.price},'${p.img}')">السلة</button>
-        <button class="action-btn secondary" onclick="addToWishlist('${p.name}')">حفظ</button>
-      </div>
-      <button class="details-btn" onclick="openProductByName('${p.name}')">عرض التفاصيل</button>
-    </div>
-  `).join("");
-}
-
-function openProductByName(name){
-  currentProduct = allProducts.find(p=>p.name===name);
-  document.getElementById("modalTitle").innerText = currentProduct.name;
-  document.getElementById("modalMeta").innerText = currentProduct.meta + " · " + currentProduct.city;
-  document.getElementById("modalPrice").innerText = currentProduct.price.toLocaleString() + " ريال";
-  document.getElementById("modalDetails").innerText = currentProduct.details;
-  document.getElementById("modalSpecs").innerHTML = currentProduct.specs.map(s=>`<li>${s}</li>`).join("");
-  document.getElementById("commentText").value = "";
-  loadComments();
-  document.getElementById("productModal").style.display = "flex";
-}
-
-function closeProduct(){document.getElementById("productModal").style.display="none"}
-
-function saveComment(){
-  if(!currentProduct) return;
-  let text = document.getElementById("commentText").value.trim();
-  if(!text){showToast("اكتب تعليقك أولاً");return}
-  let key = "comments_" + currentProduct.name;
-  let comments = JSON.parse(localStorage.getItem(key)) || [];
-  comments.push(text);
-  localStorage.setItem(key,JSON.stringify(comments));
-  document.getElementById("commentText").value="";
-  loadComments();
-  showToast("تم حفظ التعليق");
-}
-
-function loadComments(){
-  let key = "comments_" + currentProduct.name;
-  let comments = JSON.parse(localStorage.getItem(key)) || [];
-  document.getElementById("commentsBox").innerHTML = comments.length
-  ? comments.map(c=>`<div style="background:#ffffff0d;border:1px solid #ffffff12;border-radius:12px;padding:12px;margin-top:8px;">${c}</div>`).join("")
-  : "<p style='color:#aaa'>لا توجد تعليقات بعد.</p>";
-}
-
-function addToCart(name,price,image){
-  let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
-  let found = cart.find(item=>item.name===name);
-  if(found){found.qty += 1}else{cart.push({name,price,image,qty:1})}
-  localStorage.setItem("nukhba_cart",JSON.stringify(cart));
-  showToast("تمت إضافة المنتج إلى السلة");
-}
-
-function addToWishlist(name){
-  let wish = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
-  if(!wish.includes(name)) wish.push(name);
-  localStorage.setItem("nukhba_wishlist",JSON.stringify(wish));
-  showToast("تم حفظ المنتج في المفضلة");
-}
-
-function showToast(message){
-  let old = document.querySelector(".toast");
-  if(old) old.remove();
-  let toast = document.createElement("div");
-  toast.className = "toast";
-  toast.innerText = message;
-  document.body.appendChild(toast);
-  setTimeout(()=>toast.remove(),1600);
-}
-
-["searchInput","conditionFilter","sortFilter","cityFilter"].forEach(id=>{
-  document.getElementById(id).addEventListener("input",renderProducts);
-  document.getElementById(id).addEventListener("change",renderProducts);
-});
-
-renderProducts();
-</script>
-
+<script src="../js/products.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>
