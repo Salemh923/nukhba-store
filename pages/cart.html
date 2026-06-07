@@ -6,7 +6,84 @@
 <title>السلة | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+
+<style>
+body{background:#030608;color:#fff;font-family:Tajawal,sans-serif}
+.cart-page{padding:45px 0}
+.cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+.cart-layout{display:grid;grid-template-columns:1fr 380px;gap:25px;align-items:start}
+.cart-list{display:flex;flex-direction:column;gap:18px}
+.cart-item{
+  display:grid;
+  grid-template-columns:180px 1fr auto;
+  gap:20px;
+  align-items:center;
+  background:linear-gradient(180deg,#151b20,#080b0e);
+  border:1px solid #ffffff20;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 25px 70px #0008;
+}
+.cart-item img{
+  width:180px;
+  height:140px;
+  object-fit:contain;
+  border-radius:16px;
+  background:radial-gradient(circle,#d8a64b22,#0b1014 60%);
+  padding:15px;
+}
+.cart-info h3{margin:0 0 8px;font-size:22px}
+.cart-info p{color:#aaa;margin:6px 0}
+.cart-price{font-size:24px;font-weight:900;color:#f3d18a}
+.remove-btn{
+  background:#ffffff12;
+  color:#fff;
+  border:1px solid #ffffff25;
+  border-radius:10px;
+  padding:12px 18px;
+  cursor:pointer;
+}
+.summary{
+  position:sticky;
+  top:130px;
+  background:linear-gradient(180deg,#181f24,#090c0f);
+  border:1px solid #d8a64b55;
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 30px 90px #000;
+}
+.summary h2{margin-top:0;font-size:30px}
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #ffffff14;
+  padding:14px 0;
+  color:#ddd;
+}
+.summary-total{
+  font-size:28px;
+  font-weight:900;
+  color:#f3d18a;
+  margin:20px 0;
+}
+.empty{
+  background:#111820;
+  border:1px solid #ffffff18;
+  border-radius:24px;
+  padding:60px;
+  text-align:center;
+}
+.checkout-actions{display:grid;gap:12px}
+.checkout-actions .btn{text-align:center}
+@media(max-width:900px){
+  .cart-layout{grid-template-columns:1fr}
+  .cart-item{grid-template-columns:1fr}
+  .cart-item img{width:100%;height:220px}
+  .summary{position:static}
+}
+</style>
 </head>
+
 <body>
 
 <header>
@@ -16,24 +93,43 @@
   </div>
 </header>
 
-<main class="container" style="padding:50px 0;">
-  <div class="section-head">
-    <h2>سلة المشتريات</h2>
-    <a href="../index.html">متابعة التسوق ‹</a>
-  </div>
+<main class="container cart-page">
 
-  <section class="products" id="cartItems"></section>
-
-  <div class="sell-panel">
+  <div class="cart-header">
     <div>
-      <h2>ملخص الطلب</h2>
-      <p id="cartSummary">جاري حساب السلة...</p>
-      <h2 id="cartTotal">الإجمالي: 0 ريال</h2>
+      <h1>سلة المشتريات</h1>
+      <p class="meta">راجع منتجاتك قبل إتمام الطلب</p>
     </div>
-
-    <button class="btn" onclick="checkout()">إتمام الطلب</button>
-    <button class="btn secondary" onclick="clearCart()">تفريغ السلة</button>
+    <a href="../index.html" class="btn secondary">متابعة التسوق</a>
   </div>
+
+  <div class="cart-layout">
+    <section class="cart-list" id="cartItems"></section>
+
+    <aside class="summary">
+      <h2>ملخص الطلب</h2>
+      <div class="summary-row">
+        <span>عدد المنتجات</span>
+        <b id="cartCount">0</b>
+      </div>
+      <div class="summary-row">
+        <span>الشحن</span>
+        <b>مجاني</b>
+      </div>
+      <div class="summary-row">
+        <span>الحالة</span>
+        <b>جاهز للدفع</b>
+      </div>
+
+      <div class="summary-total" id="cartTotal">0 ريال</div>
+
+      <div class="checkout-actions">
+        <button class="btn" onclick="checkout()">إتمام الطلب</button>
+        <button class="btn secondary" onclick="clearCart()">تفريغ السلة</button>
+      </div>
+    </aside>
+  </div>
+
 </main>
 
 <footer>© 2026 نُخبة — سلة المشتريات</footer>
@@ -43,13 +139,19 @@ let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
 
 function renderCart(){
   const box = document.getElementById("cartItems");
-  const summary = document.getElementById("cartSummary");
+  const countBox = document.getElementById("cartCount");
   const totalBox = document.getElementById("cartTotal");
 
   if(cart.length === 0){
-    box.innerHTML = `<div class="card"><h3>السلة فارغة</h3><p class="meta">لم تقم بإضافة أي منتج بعد.</p></div>`;
-    summary.innerText = "لا توجد منتجات في السلة.";
-    totalBox.innerText = "الإجمالي: 0 ريال";
+    box.innerHTML = `
+      <div class="empty">
+        <h2>السلة فارغة</h2>
+        <p class="meta">لم تقم بإضافة أي منتج بعد.</p>
+        <a href="../index.html" class="btn">العودة للتسوق</a>
+      </div>
+    `;
+    countBox.innerText = "0";
+    totalBox.innerText = "0 ريال";
     return;
   }
 
@@ -59,19 +161,23 @@ function renderCart(){
   box.innerHTML = cart.map((item,index)=>{
     total += item.price * item.qty;
     count += item.qty;
+
     return `
-      <div class="card">
-        <img src="${item.image}">
-        <h3>${item.name}</h3>
-        <p class="meta">الكمية: ${item.qty}</p>
-        <p class="price">${(item.price * item.qty).toLocaleString()} ريال</p>
-        <button class="btn secondary" onclick="removeItem(${index})">حذف</button>
+      <div class="cart-item">
+        <img src="${item.image}" alt="${item.name}">
+        <div class="cart-info">
+          <h3>${item.name}</h3>
+          <p>الكمية: ${item.qty}</p>
+          <p>منتج محفوظ في سلة نُخبة</p>
+          <div class="cart-price">${(item.price * item.qty).toLocaleString()} ريال</div>
+        </div>
+        <button class="remove-btn" onclick="removeItem(${index})">حذف</button>
       </div>
     `;
   }).join("");
 
-  summary.innerText = "عدد المنتجات: " + count;
-  totalBox.innerText = "الإجمالي: " + total.toLocaleString() + " ريال";
+  countBox.innerText = count;
+  totalBox.innerText = total.toLocaleString() + " ريال";
 }
 
 function removeItem(index){
