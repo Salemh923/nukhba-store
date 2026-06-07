@@ -13,8 +13,54 @@ body{margin:0;font-family:Tajawal,sans-serif;background:radial-gradient(circle a
 a{text-decoration:none;color:inherit}
 .container{width:min(1500px,94%);margin:auto}
 
-header{position:sticky;top:0;z-index:20;background:#06090dd9;backdrop-filter:blur(22px);border-bottom:1px solid var(--line);padding-top:6px}
-.nav{display:grid;grid-template-columns:190px 1fr 330px 130px;align-items:center;gap:24px;padding:28px 0 22px}
+header{
+position:sticky;
+top:0;
+z-index:20;
+background:
+radial-gradient(circle at 15% 20%,rgba(216,166,75,.18),transparent 28%),
+linear-gradient(135deg,#05070aee,#081115ee 55%,#120c05ee);
+backdrop-filter:blur(24px);
+border-bottom:1px solid var(--line);
+padding-top:6px;
+overflow:hidden;
+}
+
+header:before{
+content:"";
+position:absolute;
+inset:-80px;
+background:
+radial-gradient(circle at 18% 35%,rgba(243,209,138,.22),transparent 18%),
+radial-gradient(circle at 75% 20%,rgba(216,166,75,.12),transparent 22%),
+linear-gradient(120deg,transparent,rgba(255,255,255,.05),transparent);
+filter:blur(18px);
+animation:luxuryGlow 7s ease-in-out infinite alternate;
+pointer-events:none;
+}
+
+header:after{
+content:"نُخبة • سوق سعودي فاخر للجديد والمستعمل المضمون";
+position:absolute;
+left:7%;
+top:28px;
+color:rgba(243,209,138,.55);
+font-size:14px;
+font-weight:800;
+letter-spacing:1px;
+padding:10px 18px;
+border:1px solid rgba(216,166,75,.22);
+border-radius:999px;
+background:rgba(255,255,255,.04);
+box-shadow:0 0 35px rgba(216,166,75,.12);
+}
+
+@keyframes luxuryGlow{
+0%{transform:translateX(-20px) translateY(0) scale(1)}
+100%{transform:translateX(25px) translateY(10px) scale(1.08)}
+}
+
+.nav{position:relative;z-index:2;display:grid;grid-template-columns:190px 1fr 330px 130px;align-items:center;gap:24px;padding:28px 0 22px}
 .logo{position:relative;font-size:52px;font-weight:900;letter-spacing:2px;line-height:1.25;padding-top:10px}
 .logo span{color:var(--gold)}
 .logo small{display:block;color:var(--gold);font-size:11px;letter-spacing:8px;margin-right:8px}
@@ -94,6 +140,17 @@ footer{margin-top:60px;padding:35px 0;background:#020406;border-top:1px solid #f
 .categories,.products,.trust-row{grid-template-columns:repeat(2,1fr)}
 .hero h1{font-size:48px}
 .icons{justify-content:flex-start}
+header:after{
+position:relative;
+display:block;
+left:auto;
+top:auto;
+margin:0 auto 10px;
+width:94%;
+text-align:center;
+font-size:11px;
+padding:8px 10px;
+}
 }
 @media(max-width:650px){
 .categories,.products,.trust-row,.steps{grid-template-columns:1fr}
@@ -280,45 +337,11 @@ footer{margin-top:60px;padding:35px 0;background:#020406;border-top:1px solid #f
 </div>
 
 <section class="products">
-<div class="card">
-<div class="badges"><span class="badge used">مستعمل ممتاز</span></div>
-<img src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?q=80&w=900">
-<h3>تويوتا لاند كروزر 2023</h3>
-<p class="meta">GXR · ممشى قليل · فحص شامل</p>
-<p class="price">315,000 ريال</p>
-</div>
-
-<div class="card">
-<div class="badges"><span class="badge new">جديد</span></div>
-<img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=900">
-<h3>لكزس ES 2023</h3>
-<p class="meta">فل كامل · ضمان الوكالة</p>
-<p class="price">185,000 ريال</p>
-</div>
-
-<div class="card">
-<div class="badges"><span class="badge used">مستعمل</span></div>
-<img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=900">
-<h3>شقة فاخرة بالرياض</h3>
-<p class="meta">3 غرف · حي راقٍ · جاهزة للسكن</p>
-<p class="price">980,000 ريال</p>
-</div>
-
-<div class="card">
-<div class="badges"><span class="badge checked">موثّق</span></div>
-<img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900">
-<h3>فيلا حديثة</h3>
-<p class="meta">تصميم فاخر · مساحة 420م</p>
-<p class="price">2,450,000 ريال</p>
-</div>
-
-<div class="card">
-<div class="badges"><span class="badge used">مستعمل ممتاز</span></div>
-<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=900">
-<h3>ساعة فاخرة</h3>
-<p class="meta">أصلية · علبة وكرت · مفحوصة</p>
-<p class="price">8,900 ريال</p>
-</div>
+<div class="card"><div class="badges"><span class="badge used">مستعمل ممتاز</span></div><img src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?q=80&w=900"><h3>تويوتا لاند كروزر 2023</h3><p class="meta">GXR · ممشى قليل · فحص شامل</p><p class="price">315,000 ريال</p></div>
+<div class="card"><div class="badges"><span class="badge new">جديد</span></div><img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=900"><h3>لكزس ES 2023</h3><p class="meta">فل كامل · ضمان الوكالة</p><p class="price">185,000 ريال</p></div>
+<div class="card"><div class="badges"><span class="badge used">مستعمل</span></div><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=900"><h3>شقة فاخرة بالرياض</h3><p class="meta">3 غرف · حي راقٍ · جاهزة للسكن</p><p class="price">980,000 ريال</p></div>
+<div class="card"><div class="badges"><span class="badge checked">موثّق</span></div><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900"><h3>فيلا حديثة</h3><p class="meta">تصميم فاخر · مساحة 420م</p><p class="price">2,450,000 ريال</p></div>
+<div class="card"><div class="badges"><span class="badge used">مستعمل ممتاز</span></div><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=900"><h3>ساعة فاخرة</h3><p class="meta">أصلية · علبة وكرت · مفحوصة</p><p class="price">8,900 ريال</p></div>
 </section>
 
 </main>
@@ -327,38 +350,28 @@ footer{margin-top:60px;padding:35px 0;background:#020406;border-top:1px solid #f
 
 <script>
 function addToCart(name, price, image){
-  let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
-  let found = cart.find(item => item.name === name);
-
-  if(found){
-    found.qty += 1;
-  }else{
-    cart.push({name:name, price:Number(price), image:image, qty:1});
-  }
-
-  localStorage.setItem("nukhba_cart", JSON.stringify(cart));
-  alert("تمت إضافة المنتج إلى السلة ✅");
+let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
+let found = cart.find(item => item.name === name);
+if(found){found.qty += 1}else{cart.push({name:name, price:Number(price), image:image, qty:1})}
+localStorage.setItem("nukhba_cart", JSON.stringify(cart));
+alert("تمت إضافة المنتج إلى السلة ✅");
 }
 
 function addToWishlist(name){
-  let wish = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
-
-  if(!wish.includes(name)){
-    wish.push(name);
-  }
-
-  localStorage.setItem("nukhba_wishlist", JSON.stringify(wish));
-  alert("تمت إضافة المنتج إلى المفضلة ❤️");
+let wish = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
+if(!wish.includes(name)){wish.push(name)}
+localStorage.setItem("nukhba_wishlist", JSON.stringify(wish));
+alert("تمت إضافة المنتج إلى المفضلة ❤️");
 }
 
 const searchInput = document.querySelector(".search");
 if(searchInput){
-  searchInput.addEventListener("input", function(){
-    let q = this.value.toLowerCase();
-    document.querySelectorAll(".card").forEach(card=>{
-      card.style.display = card.innerText.toLowerCase().includes(q) ? "block" : "none";
-    });
-  });
+searchInput.addEventListener("input", function(){
+let q = this.value.toLowerCase();
+document.querySelectorAll(".card").forEach(card=>{
+card.style.display = card.innerText.toLowerCase().includes(q) ? "block" : "none";
+});
+});
 }
 </script>
 
