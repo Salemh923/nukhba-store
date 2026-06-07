@@ -1,112 +1,23 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>السلة | نُخبة</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
-</head>
+let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
 
-<body>
+function addToCart(name, price, image){
+  let found = cart.find(item => item.name === name);
 
-<header>
-  <div class="container nav">
-    <div class="logo">نُخ<span>بة</span><small>NUKHBA</small></div>
-    <a class="btn" href="../index.html">العودة للمتجر</a>
-  </div>
-</header>
-
-<main class="container" style="padding:50px 0;">
-
-  <div class="section-head">
-    <h2>سلة المشتريات</h2>
-    <a href="../index.html">متابعة التسوق ‹</a>
-  </div>
-
-  <section class="products" id="cartItems"></section>
-
-  <div class="sell-panel" style="margin-top:35px;">
-    <div>
-      <h2>ملخص الطلب</h2>
-      <p id="cartSummary">جاري حساب السلة...</p>
-      <h2 id="cartTotal">الإجمالي: 0 ريال</h2>
-    </div>
-
-    <div class="steps">
-      <div class="step">1<br><b>مراجعة السلة</b></div>
-      <div class="step">2<br><b>تأكيد الطلب</b></div>
-      <div class="step">3<br><b>الدفع</b></div>
-    </div>
-
-    <button class="btn" onclick="checkout()">إتمام الطلب</button>
-    <button class="btn secondary" onclick="clearCart()">تفريغ السلة</button>
-  </div>
-
-</main>
-
-<footer>
-  © 2026 نُخبة — سلة المشتريات
-</footer>
-
-<script src="../js/cart.js"></script>
-
-<script>
-const cartItems = document.getElementById("cartItems");
-const cartSummary = document.getElementById("cartSummary");
-const cartTotal = document.getElementById("cartTotal");
-
-let items = getCart();
-
-function renderCart(){
-  if(items.length === 0){
-    cartItems.innerHTML = `
-      <div class="card">
-        <h3>السلة فارغة</h3>
-        <p class="meta">لم تقم بإضافة أي منتج بعد.</p>
-        <a class="btn" href="../index.html">العودة للتسوق</a>
-      </div>
-    `;
-    cartSummary.innerText = "لا توجد منتجات في السلة.";
-    cartTotal.innerText = "الإجمالي: 0 ريال";
-    return;
+  if(found){
+    found.qty += 1;
+  }else{
+    cart.push({
+      name:name,
+      price:Number(price),
+      image:image,
+      qty:1
+    });
   }
 
-  let total = 0;
-  let count = 0;
-
-  cartItems.innerHTML = items.map((item,index)=>{
-    total += item.price * item.qty;
-    count += item.qty;
-
-    return `
-      <div class="card">
-        <img src="${item.image}" alt="${item.name}">
-        <h3>${item.name}</h3>
-        <p class="meta">الكمية: ${item.qty}</p>
-        <p class="price">${item.price.toLocaleString()} ريال</p>
-        <button class="btn secondary" onclick="removeFromCart(${index})">حذف المنتج</button>
-      </div>
-    `;
-  }).join("");
-
-  cartSummary.innerText = "عدد المنتجات: " + count;
-  cartTotal.innerText = "الإجمالي: " + total.toLocaleString() + " ريال";
+  localStorage.setItem("nukhba_cart", JSON.stringify(cart));
+  alert("تمت إضافة المنتج إلى السلة ✅");
 }
 
-function checkout(){
-  if(items.length === 0){
-    alert("السلة فارغة");
-    return;
-  }
-
-  alert("تم إنشاء الطلب بنجاح ✅ سيتم ربط الدفع الحقيقي لاحقًا");
-}
-
-renderCart();
-</script>
-
-</body>
-</html>  cart = [];
-  location.reload();
+function getCart(){
+  return JSON.parse(localStorage.getItem("nukhba_cart")) || [];
 }
