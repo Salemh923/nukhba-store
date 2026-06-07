@@ -5,52 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>تواصل معنا | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/responsive.css">
-<link rel="stylesheet" href="../css/animations.css">
+<style>
+body{margin:0;font-family:Tajawal,sans-serif;background:#030608;color:#fff}
+.page{width:min(1200px,94%);margin:auto;padding:35px 0 70px}
+h1{color:#f3d18a;font-size:38px;margin-bottom:24px}
+.section{background:#111820;border:1px solid #ffffff18;border-radius:24px;padding:24px;margin-bottom:24px}
+.section h2{color:#f3d18a;margin-bottom:12px}
+.section p,a{color:#ccc;line-height:1.8;text-decoration:none}
+a:hover{color:#f3d18a}
+input,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #ffffff22;background:#0b1115;color:#fff;margin-bottom:14px;font-family:inherit}
+button{border:0;border-radius:12px;padding:14px 24px;background:linear-gradient(135deg,#f3d18a,#ad762d);color:#111;font-weight:900;cursor:pointer}
+</style>
 </head>
 <body>
 
-<header class="luxury-header">
-  <div class="header-inner container">
-    <a class="logo" href="../index.html">نُخ<span>بة</span><small>NUKHBA</small></a>
-  </div>
-</header>
+<main class="page">
+<h1>تواصل معنا</h1>
 
-<main class="container">
-  <div class="section-head">
-    <h2>تواصل معنا</h2>
-    <a href="../index.html">الرئيسية ‹</a>
-  </div>
+<section class="section">
+<h2>طرق التواصل</h2>
+<p>واتساب: <a href="https://wa.me/966500000000">+966 50 000 0000</a></p>
+<p>البريد الإلكتروني: <a href="mailto:info@nukhba.sa">info@nukhba.sa</a></p>
+<p>الموقع: الرياض، المملكة العربية السعودية</p>
+<p>ساعات العمل: السبت – الخميس: 9 صباحاً – 10 مساءً</p>
+</section>
 
-  <section class="sell-panel contact-layout">
-    <div>
-      <h2>نسعد بخدمتك</h2>
-      <p>للاستفسارات، الدعم، الشكاوى، أو طلبات البيع، تواصل معنا عبر النموذج التالي.</p>
-      <p>الهاتف: +966 50 000 0000</p>
-      <p>البريد: info@nukhba.sa</p>
-      <p>الموقع: الرياض، المملكة العربية السعودية</p>
-    </div>
-
-    <form>
-      <label>الاسم</label>
-      <input type="text" placeholder="اسمك الكامل">
-
-      <label>البريد الإلكتروني</label>
-      <input type="email" placeholder="example@mail.com">
-
-      <label>الرسالة</label>
-      <textarea placeholder="اكتب رسالتك هنا"></textarea>
-
-      <button class="btn" type="submit">إرسال الرسالة</button>
-    </form>
-  </section>
+<section class="section">
+<h2>نموذج التواصل</h2>
+<form id="contactForm">
+  <input type="text" placeholder="الاسم الكامل" required>
+  <input type="email" placeholder="البريد الإلكتروني" required>
+  <textarea placeholder="رسالتك..." rows="5" required></textarea>
+  <button type="submit">إرسال</button>
+</form>
+</section>
 </main>
 
-<footer class="footer">
-  <div class="footer-bottom">© 2026 نُخبة — جميع الحقوق محفوظة</div>
-</footer>
+<script>
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  alert('تم إرسال رسالتك ✅ سنرد عليك قريباً');
+  this.reset();
+});
+</script>
 
-<script src="../js/storage.js"></script>
 </body>
 </html>
