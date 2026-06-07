@@ -1,72 +1,48 @@
-function renderCart(){
-  const cartContainer = document.getElementById("cartItems");
-  const cartTotalEl = document.getElementById("cartTotal");
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>السلة | نُخبة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/animations.css">
+</head>
+<body>
 
-  if(!cartContainer || !cartTotalEl) return;
-
-  const cart = getStorage("nukhba_cart");
-
-  if(cart.length === 0){
-    cartContainer.innerHTML = `
-      <div style="grid-column:1/-1;text-align:center;color:#aaa;padding:40px">
-        سلة التسوق فارغة
-      </div>
-    `;
-    cartTotalEl.innerText = "0 ريال";
-    return;
-  }
-
-  cartContainer.innerHTML = cart.map(item=>`
-    <div class="card">
-      <img src="${item.image}" alt="${item.name}">
-      <h3>${item.name}</h3>
-      <p class="meta">السعر: ${money(item.price)}</p>
-
-      <div class="product-info">
-        <div class="info-pill"><b>الكمية</b><span>${item.qty}</span></div>
-        <div class="info-pill"><b>الإجمالي</b><span>${money(item.price * item.qty)}</span></div>
-      </div>
-
-      <div class="actions" style="grid-template-columns:1fr 1fr 1fr">
-        <button class="details" onclick="changeQty(${item.id},-1)">-</button>
-        <button class="details" onclick="changeQty(${item.id},1)">+</button>
-        <button class="heart" onclick="removeCartItem(${item.id})">حذف</button>
-      </div>
+<header class="luxury-header">
+  <div class="header-inner container">
+    <div class="top-brand">
+      <a class="logo" href="../index.html">نُخ<span>بة</span><small>NUKHBA</small></a>
+      <div class="brand-card"><b>سلة التسوق</b><p>راجع منتجاتك قبل إتمام الطلب.</p></div>
     </div>
-  `).join("");
+  </div>
+</header>
 
-  const total = cart.reduce((sum,item)=>sum + item.price * item.qty,0);
-  cartTotalEl.innerText = money(total);
-}
+<main class="container">
+  <div class="section-head">
+    <h2>سلة التسوق</h2>
+    <a href="../index.html">متابعة التسوق ‹</a>
+  </div>
 
-function changeQty(id,step){
-  const cart = getStorage("nukhba_cart");
-  const item = cart.find(x=>x.id === Number(id));
+  <section class="page-grid" id="cartItems"></section>
 
-  if(!item) return;
+  <section class="sell-panel">
+    <div>
+      <h2>ملخص الطلب</h2>
+      <p>الإجمالي: <b id="cartTotal">0 ريال</b></p>
+      <a href="checkout.html" class="btn">إتمام الشراء</a>
+    </div>
+  </section>
+</main>
 
-  item.qty += step;
+<footer class="footer">
+  <div class="footer-bottom">© 2026 نُخبة — جميع الحقوق محفوظة</div>
+</footer>
 
-  if(item.qty <= 0){
-    removeCartItem(id);
-    return;
-  }
-
-  setStorage("nukhba_cart",cart);
-  renderCart();
-  updateCounters();
-}
-
-function removeCartItem(id){
-  let cart = getStorage("nukhba_cart");
-  cart = cart.filter(item=>item.id !== Number(id));
-  setStorage("nukhba_cart",cart);
-  renderCart();
-  updateCounters();
-  showToast("تم حذف المنتج من السلة");
-}
-
-document.addEventListener("DOMContentLoaded",()=>{
-  renderCart();
-  updateCounters();
-});
+<script src="../js/products.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/cart.js"></script>
+</body>
+</html>
