@@ -9,104 +9,111 @@
 <style>
 body{margin:0;background:#030608;color:#fff;font-family:Tajawal,sans-serif}
 a{text-decoration:none;color:inherit}
+
 .page{width:min(1200px,94%);margin:auto;padding:40px 0}
+.header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap}
+.header-top h1{margin:0;font-size:38px}
+.header-top .btn{padding:12px 24px}
 
-.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap}
-.header h1{margin:0;font-size:38px}
-.header .btn{padding:12px 24px}
+.fav-list{display:flex;flex-direction:column;gap:18px}
+.fav-item{
+  display:grid;
+  grid-template-columns:140px minmax(0,1fr) auto;
+  gap:18px;
+  align-items:center;
+  background:linear-gradient(180deg,#151b20,#080b0e);
+  border:1px solid #ffffff20;
+  border-radius:24px;
+  padding:16px;
+  box-shadow:0 24px 70px #0008;
+}
+.fav-item img{
+  width:140px;height:115px;object-fit:contain;border-radius:16px;background:radial-gradient(circle,#d8a64b22,#0b1014 60%);padding:12px;
+}
+.fav-info h3{margin:0 0 8px;font-size:21px;line-height:1.35}
+.fav-info p{margin:0;color:#aaa;line-height:1.6}
+.fav-price{font-size:23px;font-weight:900;color:#f3d18a;margin-top:8px}
 
-.fav-list{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.actions{display:flex;flex-direction:column;gap:8px}
+.actions .btn{width:100%;padding:12px 0;font-weight:900;border:0;border-radius:14px;background:linear-gradient(135deg,#f3d18a,#ad762d);color:#111;cursor:pointer;transition:.35s;text-align:center}
+.actions .btn.secondary{background:#ffffff12;color:#fff;border:1px solid #ffffff25}
+.actions .btn:hover{transform:translateY(-3px)}
 
-.card{background:linear-gradient(180deg,#151b20,#080b0e);border:1px solid #ffffff20;border-radius:24px;padding:16px;box-shadow:0 24px 70px #0008;transition:.35s}
-.card:hover{transform:translateY(-7px);border-color:#d8a64b77}
-.card img{width:100%;height:230px;object-fit:contain;border-radius:18px;background:radial-gradient(circle,#d8a64b22,#0b1014 60%);padding:16px}
-.card h3{margin:16px 0 8px;font-size:21px;line-height:1.35}
-.meta{color:#aaa;margin:0 0 10px;line-height:1.7}
-.price{font-size:26px;color:#f3d18a;font-weight:900;margin:10px 0 16px}
+.empty{padding:44px 22px;text-align:center;color:#aaa}
+footer{text-align:center;color:#aaa;padding:30px 0;border-top:1px solid #ffffff12}
 
-.actions{display:flex;gap:12px}
-.actions button{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:900;padding:12px;border-radius:14px;border:0;cursor:pointer;transition:.25s}
-.add-cart{background:linear-gradient(135deg,#f3d18a,#ad762d);color:#111}
-.remove-fav{background:#ffffff12;color:#fff;border:1px solid #ffffff25}
-.actions button:hover{transform:translateY(-3px)}
-
-.empty{background:linear-gradient(180deg,#151b20,#080b0e);border:1px solid #ffffff20;border-radius:24px;padding:44px 22px;text-align:center;box-shadow:0 24px 70px #0008}
-.empty h2{margin:0 0 12px;font-size:30px;line-height:1.35}
-.empty p{margin:0 0 22px;color:#aaa;line-height:1.8}
+@media(max-width:900px){.fav-item{grid-template-columns:1fr;text-align:center;padding:18px}.fav-item img{width:100%;height:210px}}
 </style>
 </head>
-
 <body>
 
 <main class="page">
 
-  <div class="header">
-    <h1>المفضلة</h1>
-    <a href="../index.html" class="btn secondary">العودة للمتجر</a>
-  </div>
+<div class="header-top">
+<h1>المفضلة</h1>
+<a href="../index.html" class="btn secondary">العودة للمتجر</a>
+</div>
 
-  <section class="fav-list" id="favList"></section>
+<section class="fav-list" id="favItems"></section>
 
 </main>
 
 <footer>© 2026 نُخبة — المفضلة</footer>
 
 <script>
-let favs = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
+let wishlist = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
+let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
 
-function renderFavs(){
-  const box = document.getElementById("favList");
-  if(favs.length === 0){
-    box.innerHTML = `
-      <div class="empty">
-        <h2>المفضلة فارغة</h2>
-        <p>لم تقم بحفظ أي منتج بعد. أضف المنتجات المفضلة هنا.</p>
-        <a href="../index.html" class="btn">ابدأ التسوق</a>
-      </div>
-    `;
+function renderFavorites(){
+  const box = document.getElementById("favItems");
+  if(wishlist.length===0){
+    box.innerHTML=`<div class="empty">
+      <h2>لا توجد منتجات مفضلة بعد</h2>
+      <p>أضف منتجاتك المفضلة هنا لتسهيل الوصول إليها لاحقًا.</p>
+      <a href="../index.html" class="btn">تسوق الآن</a>
+    </div>`;
     return;
   }
 
-  box.innerHTML = favs.map((item,index)=>`
-    <div class="card">
-      <img src="${item.image}" alt="${item.name}">
-      <h3>${item.name}</h3>
-      <p class="meta">${item.meta || ""}</p>
-      <div class="price">${item.price?.toLocaleString() || ""} ريال</div>
-      <div class="actions">
-        <button class="add-cart" onclick="addToCart('${item.name}',${item.price},'${item.image}')">إضافة للسلة</button>
-        <button class="remove-fav" onclick="removeFav(${index})">إزالة</button>
+  box.innerHTML = wishlist.map((name,index)=>{
+    // ابحث عن المنتج في السلة أو في صفحة المنتجات
+    const allProducts = JSON.parse(localStorage.getItem("allProducts")) || [];
+    let prod = allProducts.find(p=>p.name===name) || {name:name,price:0,image:"https://via.placeholder.com/200",meta:""};
+    return `
+      <div class="fav-item">
+        <img src="${prod.image}" alt="${prod.name}">
+        <div class="fav-info">
+          <h3>${prod.name}</h3>
+          <p class="meta">${prod.meta}</p>
+          <div class="fav-price">${prod.price.toLocaleString()} ريال</div>
+        </div>
+        <div class="actions">
+          <button class="btn" onclick="moveToCart(${index})">نقل للسلة</button>
+          <button class="btn secondary" onclick="removeFav(${index})">حذف</button>
+        </div>
       </div>
-    </div>
-  `).join("");
-}
-
-function addToCart(name,price,image){
-  let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
-  let found = cart.find(p=>p.name===name);
-  if(found) found.qty+=1;
-  else cart.push({name,price,image,qty:1});
-  localStorage.setItem("nukhba_cart",JSON.stringify(cart));
-  showToast("تمت إضافة المنتج للسلة");
+    `;
+  }).join("");
 }
 
 function removeFav(index){
-  favs.splice(index,1);
-  localStorage.setItem("nukhba_wishlist",JSON.stringify(favs));
-  renderFavs();
+  wishlist.splice(index,1);
+  localStorage.setItem("nukhba_wishlist",JSON.stringify(wishlist));
+  renderFavorites();
 }
 
-function showToast(message){
-  let old = document.querySelector(".toast");
-  if(old) old.remove();
-  let toast = document.createElement("div");
-  toast.className="toast";
-  toast.innerText=message;
-  document.body.appendChild(toast);
-  setTimeout(()=>toast.remove(),1600);
+function moveToCart(index){
+  const name = wishlist[index];
+  const allProducts = JSON.parse(localStorage.getItem("allProducts")) || [];
+  let prod = allProducts.find(p=>p.name===name) || {name:name,price:0,image:"https://via.placeholder.com/200"};
+  let found = cart.find(c=>c.name===prod.name);
+  if(found){found.qty+=1}else{cart.push({...prod,qty:1})}
+  localStorage.setItem("nukhba_cart",JSON.stringify(cart));
+  removeFav(index);
+  alert("تم نقل المنتج إلى السلة ✅");
 }
 
-renderFavs();
+renderFavorites();
 </script>
 
 </body>
