@@ -7,22 +7,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <style>
-.sell-box{max-width:900px;margin:50px auto;background:#111;padding:35px;border-radius:22px;border:1px solid #333}
-.sell-box input,.sell-box textarea,.sell-box select{width:100%;padding:16px;margin-bottom:15px;border:0;border-radius:12px;background:#1c1c1c;color:#fff;font-family:Tajawal}
-.sell-box textarea{height:150px;resize:none}
+body{margin:0;background:#030608;color:#fff;font-family:Tajawal,sans-serif}
+a{text-decoration:none;color:inherit}
+.page{width:min(1200px,94%);margin:auto;padding:40px 0}
+.form-section{background:linear-gradient(180deg,#151b20,#080b0e);border:1px solid #ffffff20;border-radius:24px;padding:28px;box-shadow:0 24px 70px #0008}
+.form-section h1{margin:0 0 18px;font-size:36px;color:var(--gold2)}
+.form-section label{display:block;margin:12px 0 6px;font-weight:700}
+.form-section input, .form-section select, .form-section textarea{width:100%;padding:12px;border-radius:14px;border:1px solid #ffffff22;background:#111;color:#fff;font-family:inherit}
+.form-section textarea{resize:none;height:120px}
+.form-section button{margin-top:18px;width:100%;padding:14px 0;font-weight:900;border:0;border-radius:14px;background:linear-gradient(135deg,#f3d18a,#ad762d);color:#111;cursor:pointer;transition:.35s}
+.form-section button:hover{transform:translateY(-3px)}
+
+.empty{padding:44px 22px;text-align:center;color:#aaa}
 </style>
 </head>
 <body>
-<div class="sell-box">
+
+<main class="page">
+
+<section class="form-section">
 <h1>بيع منتجك</h1>
-<input type="text" placeholder="اسم المنتج">
-<select><option>اختر القسم</option><option>إلكترونيات</option><option>سيارات</option><option>عقارات</option><option>ساعات</option></select>
-<select><option>حالة المنتج</option><option>جديد</option><option>شبه جديد</option><option>مستعمل ممتاز</option><option>مستعمل</option></select>
-<input type="number" placeholder="السعر بالريال">
-<input type="file">
-<textarea placeholder="وصف المنتج"></textarea>
-<button class="btn" onclick="alert('تم إرسال المنتج للمراجعة ✅')">إرسال المنتج</button>
-<a href="../index.html" class="btn secondary">العودة للرئيسية</a>
-</div>
+
+<label>اسم المنتج</label>
+<input type="text" id="productName" placeholder="أدخل اسم المنتج">
+
+<label>فئة المنتج</label>
+<select id="productCategory">
+<option value="electronics">إلكترونيات</option>
+<option value="cars">سيارات</option>
+<option value="realestate">عقارات</option>
+<option value="watches">ساعات</option>
+<option value="fashion">أزياء</option>
+<option value="home">منزل ومطبخ</option>
+</select>
+
+<label>السعر (ريال)</label>
+<input type="number" id="productPrice" placeholder="أدخل سعر المنتج">
+
+<label>وصف المنتج</label>
+<textarea id="productDesc" placeholder="صف حالته ومميزاته"></textarea>
+
+<label>رابط الصورة</label>
+<input type="text" id="productImage" placeholder="https://">
+
+<button onclick="submitProduct()">رفع المنتج</button>
+</section>
+
+</main>
+
+<footer>© 2026 نُخبة — بيع المنتجات</footer>
+
+<script>
+function submitProduct(){
+  let name=document.getElementById("productName").value.trim();
+  let cat=document.getElementById("productCategory").value;
+  let price=Number(document.getElementById("productPrice").value);
+  let desc=document.getElementById("productDesc").value.trim();
+  let img=document.getElementById("productImage").value.trim();
+
+  if(!name || !price || !img){
+    alert("املأ جميع الحقول المطلوبة!");
+    return;
+  }
+
+  let products=JSON.parse(localStorage.getItem("nukhba_cart"))||[];
+  products.push({name,cat,price,details:desc,image:img,qty:1});
+  localStorage.setItem("nukhba_cart",JSON.stringify(products));
+
+  alert("تم رفع المنتج ✅");
+  window.location.href="../index.html";
+}
+</script>
+
 </body>
 </html>
