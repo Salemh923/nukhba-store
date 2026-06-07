@@ -6,29 +6,284 @@
 <title>المفضلة | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+
+<style>
+body{background:#030608;color:#fff;font-family:Tajawal,sans-serif}
+
+.fav-header{
+  background:#05090c;
+  border-bottom:1px solid #ffffff18;
+  padding:14px 0;
+}
+
+.fav-nav{
+  width:min(1200px,94%);
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.fav-logo{
+  font-size:34px;
+  font-weight:900;
+  color:#fff;
+  line-height:1.2;
+}
+
+.fav-logo span{color:#d8a64b}
+
+.fav-logo small{
+  display:block;
+  font-size:10px;
+  letter-spacing:4px;
+  color:#d8a64b;
+}
+
+.fav-page{padding:40px 0}
+
+.fav-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.fav-title h1{
+  font-size:40px;
+  margin:0;
+}
+
+.fav-title p{
+  color:#aaa;
+  margin:8px 0 0;
+}
+
+.fav-layout{
+  display:grid;
+  grid-template-columns:1fr 330px;
+  gap:25px;
+  align-items:start;
+}
+
+.fav-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.fav-card{
+  background:linear-gradient(180deg,#151b20,#080b0e);
+  border:1px solid #ffffff20;
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 25px 70px #0008;
+}
+
+.fav-card h3{
+  margin:0 0 10px;
+  font-size:24px;
+}
+
+.fav-card p{
+  color:#aaa;
+  line-height:1.7;
+}
+
+.fav-badge{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:8px;
+  background:#d8a64b;
+  color:#111;
+  font-weight:900;
+  margin-bottom:12px;
+}
+
+.fav-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+
+.fav-side{
+  background:linear-gradient(180deg,#181f24,#090c0f);
+  border:1px solid #d8a64b55;
+  border-radius:24px;
+  padding:26px;
+  box-shadow:0 30px 90px #000;
+}
+
+.fav-side h2{margin-top:0}
+
+.side-row{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #ffffff14;
+  padding:14px 0;
+  color:#ddd;
+}
+
+.empty{
+  grid-column:1/-1;
+  background:linear-gradient(180deg,#151b20,#080b0e);
+  border:1px solid #ffffff20;
+  border-radius:24px;
+  padding:60px 25px;
+  text-align:center;
+  box-shadow:0 25px 70px #0008;
+}
+
+.empty h2{
+  font-size:32px;
+  margin:0 0 12px;
+}
+
+.empty p{
+  color:#aaa;
+  margin-bottom:25px;
+}
+
+@media(max-width:900px){
+  .fav-layout{grid-template-columns:1fr}
+  .fav-list{grid-template-columns:1fr}
+}
+
+@media(max-width:600px){
+  .fav-logo{font-size:28px}
+  .fav-nav .btn{padding:11px 14px;font-size:13px}
+  .fav-title{flex-direction:column;align-items:flex-start}
+  .fav-title h1{font-size:34px}
+}
+</style>
 </head>
+
 <body>
 
-<main class="container" style="padding:60px 0;">
-<h1>المفضلة ❤️</h1>
-<section class="products" id="favoritesBox"></section>
-<a href="../index.html" class="btn">العودة للتسوق</a>
+<header class="fav-header">
+  <div class="fav-nav">
+    <div class="fav-logo">نُخ<span>بة</span><small>NUKHBA</small></div>
+    <a href="../index.html" class="btn">العودة للمتجر</a>
+  </div>
+</header>
+
+<main class="container fav-page">
+
+  <div class="fav-title">
+    <div>
+      <h1>المفضلة ❤️</h1>
+      <p>المنتجات التي أعجبتك محفوظة هنا لتعود لها لاحقًا.</p>
+    </div>
+    <a href="../index.html#products" class="btn secondary">تصفح المنتجات</a>
+  </div>
+
+  <div class="fav-layout">
+
+    <section class="fav-list" id="favoritesBox"></section>
+
+    <aside class="fav-side">
+      <h2>ملخص المفضلة</h2>
+
+      <div class="side-row">
+        <span>عدد المنتجات</span>
+        <b id="favCount">0</b>
+      </div>
+
+      <div class="side-row">
+        <span>الحالة</span>
+        <b>محفوظة محليًا</b>
+      </div>
+
+      <div class="side-row">
+        <span>الخطوة التالية</span>
+        <b>أضف للسلة</b>
+      </div>
+
+      <br>
+      <button class="btn secondary" onclick="clearFavorites()" style="width:100%;">تفريغ المفضلة</button>
+    </aside>
+
+  </div>
+
 </main>
+
+<footer>© 2026 نُخبة — المنتجات المفضلة</footer>
 
 <script>
 let fav = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
 const box = document.getElementById("favoritesBox");
+const count = document.getElementById("favCount");
 
-if(fav.length === 0){
-  box.innerHTML = `<div class="card"><h3>لا توجد منتجات محفوظة</h3><p class="meta">اضغط على القلب في أي منتج لإضافته هنا.</p></div>`;
-}else{
-  box.innerHTML = fav.map(name=>`
-    <div class="card">
-      <h3>${name}</h3>
-      <p class="meta">منتج محفوظ في المفضلة</p>
-    </div>
-  `).join("");
+const products = {
+  "iPhone 15 Pro Max": {
+    price:"3,899 ريال",
+    desc:"256GB · تيتانيوم طبيعي · بطارية 96%"
+  },
+  "Samsung Galaxy S24 Ultra": {
+    price:"4,399 ريال",
+    desc:"512GB · تيتانيوم رمادي · ضمان سنة"
+  },
+  "MacBook Air M2": {
+    price:"3,299 ريال",
+    desc:"13 إنش · 8GB · 256GB · نظيف جدًا"
+  },
+  "iPad Pro 11": {
+    price:"2,299 ريال",
+    desc:"M2 · 256GB · خدوش بسيطة"
+  },
+  "Sony WH-1000XM5": {
+    price:"1,299 ريال",
+    desc:"أسود · إلغاء ضوضاء · ضمان الوكيل"
+  }
+};
+
+function renderFavorites(){
+  count.innerText = fav.length;
+
+  if(fav.length === 0){
+    box.innerHTML = `
+      <div class="empty">
+        <h2>لا توجد منتجات محفوظة</h2>
+        <p>اضغط على علامة القلب ♡ في أي منتج ليظهر هنا.</p>
+        <a href="../index.html#products" class="btn">العودة للتسوق</a>
+      </div>
+    `;
+    return;
+  }
+
+  box.innerHTML = fav.map((name,index)=>{
+    const product = products[name] || {price:"غير محدد", desc:"منتج محفوظ في المفضلة"};
+    return `
+      <div class="fav-card">
+        <span class="fav-badge">محفوظ</span>
+        <h3>${name}</h3>
+        <p>${product.desc}</p>
+        <h2 style="color:#f3d18a;">${product.price}</h2>
+        <div class="fav-actions">
+          <a href="../index.html#products" class="btn">عرض المنتج</a>
+          <button class="btn secondary" onclick="removeFavorite(${index})">إزالة</button>
+        </div>
+      </div>
+    `;
+  }).join("");
 }
+
+function removeFavorite(index){
+  fav.splice(index,1);
+  localStorage.setItem("nukhba_wishlist", JSON.stringify(fav));
+  renderFavorites();
+}
+
+function clearFavorites(){
+  localStorage.removeItem("nukhba_wishlist");
+  fav = [];
+  renderFavorites();
+}
+
+renderFavorites();
 </script>
 
 </body>
