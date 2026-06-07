@@ -6,38 +6,157 @@
 <title>إتمام الطلب | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+
 <style>
-.checkout-box{max-width:700px;margin:60px auto;background:#111;padding:35px;border-radius:22px;border:1px solid #333}
-.checkout-box input,.checkout-box select{width:100%;padding:16px;margin:10px 0;border:0;border-radius:12px;background:#1c1c1c;color:#fff;font-family:Tajawal}
-.checkout-box button{width:100%;margin-top:15px}
+body{background:#030608;color:#fff;font-family:Tajawal,sans-serif}
+.checkout-page{min-height:100vh;padding:45px 0}
+.checkout-layout{display:grid;grid-template-columns:1fr 360px;gap:26px;align-items:start}
+.checkout-card,.order-summary{
+  background:linear-gradient(180deg,#151b20,#080b0e);
+  border:1px solid #ffffff20;
+  border-radius:26px;
+  padding:28px;
+  box-shadow:0 30px 90px #0008;
+}
+.checkout-card h1{font-size:42px;margin:0 0 25px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.input-group{display:flex;flex-direction:column;gap:8px}
+.input-group label{color:#f3d18a;font-weight:800}
+.input-group input,.input-group select{
+  width:100%;
+  padding:16px;
+  border:1px solid #ffffff18;
+  border-radius:14px;
+  background:#111;
+  color:#fff;
+  font-family:Tajawal;
+  font-size:16px;
+}
+.full{grid-column:1/-1}
+.order-summary{position:sticky;top:120px}
+.order-summary h2{margin-top:0}
+.summary-row{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #ffffff14;color:#ddd}
+.total{font-size:27px;font-weight:900;color:#f3d18a;margin:22px 0}
+.actions{display:grid;gap:12px;margin-top:18px}
+.actions .btn{text-align:center;width:100%}
+.notice{margin-top:18px;color:#aaa;line-height:1.7;font-size:14px}
+@media(max-width:850px){
+  .checkout-layout{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .order-summary{position:static}
+}
 </style>
 </head>
+
 <body>
 
-<div class="checkout-box">
-<h1>إتمام الطلب</h1>
+<main class="container checkout-page">
 
-<input type="text" placeholder="الاسم الكامل">
-<input type="text" placeholder="رقم الجوال">
-<input type="text" placeholder="المدينة">
-<input type="text" placeholder="العنوان الكامل">
+  <div class="checkout-layout">
 
-<select>
-<option>الدفع عند الاستلام</option>
-<option>مدى</option>
-<option>Visa</option>
-<option>Mastercard</option>
-<option>Apple Pay</option>
-</select>
+    <section class="checkout-card">
+      <h1>إتمام الطلب</h1>
 
-<button class="btn" onclick="finishOrder()">تأكيد الطلب</button>
-<a class="btn secondary" href="cart.html">العودة للسلة</a>
-</div>
+      <div class="form-grid">
+        <div class="input-group">
+          <label>الاسم الكامل</label>
+          <input id="name" type="text" placeholder="مثال: سالم محمد">
+        </div>
+
+        <div class="input-group">
+          <label>رقم الجوال</label>
+          <input id="phone" type="tel" placeholder="05xxxxxxxx">
+        </div>
+
+        <div class="input-group">
+          <label>المدينة</label>
+          <input id="city" type="text" placeholder="الرياض">
+        </div>
+
+        <div class="input-group">
+          <label>طريقة الدفع</label>
+          <select id="payment">
+            <option>الدفع عند الاستلام</option>
+            <option>مدى</option>
+            <option>Visa</option>
+            <option>Mastercard</option>
+            <option>Apple Pay</option>
+          </select>
+        </div>
+
+        <div class="input-group full">
+          <label>العنوان الكامل</label>
+          <input id="address" type="text" placeholder="الحي، الشارع، رقم المبنى">
+        </div>
+      </div>
+
+      <p class="notice">
+        عند تأكيد الطلب سيتم تفريغ السلة وحفظ الطلب كتجربة أولية. الدفع الحقيقي يحتاج ربط بوابة دفع لاحقًا.
+      </p>
+    </section>
+
+    <aside class="order-summary">
+      <h2>ملخص الدفع</h2>
+
+      <div class="summary-row">
+        <span>عدد المنتجات</span>
+        <b id="count">0</b>
+      </div>
+
+      <div class="summary-row">
+        <span>الشحن</span>
+        <b>مجاني</b>
+      </div>
+
+      <div class="summary-row">
+        <span>الدفع</span>
+        <b>آمن</b>
+      </div>
+
+      <div class="total" id="total">0 ريال</div>
+
+      <div class="actions">
+        <button class="btn" onclick="finishOrder()">تأكيد الطلب</button>
+        <a class="btn secondary" href="cart.html">العودة للسلة</a>
+        <a class="btn secondary" href="../index.html">متابعة التسوق</a>
+      </div>
+    </aside>
+
+  </div>
+
+</main>
 
 <script>
+let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
+let count = 0;
+let total = 0;
+
+cart.forEach(item=>{
+  count += item.qty;
+  total += item.price * item.qty;
+});
+
+document.getElementById("count").innerText = count;
+document.getElementById("total").innerText = total.toLocaleString() + " ريال";
+
 function finishOrder(){
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const city = document.getElementById("city").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(cart.length === 0){
+    alert("السلة فارغة");
+    return;
+  }
+
+  if(!name || !phone || !city || !address){
+    alert("فضلاً أكمل بيانات الطلب");
+    return;
+  }
+
   localStorage.removeItem("nukhba_cart");
-  alert("تم إرسال الطلب بنجاح ✅");
+  alert("تم تأكيد الطلب بنجاح ✅");
   window.location.href = "../index.html";
 }
 </script>
