@@ -680,6 +680,191 @@ footer{
 .luxury-header::after{
   animation: diamondMove 8s ease-in-out infinite alternate;
 }
+
+  /* إصلاح شكل المتجر على شاشة الجوال */
+@media(max-width:650px){
+
+  .luxury-header{
+    position:relative;
+  }
+
+  .header-inner{
+    padding:28px 0 18px;
+  }
+
+  .top-brand{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    text-align:center;
+  }
+
+  .logo{
+    font-size:54px;
+    margin:auto;
+  }
+
+  .search{
+    width:100%;
+    height:58px;
+    font-size:15px;
+    text-align:center;
+  }
+
+  .header-actions{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+
+  .header-actions > .btn{
+    width:100%;
+    font-size:18px;
+    padding:17px;
+  }
+
+  .icons{
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+  }
+
+  .icon-item{
+    width:100%;
+    height:82px;
+    border-radius:22px;
+  }
+
+  .menu .container{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:0;
+    text-align:center;
+  }
+
+  .menu a{
+    padding:16px 5px;
+    font-size:16px;
+  }
+
+  .hero{
+    height:520px;
+    margin-top:20px;
+    border-radius:26px;
+    background-position:center;
+  }
+
+  .hero-content{
+    right:22px;
+    left:22px;
+    top:58px;
+    max-width:none;
+    text-align:center;
+  }
+
+  .tag{
+    font-size:15px;
+  }
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .hero p{
+    font-size:17px;
+    line-height:1.8;
+  }
+
+  .hero-actions{
+    justify-content:center;
+  }
+
+  .hero-actions .btn{
+    width:100%;
+  }
+
+  .trust-row{
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+
+  .trust{
+    padding:16px 10px;
+    font-size:14px;
+  }
+
+  .categories{
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+
+  .cat{
+    height:150px;
+  }
+
+  .cat h3{
+    font-size:17px;
+  }
+
+  .sell-panel{
+    padding:24px 18px;
+    text-align:center;
+  }
+
+  .sell-panel h2{
+    font-size:28px;
+  }
+
+  .sell-panel p{
+    font-size:16px;
+  }
+
+  .section-head{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+
+  .section-head h2{
+    font-size:28px;
+  }
+
+  .products{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .card{
+    padding:18px;
+  }
+
+  .card img{
+    height:240px;
+  }
+
+  .wide-ad{
+    height:300px;
+    border-radius:24px;
+  }
+
+  .wide-ad div{
+    right:22px;
+    left:22px;
+    top:35px;
+    max-width:none;
+    text-align:center;
+  }
+
+  .wide-ad h2{
+    font-size:32px;
+  }
+
+  .wide-ad p{
+    font-size:15px;
+    line-height:1.8;
+  }
+}
 </style>
 </head>
 
