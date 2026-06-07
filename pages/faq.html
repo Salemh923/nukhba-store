@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الأسئلة الشائعة | نُخبة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Tajawal,sans-serif;background:#030608;color:#fff}
+.page{width:min(1200px,94%);margin:auto;padding:35px 0 70px}
+h1{color:#f3d18a;font-size:38px;margin-bottom:24px}
+.faq{background:#111820;border:1px solid #ffffff18;border-radius:24px;padding:24px;margin-bottom:14px;cursor:pointer}
+.faq h2{color:#f3d18a;margin:0;font-size:20px;display:flex;justify-content:space-between;align-items:center}
+.faq p{margin-top:8px;color:#ccc;display:none;line-height:1.8}
+</style>
+</head>
+<body>
+
+<main class="page">
+<h1>الأسئلة الشائعة</h1>
+
+<div class="faq">
+<h2>هل المنتجات المستعملة مضمون؟ <span>+</span></h2>
+<p>نعم، جميع المنتجات المستعملة يتم فحصها بدقة وتوثيق حالتها قبل العرض للبيع.</p>
+</div>
+
+<div class="faq">
+<h2>هل يوجد استرجاع؟ <span>+</span></h2>
+<p>نعم، يمكن الاسترجاع إذا كانت حالة المنتج تختلف عن الوصف خلال 7 أيام من التسليم.</p>
+</div>
+
+<div class="faq">
+<h2>كم مدة الشحن؟ <span>+</span></h2>
+<p>عادةً خلال 24-48 ساعة داخل المملكة، مع تتبع الطلب بالكامل.</p>
+</div>
+
+<div class="faq">
+<h2>كيف أبيع منتجي؟ <span>+</span></h2>
+<p>يمكنك رفع منتجك من صفحة بيع المنتج، اختيار الفئة والحالة والسعر، ثم نراجع المنتج قبل عرضه للشراء.</p>
+</div>
+
+</main>
+
+<script>
+document.querySelectorAll('.faq').forEach(f=>{
+  f.addEventListener('click',()=>{
+    const p = f.querySelector('p');
+    const s = f.querySelector('span');
+    if(p.style.display==='block'){p.style.display='none'; s.textContent='+'}
+    else{p.style.display='block'; s.textContent='−'}
+  });
+});
+</script>
+
+</body>
+</html>
