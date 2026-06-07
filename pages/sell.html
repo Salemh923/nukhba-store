@@ -4,37 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>بيع منتج | نُخبة</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
-
 <style>
-.sell-box{
-max-width:900px;
-margin:50px auto;
-background:#111;
-padding:35px;
-border-radius:20px;
-border:1px solid #333;
-}
-
-.sell-box h1{
-margin-bottom:25px;
-text-align:center;
-}
-
-.sell-box input,
-.sell-box textarea,
-.sell-box select{
-width:100%;
-padding:15px;
-margin-bottom:15px;
-border:none;
-border-radius:10px;
-background:#1c1c1c;
-color:#fff;
-font-family:Tajawal;
-}
+.sell-box{max-width:900px;margin:50px auto;background:#111;padding:35px;border-radius:22px;border:1px solid #333}
+.sell-box input,.sell-box textarea,.sell-box select{width:100%;padding:16px;margin-bottom:15px;border:0;border-radius:12px;background:#1c1c1c;color:#fff;font-family:Tajawal}
+.sell-box textarea{height:150px;resize:none}
+</style>
+</head>
+<body>
+<div class="sell-box">
+<h1>بيع منتجك</h1>
+<input type="text" placeholder="اسم المنتج">
+<select><option>اختر القسم</option><option>إلكترونيات</option><option>سيارات</option><option>عقارات</option><option>ساعات</option></select>
+<select><option>حالة المنتج</option><option>جديد</option><option>شبه جديد</option><option>مستعمل ممتاز</option><option>مستعمل</option></select>
+<input type="number" placeholder="السعر بالريال">
+<input type="file">
+<textarea placeholder="وصف المنتج"></textarea>
+<button class="btn" onclick="alert('تم إرسال المنتج للمراجعة ✅')">إرسال المنتج</button>
+<a href="../index.html" class="btn secondary">العودة للرئيسية</a>
+</div>
+</body>
+</html>
 
 .sell-box textarea{
 height:150px;
