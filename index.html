@@ -451,36 +451,39 @@ footer{
     <input class="search" placeholder="ابحث عن آيفون مستعمل، سيارة، ساعة، عقار...">
 
     <div class="icons">
-      <div class="icon-item">
-        <svg viewBox="0 0 24 24">
-          <circle cx="12" cy="8" r="4"></circle>
-          <path d="M4 21c1.5-5 14.5-5 16 0"></path>
-        </svg>
-        <span>حسابي</span>
-      </div>
 
-      <div class="icon-item">
-        <svg viewBox="0 0 24 24">
-          <path d="M20.8 4.6c-1.8-1.7-4.6-1.5-6.3.4L12 7.7 9.5 5C7.8 3.1 5 2.9 3.2 4.6c-2 1.9-2 5.1 0 7l8.8 8.4 8.8-8.4c2-1.9 2-5.1 0-7z"></path>
-        </svg>
-        <span>المفضلة</span>
-      </div>
+<a class="icon-item" href="pages/account.html">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="4"></circle>
+<path d="M4 21c1.5-5 14.5-5 16 0"></path>
+</svg>
+<span>حسابي</span>
+</a>
 
-      <div class="icon-item">
-        <svg viewBox="0 0 24 24">
-          <path d="M6 6h15l-2 9H8L6 6z"></path>
-          <path d="M6 6 5 3H2"></path>
-          <circle cx="9" cy="20" r="1.5"></circle>
-          <circle cx="18" cy="20" r="1.5"></circle>
-        </svg>
-        <span>السلة</span>
-      </div>
-    </div>
+<a class="icon-item" href="pages/favorites.html">
+<svg viewBox="0 0 24 24">
+<path d="M20.8 4.6c-1.8-1.7-4.6-1.5-6.3.4L12 7.7 9.5 5C7.8 3.1 5 2.9 3.2 4.6c-2 1.9-2 5.1 0 7l8.8 8.4 8.8-8.4c2-1.9 2-5.1 0-7z"></path>
+</svg>
+<span>المفضلة</span>
+</a>
 
-    <button class="btn">بيع منتجك</button>
-  </div>
+<a class="icon-item" href="pages/cart.html">
+<svg viewBox="0 0 24 24">
+<path d="M6 6h15l-2 9H8L6 6z"></path>
+<path d="M6 6 5 3H2"></path>
+<circle cx="9" cy="20" r="1.5"></circle>
+<circle cx="18" cy="20" r="1.5"></circle>
+</svg>
+<span>السلة</span>
+</a>
+
+</div>
+
+<a href="pages/sell.html" class="btn">بيع منتجك</a>
+
+</div>
 </header>
-
+  
 <div class="menu">
   <div class="container">
     <a class="active">الرئيسية</a>
@@ -502,8 +505,8 @@ footer{
     <h1>اشترِ الجديد والمستعمل <span>بثقة النخبة</span></h1>
     <p>منتجات جديدة ومستعملة مفحوصة، حالة واضحة، ضمان، تسعير عادل، ودفع آمن — تجربة قريبة من فكرة سوم لكن بهوية فاخرة متعددة الأقسام.</p>
     <div class="hero-actions">
-      <button class="btn">تسوّق الآن</button>
-      <button class="btn secondary">قيّم وبيع منتجك</button>
+      <a href="#products" class="btn">تسوّق الآن</a>
+<a href="pages/sell.html" class="btn secondary">قيّم وبيع منتجك</a>
     </div>
   </div>
 </section>
@@ -542,7 +545,7 @@ footer{
   <a>عرض الكل ‹</a>
 </div>
 
-<section class="products">
+<section class="products" id="products">
   <div class="card">
     <div class="badges"><span class="badge used">شبه جديد</span><span class="badge checked">مفحوص</span></div>
     <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=900">
@@ -550,7 +553,7 @@ footer{
     <p class="meta">256GB · تيتانيوم طبيعي · بطارية 96%</p>
     <div class="rating">★ 4.9 (324)</div>
     <p class="price">3,899 ريال <span class="old">4,699</span></p>
-    <div class="actions"><button class="cart">🛒</button><span class="heart">♡</span></div>
+    <div class="actions"><button class="cart" onclick="addToCart('iPhone 15 Pro Max')">🛒</button>="heart">♡</span></div>
   </div>
 
   <div class="card">
@@ -560,7 +563,7 @@ footer{
     <p class="meta">512GB · تيتانيوم رمادي · ضمان سنة</p>
     <div class="rating">★ 4.8 (210)</div>
     <p class="price">4,399 ريال</p>
-    <div class="actions"><button class="cart">🛒</button><span class="heart">♡</span></div>
+    <div class="actions"><button class="cart" onclick="addToCart('Samsung Galaxy S24 Ultra')">🛒</button>="heart">♡</span></div>
   </div>
 
   <div class="card">
@@ -570,7 +573,7 @@ footer{
     <p class="meta">13 إنش · 8GB · 256GB · نظيف جدًا</p>
     <div class="rating">★ 4.9 (186)</div>
     <p class="price">3,299 ريال <span class="old">3,999</span></p>
-    <div class="actions"><button class="cart">🛒</button><span class="heart">♡</span></div>
+    <div class="actions"><button class="cart" onclick="addToCart('MacBook Air M2')">🛒</button>="heart">♡</span></div>
   </div>
 
   <div class="card">
@@ -580,7 +583,7 @@ footer{
     <p class="meta">M2 · 256GB · خدوش بسيطة</p>
     <div class="rating">★ 4.7 (98)</div>
     <p class="price">2,299 ريال</p>
-    <div class="actions"><button class="cart">🛒</button><span class="heart">♡</span></div>
+    <div class="actions"><button class="cart" onclick="addToCart('iPad Pro 11')">🛒</button>="heart">♡</span></div>
   </div>
 
   <div class="card">
@@ -590,7 +593,7 @@ footer{
     <p class="meta">أسود · إلغاء ضوضاء · ضمان الوكيل</p>
     <div class="rating">★ 4.6 (76)</div>
     <p class="price">1,299 ريال</p>
-    <div class="actions"><button class="cart">🛒</button><span class="heart">♡</span></div>
+    <div class="actions"><button class="cart" onclick="addToCart('Sony WH-1000XM5')">🛒</button>="heart">♡</span></div>
   </div>
 </section>
 
@@ -655,5 +658,9 @@ footer{
   © 2026 نُخبة — متجر سعودي فاخر للجديد والمستعمل المضمون
 </footer>
 
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+<script src="js/app.js"></script>
+  
 </body>
 </html>
