@@ -4,83 +4,40 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>تفاصيل المنتج | نُخبة</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
-
 <style>
-.product-page{
-max-width:1200px;
-margin:50px auto;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:40px;
-}
-
-.product-page img{
-width:100%;
-border-radius:20px;
-background:#111;
-padding:20px;
-}
-
-.buy-box{
-background:#111;
-padding:30px;
-border-radius:20px;
-}
-
-.buy-box h1{
-margin-top:0;
-}
-
-.price{
-font-size:35px;
-font-weight:bold;
-color:#d8a64b;
-}
-
-.buy-box button{
-width:100%;
-margin-top:10px;
-}
+.product-page{max-width:1200px;margin:50px auto;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.product-page img{width:100%;border-radius:22px;background:#111;padding:20px}
+.buy-box{background:#111;padding:35px;border-radius:22px;border:1px solid #333}
+.buy-box button,.buy-box a{width:100%;text-align:center;margin-top:10px}
 </style>
-
 </head>
-
 <body>
-
 <div class="product-page">
-
-<div>
-<img src="../assets/images/iphone15.jpg">
-</div>
-
+<img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=900">
 <div class="buy-box">
-
 <h1>iPhone 15 Pro Max</h1>
-
-<p>
-آيفون 15 برو ماكس بحالة ممتازة ومفحوص بالكامل.
-</p>
-
-<h2 class="price">
-3899 ريال
-</h2>
-
-<button class="btn">
-شراء الآن
-</button>
-
-<button class="btn secondary">
-إضافة للسلة
-</button>
-
+<p class="meta">256GB · تيتانيوم طبيعي · بطارية 96% · مفحوص ومضمون</p>
+<h2 class="price">3,899 ريال</h2>
+<button class="btn" onclick="addToCart()">إضافة للسلة</button>
+<a href="cart.html" class="btn secondary">الذهاب للسلة</a>
+<a href="../index.html" class="btn secondary">العودة للمتجر</a>
+</div>
 </div>
 
-</div>
-
-</body>
-</html>
+<script>
+function addToCart(){
+let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
+cart.push({
+name:"iPhone 15 Pro Max",
+price:3899,
+image:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=900",
+qty:1
+});
+localStorage.setItem("nukhba_cart", JSON.stringify(cart));
+alert("تمت إضافة المنتج للسلة ✅");
+}
+</script>
 </body>
 </html>
