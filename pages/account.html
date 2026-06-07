@@ -6,164 +6,57 @@
 <title>حسابي | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
-
 <style>
-body{background:#030608;color:#fff;font-family:Tajawal,sans-serif}
-.account-header{background:#05090c;border-bottom:1px solid #ffffff18;padding:14px 0}
-.account-nav{width:min(1200px,94%);margin:auto;display:flex;justify-content:space-between;align-items:center}
-.account-logo{font-size:34px;font-weight:900}
-.account-logo span{color:#d8a64b}
-.account-logo small{display:block;font-size:10px;letter-spacing:4px;color:#d8a64b}
+body{margin:0;background:#030608;color:#fff;font-family:Tajawal,sans-serif}
+a{text-decoration:none;color:inherit}
+.page{width:min(1200px,94%);margin:auto;padding:40px 0}
+.account-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap}
+.account-header h1{margin:0;font-size:38px}
+.account-header .btn{padding:12px 24px}
 
-.account-page{padding:40px 0}
-.account-hero{
-  background:linear-gradient(135deg,#181f24,#070a0d 70%);
-  border:1px solid #d8a64b44;
-  border-radius:28px;
-  padding:35px;
-  margin-bottom:25px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  box-shadow:0 30px 90px #0008;
-}
-.account-hero h1{font-size:42px;margin:0}
-.account-hero p{color:#aaa;margin:8px 0 0}
+.account-info, .account-actions{background:linear-gradient(180deg,#151b20,#080b0e);border:1px solid #ffffff20;border-radius:24px;padding:28px;margin-bottom:28px;box-shadow:0 24px 70px #0008}
+.account-info h2, .account-actions h2{margin:0 0 16px;font-size:26px;color:var(--gold2)}
+.account-info p{margin:6px 0;color:#ddd;line-height:1.7}
 
-.account-grid{display:grid;grid-template-columns:330px 1fr;gap:25px}
-.profile-card,.content-card{
-  background:linear-gradient(180deg,#151b20,#080b0e);
-  border:1px solid #ffffff20;
-  border-radius:26px;
-  padding:26px;
-  box-shadow:0 25px 70px #0008;
-}
-.avatar{
-  width:120px;height:120px;border-radius:50%;
-  background:linear-gradient(135deg,#f3d18a,#ad762d);
-  color:#111;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:52px;
-  font-weight:900;
-  margin:0 auto 15px;
-}
-.profile-card{text-align:center}
-.profile-card h2{margin:8px 0}
-.profile-card p{color:#aaa}
-.menu-links{display:grid;gap:12px;margin-top:22px}
-.menu-links a{
-  background:#ffffff0d;
-  border:1px solid #ffffff12;
-  padding:14px;
-  border-radius:14px;
-  color:#fff;
-  text-align:center;
-}
-.menu-links a:hover{border-color:#d8a64b;color:#f3d18a}
+.action-btn{width:100%;padding:14px 0;margin-top:12px;border-radius:14px;border:0;cursor:pointer;font-weight:900;font-size:16px;color:#111;background:linear-gradient(135deg,#f3d18a,#ad762d);transition:.35s}
+.action-btn.secondary{background:#ffffff12;color:#fff;border:1px solid #ffffff25}
+.action-btn:hover{transform:translateY(-3px)}
 
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:25px}
-.stat{
-  background:#ffffff0d;
-  border:1px solid #ffffff14;
-  border-radius:18px;
-  padding:20px;
-}
-.stat b{font-size:32px;color:#f3d18a}
-.stat span{display:block;color:#aaa;margin-top:6px}
-
-.info-list{display:grid;gap:14px}
-.info-row{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  border-bottom:1px solid #ffffff12;
-  padding:15px 0;
-}
-.info-row span{color:#aaa}
-.info-row b{color:#fff}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
-
-@media(max-width:850px){
-  .account-grid{grid-template-columns:1fr}
-  .account-hero{flex-direction:column;align-items:flex-start}
-  .stats{grid-template-columns:1fr}
-}
+.empty{padding:44px 22px;text-align:center;color:#aaa}
 </style>
 </head>
-
 <body>
 
-<header class="account-header">
-  <div class="account-nav">
-    <div class="account-logo">نُخ<span>بة</span><small>NUKHBA</small></div>
-    <a href="../index.html" class="btn">العودة للمتجر</a>
-  </div>
-</header>
+<main class="page">
 
-<main class="container account-page">
-
-<section class="account-hero">
-  <div>
-    <h1>حسابي</h1>
-    <p>لوحة مختصرة لإدارة مشترياتك، مفضلتك، ومنتجاتك المعروضة للبيع.</p>
-  </div>
-  <a href="login.html" class="btn">تسجيل الدخول</a>
-</section>
-
-<div class="account-grid">
-
-<aside class="profile-card">
-  <div class="avatar">ن</div>
-  <h2>مستخدم نُخبة</h2>
-  <p>عضو تجريبي</p>
-
-  <div class="menu-links">
-    <a href="cart.html">سلة المشتريات</a>
-    <a href="favorites.html">المفضلة</a>
-    <a href="sell.html">بيع منتج</a>
-    <a href="../index.html">الرئيسية</a>
-  </div>
-</aside>
-
-<section class="content-card">
-  <div class="stats">
-    <div class="stat"><b id="orders">0</b><span>طلبات مكتملة</span></div>
-    <div class="stat"><b id="cartCount">0</b><span>منتجات في السلة</span></div>
-    <div class="stat"><b id="favCount">0</b><span>منتجات مفضلة</span></div>
-  </div>
-
-  <h2>معلومات الحساب</h2>
-
-  <div class="info-list">
-    <div class="info-row"><span>الاسم</span><b>مستخدم نُخبة</b></div>
-    <div class="info-row"><span>البريد الإلكتروني</span><b>user@nukhba.com</b></div>
-    <div class="info-row"><span>نوع الحساب</span><b>عميل / بائع</b></div>
-    <div class="info-row"><span>الحالة</span><b>تجريبي</b></div>
-  </div>
-
-  <div class="actions">
-    <a href="cart.html" class="btn">عرض السلة</a>
-    <a href="favorites.html" class="btn secondary">عرض المفضلة</a>
-    <a href="sell.html" class="btn secondary">بيع منتج جديد</a>
-  </div>
-</section>
-
+<div class="account-header">
+<h1>حسابي</h1>
+<a href="../index.html" class="btn secondary">العودة للمتجر</a>
 </div>
+
+<section class="account-info">
+<h2>معلومات المستخدم</h2>
+<p>الاسم: أحمد بن خالد</p>
+<p>البريد الإلكتروني: user@example.com</p>
+<p>رقم الهاتف: 0501234567</p>
+</section>
+
+<section class="account-actions">
+<h2>إجراءات الحساب</h2>
+<button class="action-btn">تعديل المعلومات</button>
+<button class="action-btn">تغيير كلمة المرور</button>
+<button class="action-btn secondary" onclick="logout()">تسجيل الخروج</button>
+</section>
 
 </main>
 
-<footer>© 2026 نُخبة — حسابي</footer>
+<footer>© 2026 نُخبة — حساب المستخدم</footer>
 
 <script>
-let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
-let fav = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
-let cartCount = cart.reduce((sum,item)=>sum + item.qty,0);
-
-document.getElementById("cartCount").innerText = cartCount;
-document.getElementById("favCount").innerText = fav.length;
+function logout(){
+  alert("تم تسجيل الخروج ✅");
+  window.location.href = "../index.html";
+}
 </script>
 
 </body>
