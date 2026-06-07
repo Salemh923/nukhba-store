@@ -3,59 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الدفع | نُخبة</title>
+<title>إتمام الطلب | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/responsive.css">
-<link rel="stylesheet" href="../css/animations.css">
+<style>
+body{margin:0;background:#030608;color:#fff;font-family:Tajawal,sans-serif}
+a{text-decoration:none;color:inherit}
+.page{width:min(1200px,94%);margin:auto;padding:35px 0 70px}
+.top{background:#05090c;border-bottom:1px solid #ffffff18;padding:16px 0}
+.nav{width:min(1200px,94%);margin:auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:34px;font-weight:900}.logo span{color:#d8a64b}
+.btn{border:0;cursor:pointer;color:#111;font-weight:900;border-radius:12px;padding:13px 22px;background:linear-gradient(135deg,#f3d18a,#ad762d);display:inline-block}
+.btn.secondary{background:#ffffff12;color:#fff;border:1px solid #ffffff25}
+.layout{display:grid;grid-template-columns:1fr 360px;gap:24px}
+.form,.summary{background:linear-gradient(180deg,#151b20,#080b0e);border:1px solid #ffffff20;border-radius:24px;padding:24px;box-shadow:0 24px 70px #0008}
+h1{font-size:38px;margin:0 0 24px}
+label{display:block;margin:14px 0 6px;font-weight:900;color:#f3d18a}
+input,select,textarea{width:100%;height:48px;border-radius:12px;border:1px solid #ffffff22;background:#0b1115;color:#fff;padding:0 14px;font-family:inherit}
+textarea{height:90px;padding:14px}
+.row{display:flex;justify-content:space-between;border-bottom:1px solid #ffffff12;padding:12px 0;color:#ddd}
+.total{font-size:28px;color:#f3d18a;font-weight:900;margin:20px 0}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
-<header class="luxury-header">
-  <div class="header-inner container">
-    <a class="logo" href="../index.html">نُخ<span>بة</span><small>NUKHBA</small></a>
+<header class="top">
+  <div class="nav">
+    <div class="logo">نُخ<span>بة</span></div>
+    <a class="btn" href="cart.html">السلة</a>
   </div>
 </header>
 
-<main class="container">
-  <div class="section-head">
-    <h2>إتمام الدفع</h2>
-    <a href="../index.html">الرئيسية ‹</a>
-  </div>
+<main class="page">
+<h1>إتمام الطلب</h1>
 
-  <section class="page-grid">
-    <form class="checkout-form">
-      <label>الاسم الكامل</label>
-      <input type="text" placeholder="أدخل الاسم الكامل" required>
+<div class="layout">
+  <section class="form">
+    <label>الاسم الكامل</label>
+    <input id="name" placeholder="اكتب اسمك">
 
-      <label>البريد الإلكتروني</label>
-      <input type="email" placeholder="example@mail.com" required>
+    <label>رقم الجوال</label>
+    <input id="phone" placeholder="05xxxxxxxx">
 
-      <label>رقم الهاتف</label>
-      <input type="tel" placeholder="05XXXXXXXX" required>
+    <label>المدينة</label>
+    <select id="city">
+      <option>الرياض</option>
+      <option>جدة</option>
+      <option>الدمام</option>
+      <option>مكة</option>
+      <option>المدينة</option>
+    </select>
 
-      <label>العنوان</label>
-      <textarea placeholder="عنوان الشحن" required></textarea>
+    <label>العنوان</label>
+    <textarea id="address" placeholder="الحي، الشارع، رقم المنزل"></textarea>
 
-      <label>طريقة الدفع</label>
-      <select required>
-        <option value="">اختر الطريقة</option>
-        <option value="credit">بطاقة ائتمان</option>
-        <option value="paypal">PayPal</option>
-        <option value="cash">الدفع عند الاستلام</option>
-      </select>
+    <label>طريقة الدفع</label>
+    <select id="payment">
+      <option>الدفع عند الاستلام</option>
+      <option>مدى</option>
+      <option>Apple Pay</option>
+      <option>STC Pay</option>
+    </select>
 
-      <button class="btn" type="submit">إتمام الطلب</button>
-    </form>
+    <br><br>
+    <button class="btn" style="width:100%" onclick="placeOrder()">تأكيد الطلب</button>
   </section>
+
+  <aside class="summary">
+    <h2>ملخص الطلب</h2>
+    <div id="items"></div>
+    <div class="row"><span>الشحن</span><b>مجاني</b></div>
+    <div class="total" id="total">0 ريال</div>
+  </aside>
+</div>
 </main>
 
-<footer class="footer">
-  <div class="footer-bottom">© 2026 نُخبة — جميع الحقوق محفوظة</div>
-</footer>
+<script>
+let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
+const itemsBox = document.getElementById("items");
+const totalBox = document.getElementById("total");
 
-<script src="../js/products.js"></script>
-<script src="../js/storage.js"></script>
-<script src="../js/cart.js"></script>
+function render(){
+  let total = 0;
+  if(!cart.length){
+    itemsBox.innerHTML = "<p style='color:#aaa'>السلة فارغة</p>";
+    totalBox.innerText = "0 ريال";
+    return;
+  }
+
+  itemsBox.innerHTML = cart.map(item=>{
+    total += Number(item.price) * Number(item.qty);
+    return `<div class="row"><span>${item.name} × ${item.qty}</span><b>${(item.price*item.qty).toLocaleString()} ريال</b></div>`;
+  }).join("");
+
+  totalBox.innerText = total.toLocaleString() + " ريال";
+}
+
+function placeOrder(){
+  if(!cart.length){alert("السلة فارغة");return}
+
+  const order = {
+    id: Date.now(),
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    city: document.getElementById("city").value,
+    address: document.getElementById("address").value,
+    payment: document.getElementById("payment").value,
+    items: cart,
+    date: new Date().toLocaleString("ar-SA")
+  };
+
+  if(!order.name || !order.phone || !order.address){
+    alert("أكمل بيانات الطلب");
+    return;
+  }
+
+  localStorage.setItem("nukhba_last_order",JSON.stringify(order));
+  localStorage.removeItem("nukhba_cart");
+  window.location.href = "order-success.html";
+}
+
+render();
+</script>
+
 </body>
 </html>
