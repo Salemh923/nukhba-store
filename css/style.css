@@ -227,3 +227,38 @@ font-size:32px;
 }
 
 }
+.cart,
+.heart{
+display:flex;
+align-items:center;
+justify-content:center;
+width:48%;
+height:52px;
+border-radius:14px;
+cursor:pointer;
+transition:.3s;
+font-size:0;
+}
+
+.cart{
+background:linear-gradient(135deg,#f3d18a,#d8a64b);
+border:none;
+color:#111;
+}
+
+.heart{
+background:#0f1419;
+border:1px solid rgba(216,166,75,.35);
+color:#f3d18a;
+}
+
+.cart svg,
+.heart svg{
+width:22px;
+height:22px;
+}
+
+.cart:hover,
+.heart:hover{
+transform:translateY(-3px);
+}
