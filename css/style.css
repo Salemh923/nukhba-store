@@ -60,9 +60,7 @@ content:"";
 position:absolute;
 inset:0;
 background:
-linear-gradient(to bottom,
-rgba(0,0,0,.3),
-rgba(0,0,0,.8)),
+linear-gradient(to bottom,rgba(0,0,0,.3),rgba(0,0,0,.8)),
 url("https://images.unsplash.com/photo-1511707171634-5f897ff02aa9");
 background-size:cover;
 background-position:center;
@@ -208,6 +206,73 @@ color:#aaa;
 margin-top:80px;
 }
 
+/* أزرار السلة والمفضلة بدون تخريب */
+.actions{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-top:14px;
+}
+
+.cart,
+.heart{
+width:48px;
+height:44px;
+min-width:48px;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+transition:.25s ease;
+font-size:18px;
+line-height:1;
+}
+
+.cart{
+background:linear-gradient(135deg,#f3d18a,#d8a64b);
+color:#111;
+border:0;
+}
+
+.heart{
+background:#0f1419;
+color:#f3d18a;
+border:1px solid rgba(216,166,75,.35);
+}
+
+.cart:hover,
+.heart:hover{
+transform:translateY(-3px);
+}
+
+.cart svg,
+.heart svg{
+width:21px;
+height:21px;
+}
+
+/* دعم البطاقات التي اسمها card داخل index */
+.card .actions{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-top:14px;
+}
+
+.card .cart,
+.card .heart{
+width:48px;
+height:44px;
+min-width:48px;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
 @media(max-width:768px){
 
 .hero h1{
@@ -226,39 +291,15 @@ font-size:34px;
 font-size:32px;
 }
 
+.actions{
+gap:10px;
 }
+
 .cart,
 .heart{
-display:flex;
-align-items:center;
-justify-content:center;
-width:48%;
-height:52px;
-border-radius:14px;
-cursor:pointer;
-transition:.3s;
-font-size:0;
+width:46px;
+height:42px;
+min-width:46px;
 }
 
-.cart{
-background:linear-gradient(135deg,#f3d18a,#d8a64b);
-border:none;
-color:#111;
-}
-
-.heart{
-background:#0f1419;
-border:1px solid rgba(216,166,75,.35);
-color:#f3d18a;
-}
-
-.cart svg,
-.heart svg{
-width:22px;
-height:22px;
-}
-
-.cart:hover,
-.heart:hover{
-transform:translateY(-3px);
 }
