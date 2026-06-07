@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 </head>
-
 <body>
 
 <header>
@@ -18,7 +17,6 @@
 </header>
 
 <main class="container" style="padding:50px 0;">
-
   <div class="section-head">
     <h2>سلة المشتريات</h2>
     <a href="../index.html">متابعة التسوق ‹</a>
@@ -26,15 +24,80 @@
 
   <section class="products" id="cartItems"></section>
 
-  <div class="sell-panel" style="margin-top:35px;">
+  <div class="sell-panel">
     <div>
       <h2>ملخص الطلب</h2>
       <p id="cartSummary">جاري حساب السلة...</p>
       <h2 id="cartTotal">الإجمالي: 0 ريال</h2>
     </div>
 
-    <div class="steps">
-      <div class="step">1<br><b>مراجعة السلة</b></div>
+    <button class="btn" onclick="checkout()">إتمام الطلب</button>
+    <button class="btn secondary" onclick="clearCart()">تفريغ السلة</button>
+  </div>
+</main>
+
+<footer>© 2026 نُخبة — سلة المشتريات</footer>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
+
+function renderCart(){
+  const box = document.getElementById("cartItems");
+  const summary = document.getElementById("cartSummary");
+  const totalBox = document.getElementById("cartTotal");
+
+  if(cart.length === 0){
+    box.innerHTML = `<div class="card"><h3>السلة فارغة</h3><p class="meta">لم تقم بإضافة أي منتج بعد.</p></div>`;
+    summary.innerText = "لا توجد منتجات في السلة.";
+    totalBox.innerText = "الإجمالي: 0 ريال";
+    return;
+  }
+
+  let total = 0;
+  let count = 0;
+
+  box.innerHTML = cart.map((item,index)=>{
+    total += item.price * item.qty;
+    count += item.qty;
+    return `
+      <div class="card">
+        <img src="${item.image}">
+        <h3>${item.name}</h3>
+        <p class="meta">الكمية: ${item.qty}</p>
+        <p class="price">${(item.price * item.qty).toLocaleString()} ريال</p>
+        <button class="btn secondary" onclick="removeItem(${index})">حذف</button>
+      </div>
+    `;
+  }).join("");
+
+  summary.innerText = "عدد المنتجات: " + count;
+  totalBox.innerText = "الإجمالي: " + total.toLocaleString() + " ريال";
+}
+
+function removeItem(index){
+  cart.splice(index,1);
+  localStorage.setItem("nukhba_cart", JSON.stringify(cart));
+  location.reload();
+}
+
+function clearCart(){
+  localStorage.removeItem("nukhba_cart");
+  location.reload();
+}
+
+function checkout(){
+  if(cart.length === 0){
+    alert("السلة فارغة");
+    return;
+  }
+  window.location.href = "checkout.html";
+}
+
+renderCart();
+</script>
+
+</body>
+</html>      <div class="step">1<br><b>مراجعة السلة</b></div>
       <div class="step">2<br><b>معلومات العميل</b></div>
       <div class="step">3<br><b>الدفع</b></div>
     </div>
