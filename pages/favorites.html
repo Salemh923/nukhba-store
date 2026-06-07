@@ -1,38 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المفضلة | نُخبة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root{--gold:#d8a64b;--gold2:#f3d18a}
+*{box-sizing:border-box}
+body{margin:0;background:#030608;color:#fff;font-family:Tajawal,sans-serif}
+a{text-decoration:none;color:inherit}
+.page{width:min(1200px,94%);margin:auto;padding:35px 0 70px}
+.top{background:#05090c;border-bottom:1px solid #ffffff18;padding:16px 0}
+.nav{width:min(1200px,94%);margin:auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:34px;font-weight:900}.logo span{color:var(--gold)}
+.btn{border:0;cursor:pointer;color:#111;font-weight:900;border-radius:12px;padding:13px 22px;background:linear-gradient(135deg,var(--gold2),#ad762d);display:inline-block;font-family:inherit}
+.btn.secondary{background:#ffffff12;color:#fff;border:1px solid #ffffff25}
+h1{font-size:38px;margin:0 0 24px}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:linear-gradient(180deg,#151b20,#080b0e);border:1px solid #ffffff20;border-radius:24px;padding:16px;box-shadow:0 24px 70px #0008}
+.card img{width:100%;height:230px;object-fit:contain;border-radius:18px;background:radial-gradient(circle,#d8a64b22,#0b1014 60%);padding:16px}
+.card h3{margin:15px 0 8px;font-size:21px}
+.meta{color:#aaa;line-height:1.7}
+.price{font-size:25px;color:var(--gold2);font-weight:900;margin:12px 0}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.empty{text-align:center;background:#111820;border:1px solid #ffffff18;border-radius:24px;padding:45px;color:#aaa;grid-column:1/-1}
+@media(max-width:800px){.products{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+
+<header class="top">
+  <div class="nav">
+    <div class="logo">نُخ<span>بة</span></div>
+    <a class="btn" href="../index.html">الرئيسية</a>
+  </div>
+</header>
+
+<main class="page">
+  <h1>المفضلة</h1>
+  <section class="products" id="favBox"></section>
+</main>
+
 <script>
 const products = [
-  {id:1,name:"iPhone 15 Pro Max",price:3899,image:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=900",meta:"256GB · تيتانيوم طبيعي · بطارية 96%"},
-  {id:2,name:"Samsung Galaxy S24 Ultra",price:4399,image:"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=900",meta:"512GB · قلم S Pen · جديد"},
-  {id:3,name:"MacBook Air M2",price:3299,image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=900",meta:"13 إنش · 8GB RAM · 256GB SSD"}
+  {
+    id:1,
+    name:"iPhone 15 Pro Max",
+    price:3899,
+    meta:"256GB · تيتانيوم طبيعي · بطارية 96%",
+    image:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=900"
+  },
+  {
+    id:2,
+    name:"Samsung Galaxy S24 Ultra",
+    price:4399,
+    meta:"512GB · تيتانيوم رمادي · ضمان سنة",
+    image:"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=900"
+  },
+  {
+    id:3,
+    name:"MacBook Air M2",
+    price:3299,
+    meta:"13 إنش · 8GB RAM · 256GB SSD",
+    image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=900"
+  },
+  {
+    id:4,
+    name:"iPad Pro 11 M2",
+    price:2299,
+    meta:"M2 · 256GB · خدوش بسيطة",
+    image:"https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=900"
+  },
+  {
+    id:5,
+    name:"Sony WH-1000XM5",
+    price:1299,
+    meta:"أسود · إلغاء ضوضاء · ضمان الوكيل",
+    image:"https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=900"
+  }
 ];
-
-function getProductById(id){
-  return products.find(p=>Number(p.id)===Number(id));
-}
-
-function formatPrice(num){
-  return num.toLocaleString() + " ريال";
-}
 
 let wish = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
 const box = document.getElementById("favBox");
 
+function getProductById(id){
+  return products.find(p => Number(p.id) === Number(id));
+}
+
 function render(){
-  if(!wish.length){
-    box.innerHTML = `<div class="empty"><h2>المفضلة فارغة</h2><p>لم تقم بحفظ أي منتج بعد.</p><br><a class="btn" href="../index.html">تصفح المتجر</a></div>`;
+  wish = wish.map(Number).filter(id => getProductById(id));
+  localStorage.setItem("nukhba_wishlist", JSON.stringify(wish));
+
+  if(wish.length === 0){
+    box.innerHTML = `
+      <div class="empty">
+        <h2>المفضلة فارغة</h2>
+        <p>لم تقم بحفظ أي منتج بعد.</p>
+        <br>
+        <a class="btn" href="../index.html">تصفح المتجر</a>
+      </div>
+    `;
     return;
   }
 
   box.innerHTML = wish.map(id=>{
     const p = getProductById(id);
-    if(!p) return "";
     return `
       <div class="card">
         <img src="${p.image}" alt="${p.name}">
         <h3>${p.name}</h3>
         <p class="meta">${p.meta}</p>
-        <div class="price">${formatPrice(p.price)}</div>
+        <div class="price">${p.price.toLocaleString()} ريال</div>
         <div class="actions">
-          <button class="btn" onclick="addToCart(${p.id})">السلة</button>
+          <button class="btn" onclick="addToCart(${p.id})">أضف للسلة</button>
           <button class="btn secondary" onclick="removeFav(${p.id})">حذف</button>
         </div>
       </div>
@@ -43,17 +126,32 @@ function render(){
 function addToCart(id){
   const p = getProductById(id);
   let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
-  let found = cart.find(item=>Number(item.id)===Number(id));
-  if(found){found.qty += 1}else{cart.push({id:p.id,name:p.name,price:p.price,image:p.image,qty:1})}
-  localStorage.setItem("nukhba_cart",JSON.stringify(cart));
-  alert("تمت الإضافة للسلة");
+  let found = cart.find(item => Number(item.id) === Number(id));
+
+  if(found){
+    found.qty += 1;
+  }else{
+    cart.push({
+      id:p.id,
+      name:p.name,
+      price:p.price,
+      image:p.image,
+      qty:1
+    });
+  }
+
+  localStorage.setItem("nukhba_cart", JSON.stringify(cart));
+  alert("تمت إضافة المنتج للسلة");
 }
 
 function removeFav(id){
-  wish = wish.filter(x=>Number(x)!==Number(id));
-  localStorage.setItem("nukhba_wishlist",JSON.stringify(wish));
+  wish = wish.filter(x => Number(x) !== Number(id));
+  localStorage.setItem("nukhba_wishlist", JSON.stringify(wish));
   render();
 }
 
 render();
 </script>
+
+</body>
+</html>
