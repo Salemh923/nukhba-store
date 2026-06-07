@@ -1,36 +1,49 @@
-// js/wishlist.js
-const wishContainer = document.getElementById("wishItems");
-
 function renderWishlist(){
-  let wish = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
+  const box = document.getElementById("wishItems");
+  if(!box) return;
+
+  const wish = getStorage("nukhba_wishlist");
+
   if(wish.length === 0){
-    wishContainer.innerHTML = '<p style="text-align:center;color:#aaa;padding:40px;">المفضلة فارغة</p>';
+    box.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;color:#aaa;padding:40px">
+        المفضلة فارغة
+      </div>
+    `;
     return;
   }
-  wishContainer.innerHTML = wish.map(id=>{
-    const p = products.find(x=>x.id===id);
-    if(!p) return '';
+
+  box.innerHTML = wish.map(id=>{
+    const p = findProduct(id);
+    if(!p) return "";
+
     return `
-      <div class="wish-item">
-        <img src="${p.image}" alt="${p.name}" />
-        <div class="wish-info">
-          <h3>${p.name}</h3>
-          <p>${p.price.toLocaleString()} ريال</p>
-          <button onclick="removeWish(${p.id})" class="btn secondary">حذف</button>
-          <button onclick="addToCart(${p.id})" class="btn">أضف للسلة</button>
+      <div class="card">
+        <img src="${p.image}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p class="meta">${p.meta}</p>
+        <div class="rating">★ ${p.rating} <span style="color:#aaa">(${p.reviews} تقييم)</span></div>
+        <p class="price">${money(p.price)}</p>
+
+        <div class="actions" style="grid-template-columns:1fr 1fr">
+          <button class="cart" onclick="addToCart(${p.id})">أضف للسلة</button>
+          <button class="heart" onclick="removeWish(${p.id})">حذف</button>
         </div>
       </div>
     `;
-  }).join('');
+  }).join("");
 }
 
 function removeWish(id){
-  let wish = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
-  wish = wish.filter(i=>i!==id);
-  localStorage.setItem("nukhba_wishlist",JSON.stringify(wish));
+  let wish = getStorage("nukhba_wishlist");
+  wish = wish.filter(item=>item !== Number(id));
+  setStorage("nukhba_wishlist",wish);
   renderWishlist();
   updateCounters();
+  showToast("تم حذف المنتج من المفضلة");
 }
 
-renderWishlist();
-updateCounters();
+document.addEventListener("DOMContentLoaded",()=>{
+  renderWishlist();
+  updateCounters();
+});
