@@ -5,36 +5,87 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>المفضلة | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/responsive.css">
-<link rel="stylesheet" href="../css/animations.css">
+<style>
+body{margin:0;background:#030608;color:#fff;font-family:Tajawal,sans-serif}
+a{text-decoration:none;color:inherit}
+.page{width:min(1200px,94%);margin:auto;padding:35px 0 70px}
+.top{background:#05090c;border-bottom:1px solid #ffffff18;padding:16px 0}
+.nav{width:min(1200px,94%);margin:auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:34px;font-weight:900}.logo span{color:#d8a64b}
+.btn{border:0;cursor:pointer;color:#111;font-weight:900;border-radius:12px;padding:13px 22px;background:linear-gradient(135deg,#f3d18a,#ad762d);display:inline-block}
+.btn.secondary{background:#ffffff12;color:#fff;border:1px solid #ffffff25}
+h1{font-size:38px;margin:0 0 24px}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:linear-gradient(180deg,#151b20,#080b0e);border:1px solid #ffffff20;border-radius:24px;padding:16px;box-shadow:0 24px 70px #0008}
+.card img{width:100%;height:230px;object-fit:contain;border-radius:18px;background:radial-gradient(circle,#d8a64b22,#0b1014 60%);padding:16px}
+.card h3{margin:15px 0 8px;font-size:21px}
+.meta{color:#aaa;line-height:1.7}
+.price{font-size:25px;color:#f3d18a;font-weight:900;margin:12px 0}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.empty{text-align:center;background:#111820;border:1px solid #ffffff18;border-radius:24px;padding:45px;color:#aaa}
+@media(max-width:800px){.products{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
-<header class="luxury-header">
-  <div class="header-inner container">
-    <div class="top-brand">
-      <a class="logo" href="../index.html">نُخ<span>بة</span><small>NUKHBA</small></a>
-      <div class="brand-card"><b>المفضلة</b><p>منتجاتك المحفوظة للعودة إليها لاحقًا.</p></div>
-    </div>
+<header class="top">
+  <div class="nav">
+    <div class="logo">نُخ<span>بة</span></div>
+    <a class="btn" href="../index.html">الرئيسية</a>
   </div>
 </header>
 
-<main class="container">
-  <div class="section-head">
-    <h2>المفضلة</h2>
-    <a href="../index.html">الرئيسية ‹</a>
-  </div>
-
-  <section class="products" id="wishItems"></section>
+<main class="page">
+  <h1>المفضلة</h1>
+  <section class="products" id="favBox"></section>
 </main>
 
-<footer class="footer">
-  <div class="footer-bottom">© 2026 نُخبة — جميع الحقوق محفوظة</div>
-</footer>
+<script src="../js/nukhba-data.js"></script>
+<script>
+let wish = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
+const box = document.getElementById("favBox");
 
-<script src="../js/products.js"></script>
-<script src="../js/storage.js"></script>
-<script src="../js/wishlist.js"></script>
+function render(){
+  if(!wish.length){
+    box.innerHTML = `<div class="empty"><h2>المفضلة فارغة</h2><p>لم تقم بحفظ أي منتج بعد.</p><br><a class="btn" href="../index.html">تصفح المتجر</a></div>`;
+    return;
+  }
+
+  box.innerHTML = wish.map(id=>{
+    const p = getProductById(id);
+    if(!p) return "";
+    return `
+      <div class="card">
+        <img src="${p.image}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p class="meta">${p.meta}</p>
+        <div class="price">${formatPrice(p.price)}</div>
+        <div class="actions">
+          <button class="btn" onclick="addToCart(${p.id})">السلة</button>
+          <button class="btn secondary" onclick="removeFav(${p.id})">حذف</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function addToCart(id){
+  const p = getProductById(id);
+  let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
+  let found = cart.find(item=>Number(item.id)===Number(id));
+  if(found){found.qty += 1}else{cart.push({id:p.id,name:p.name,price:p.price,image:p.image,qty:1})}
+  localStorage.setItem("nukhba_cart",JSON.stringify(cart));
+  alert("تمت الإضافة للسلة");
+}
+
+function removeFav(id){
+  wish = wish.filter(x=>Number(x)!==Number(id));
+  localStorage.setItem("nukhba_wishlist",JSON.stringify(wish));
+  render();
+}
+
+render();
+</script>
+
 </body>
 </html>
