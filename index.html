@@ -536,6 +536,104 @@ footer{
   0%,100%{box-shadow:0 0 0 rgba(216,166,75,0)}
   50%{box-shadow:0 0 25px rgba(216,166,75,.18)}
 }
+  /* ===== NUKHBA LUXURY MOTION ===== */
+
+.logo{
+  animation: floatLogo 4s ease-in-out infinite;
+}
+
+@keyframes floatLogo{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+
+.search{
+  animation: searchGlow 3.5s ease-in-out infinite;
+}
+
+@keyframes searchGlow{
+  0%,100%{box-shadow:0 0 18px rgba(216,166,75,.08)}
+  50%{box-shadow:0 0 35px rgba(216,166,75,.28)}
+}
+
+.icon-item{
+  animation: iconBreath 4s ease-in-out infinite;
+}
+
+@keyframes iconBreath{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+
+.hero{
+  animation: heroLuxury 12s ease-in-out infinite alternate;
+}
+
+@keyframes heroLuxury{
+  from{filter:brightness(1)}
+  to{filter:brightness(1.12)}
+}
+
+.hero h1,
+.hero p,
+.hero-actions,
+.trust,
+.cat,
+.sell-panel,
+.wide-ad,
+.section-head,
+.card{
+  animation: fadeUpLuxury .9s ease both;
+}
+
+@keyframes fadeUpLuxury{
+  from{
+    opacity:0;
+    transform:translateY(28px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.cat img,
+.card img{
+  transition:1s ease;
+}
+
+.cat:hover img,
+.card:hover img{
+  transform:scale(1.08);
+}
+
+.btn{
+  transition:.35s ease;
+}
+
+.btn:hover{
+  transform:translateY(-4px) scale(1.02);
+  box-shadow:0 18px 45px rgba(216,166,75,.35);
+}
+
+.card,
+.cat,
+.trust,
+.sell-panel{
+  transition:.4s ease;
+}
+
+.card:hover,
+.cat:hover,
+.trust:hover,
+.sell-panel:hover{
+  transform:translateY(-7px);
+  border-color:rgba(216,166,75,.55);
+}
+
+.luxury-header::after{
+  animation: diamondMove 8s ease-in-out infinite alternate;
+}
 </style>
 </head>
 
