@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>القسم | نُخبة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+body{background:#030608;color:#fff;font-family:Tajawal,sans-serif}
+.page{padding:35px 0}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{background:linear-gradient(180deg,#151b20,#080b0e);border:1px solid #ffffff20;border-radius:22px;padding:16px}
+.card img{width:100%;height:220px;object-fit:contain;background:#0b1014;border-radius:16px;padding:15px}
+.card h3{margin:15px 0 5px}
+.price{color:#f3d18a;font-size:24px;font-weight:900}
+.actions{display:flex;gap:10px;margin-top:12px}
+.actions button,.actions a{flex:1;text-align:center}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.top{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+<div class="logo">نُخ<span>بة</span><small>NUKHBA</small></div>
+<a href="../index.html" class="btn">الرئيسية</a>
+</div>
+</header>
+
+<main class="container page">
+
+<div class="top">
+<div>
+<h1 id="title">القسم</h1>
+<p class="meta" id="desc">منتجات مختارة من نُخبة</p>
+</div>
+<a href="cart.html" class="btn">السلة</a>
+</div>
+
+<section class="grid" id="productsBox"></section>
+
+</main>
+
+<footer>© 2026 نُخبة — الأقسام</footer>
+
+<script>
+const allProducts = [
+{cat:"electronics",name:"iPhone 15 Pro Max",price:3899,desc:"256GB · بطارية 96% · شبه جديد",image:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=900"},
+{cat:"electronics",name:"Samsung Galaxy S24 Ultra",price:4399,desc:"512GB · جديد · ضمان سنة",image:"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=900"},
+{cat:"electronics",name:"MacBook Air M2",price:3299,desc:"13 إنش · مستعمل ممتاز",image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=900"},
+{cat:"electronics",name:"iPad Pro 11",price:2299,desc:"M2 · 256GB · مفحوص",image:"https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=900"},
+{cat:"electronics",name:"Sony WH-1000XM5",price:1299,desc:"سماعة جديدة · إلغاء ضوضاء",image:"https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=900"},
+
+{cat:"cars",name:"تويوتا لاند كروزر 2023",price:315000,desc:"GXR · ممشى قليل · فحص شامل",image:"https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?q=80&w=900"},
+{cat:"cars",name:"لكزس ES 2023",price:185000,desc:"فل كامل · ضمان الوكالة",image:"https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=900"},
+
+{cat:"realestate",name:"شقة فاخرة بالرياض",price:980000,desc:"3 غرف · حي راقٍ · جاهزة للسكن",image:"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=900"},
+{cat:"realestate",name:"فيلا حديثة",price:2450000,desc:"تصميم فاخر · مساحة 420م",image:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900"},
+
+{cat:"watches",name:"ساعة فاخرة",price:8900,desc:"أصلية · علبة وكرت · مفحوصة",image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=900"},
+
+{cat:"fashion",name:"أزياء فاخرة",price:650,desc:"جديد · جودة عالية",image:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=900"},
+
+{cat:"home",name:"كنب منزلي فاخر",price:2400,desc:"منزل ومطبخ · حالة ممتازة",image:"https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=900"}
+];
+
+const names = {
+electronics:["الإلكترونيات","جوالات، لابتوبات، أجهزة وسماعات"],
+cars:["السيارات","سيارات مختارة مفحوصة وجاهزة"],
+realestate:["العقارات","شقق وفيلات مختارة"],
+watches:["الساعات","ساعات أصلية وجديدة ومستعملة"],
+fashion:["الأزياء","أزياء وإكسسوارات مختارة"],
+home:["منزل ومطبخ","منتجات منزلية مختارة"],
+new:["جديد","منتجات جديدة من نُخبة"],
+used:["مستعمل مضمون","منتجات مستعملة مفحوصة"]
+};
+
+const params = new URLSearchParams(location.search);
+const cat = params.get("cat") || "electronics";
+
+document.getElementById("title").innerText = names[cat]?.[0] || "القسم";
+document.getElementById("desc").innerText = names[cat]?.[1] || "منتجات مختارة";
+
+let products = allProducts;
+
+if(cat !== "new" && cat !== "used"){
+  products = allProducts.filter(p => p.cat === cat);
+}
+
+if(cat === "new"){
+  products = allProducts.filter(p => !p.desc.includes("مستعمل"));
+}
+
+if(cat === "used"){
+  products = allProducts.filter(p => p.desc.includes("مستعمل") || p.desc.includes("مفحوص") || p.desc.includes("شبه جديد"));
+}
+
+document.getElementById("productsBox").innerHTML = products.map(p=>`
+<div class="card">
+<img src="${p.image}" alt="${p.name}">
+<h3>${p.name}</h3>
+<p class="meta">${p.desc}</p>
+<p class="price">${p.price.toLocaleString()} ريال</p>
+<div class="actions">
+<button class="btn" onclick="addToCart('${p.name}',${p.price},'${p.image}')">🛒</button>
+<button class="btn secondary" onclick="addToWishlist('${p.name}')">♡</button>
+</div>
+</div>
+`).join("");
+
+function addToCart(name,price,image){
+let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
+let found = cart.find(i=>i.name===name);
+if(found){found.qty+=1}else{cart.push({name,price,image,qty:1})}
+localStorage.setItem("nukhba_cart",JSON.stringify(cart));
+alert("تمت إضافة المنتج إلى السلة ✅");
+}
+
+function addToWishlist(name){
+let fav = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
+if(!fav.includes(name)){fav.push(name)}
+localStorage.setItem("nukhba_wishlist",JSON.stringify(fav));
+alert("تمت إضافة المنتج إلى المفضلة ❤️");
+}
+</script>
+
+</body>
+</html>
