@@ -5,64 +5,88 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>بيع منتج | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/responsive.css">
-<link rel="stylesheet" href="../css/animations.css">
+<style>
+body{margin:0;font-family:Tajawal,sans-serif;background:#030608;color:#fff}
+.page{width:min(1200px,94%);margin:auto;padding:35px 0 70px}
+.top{background:#05090c;border-bottom:1px solid #ffffff18;padding:16px 0}
+.nav{width:min(1200px,94%);margin:auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:34px;font-weight:900}.logo span{color:#d8a64b}
+h1{font-size:38px;margin:0 0 24px}
+form{background:#111820;border:1px solid #ffffff18;border-radius:24px;padding:24px;display:grid;gap:14px}
+input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #ffffff22;background:#0b1115;color:#fff;font-family:inherit}
+.btn{border:0;cursor:pointer;color:#111;font-weight:900;border-radius:12px;padding:14px 24px;background:linear-gradient(135deg,#f3d18a,#ad762d);display:inline-block;margin-top:12px}
+</style>
 </head>
 <body>
 
-<header class="luxury-header">
-  <div class="header-inner container">
-    <a class="logo" href="../index.html">نُخ<span>بة</span><small>NUKHBA</small></a>
+<header class="top">
+  <div class="nav">
+    <div class="logo">نُخ<span>بة</span></div>
+    <a class="btn" href="../index.html">الرئيسية</a>
   </div>
 </header>
 
-<main class="container">
-  <div class="section-head">
-    <h2>بيع منتجك</h2>
-    <a href="../index.html">الرئيسية ‹</a>
-  </div>
+<main class="page">
+<h1>بيع منتجك</h1>
 
-  <section class="page-grid">
-    <form class="sell-form">
-      <label>اسم المنتج</label>
-      <input type="text" placeholder="أدخل اسم المنتج" required>
+<form id="sellForm">
+  <label>اسم المنتج</label>
+  <input id="prodName" placeholder="اكتب اسم المنتج">
 
-      <label>الفئة</label>
-      <select required>
-        <option value="">اختر الفئة</option>
-        <option value="electronics">إلكترونيات</option>
-        <option value="cars">سيارات</option>
-        <option value="watches">ساعات</option>
-        <option value="realestate">عقارات</option>
-        <option value="fashion">أزياء</option>
-        <option value="home">منزل ومطبخ</option>
-      </select>
+  <label>الفئة</label>
+  <select id="prodCategory">
+    <option value="electronics">إلكترونيات</option>
+    <option value="watches">ساعات</option>
+    <option value="cars">سيارات</option>
+    <option value="realestate">عقارات</option>
+    <option value="fashion">أزياء</option>
+    <option value="home">منزل ومطبخ</option>
+  </select>
 
-      <label>الحالة</label>
-      <select required>
-        <option value="">اختر الحالة</option>
-        <option value="جديد">جديد</option>
-        <option value="شبه جديد">شبه جديد</option>
-        <option value="مستعمل">مستعمل</option>
-      </select>
+  <label>الحالة</label>
+  <select id="prodCondition">
+    <option value="new">جديد</option>
+    <option value="used">مستعمل</option>
+    <option value="used_good">شبه جديد</option>
+  </select>
 
-      <label>السعر</label>
-      <input type="number" placeholder="أدخل السعر" required>
+  <label>السعر</label>
+  <input id="prodPrice" type="number" placeholder="مثال: 2999">
 
-      <label>رفع صورة المنتج</label>
-      <input type="file" accept="image/*" required>
+  <label>الوصف</label>
+  <textarea id="prodDesc"></textarea>
 
-      <button class="btn" type="submit">نشر المنتج</button>
-    </form>
-  </section>
-</main>
+  <label>رابط صورة المنتج</label>
+  <input id="prodImg" placeholder="https://example.com/image.jpg">
 
-<footer class="footer">
-  <div class="footer-bottom">© 2026 نُخبة — جميع الحقوق محفوظة</div>
-</footer>
+  <button type="button" class="btn" onclick="submitProduct()">رفع المنتج</button>
+</form>
 
-<script src="../js/products.js"></script>
-<script src="../js/storage.js"></script>
+<script src="../js/nukhba-data.js"></script>
+<script>
+function submitProduct(){
+  const prod = {
+    id: Date.now(),
+    name: document.getElementById("prodName").value,
+    category: document.getElementById("prodCategory").value,
+    condition: document.getElementById("prodCondition").value,
+    price: Number(document.getElementById("prodPrice").value),
+    meta: document.getElementById("prodDesc").value,
+    image: document.getElementById("prodImg").value,
+    type: document.getElementById("prodCondition").value === 'new' ? 'new':'used',
+    badge: 'مفحوص',
+    rating:4.5,
+    reviews:0,
+    city:"الرياض",
+    warranty:"ضمان 1 شهر",
+    delivery:"توصيل سريع",
+    seller:"نُخبة المعتمد"
+  };
+  NUKHBA_PRODUCTS.push(prod);
+  alert("تم رفع المنتج ✅");
+  window.location.href="../index.html";
+}
+</script>
+
 </body>
 </html>
