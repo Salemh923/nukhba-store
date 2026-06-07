@@ -6,78 +6,63 @@
 <title>بيع منتج | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
-<style>
-body{margin:0;background:#030608;color:#fff;font-family:Tajawal,sans-serif}
-a{text-decoration:none;color:inherit}
-.page{width:min(1200px,94%);margin:auto;padding:40px 0}
-.form-section{background:linear-gradient(180deg,#151b20,#080b0e);border:1px solid #ffffff20;border-radius:24px;padding:28px;box-shadow:0 24px 70px #0008}
-.form-section h1{margin:0 0 18px;font-size:36px;color:var(--gold2)}
-.form-section label{display:block;margin:12px 0 6px;font-weight:700}
-.form-section input, .form-section select, .form-section textarea{width:100%;padding:12px;border-radius:14px;border:1px solid #ffffff22;background:#111;color:#fff;font-family:inherit}
-.form-section textarea{resize:none;height:120px}
-.form-section button{margin-top:18px;width:100%;padding:14px 0;font-weight:900;border:0;border-radius:14px;background:linear-gradient(135deg,#f3d18a,#ad762d);color:#111;cursor:pointer;transition:.35s}
-.form-section button:hover{transform:translateY(-3px)}
-
-.empty{padding:44px 22px;text-align:center;color:#aaa}
-</style>
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/animations.css">
 </head>
 <body>
 
-<main class="page">
+<header class="luxury-header">
+  <div class="header-inner container">
+    <a class="logo" href="../index.html">نُخ<span>بة</span><small>NUKHBA</small></a>
+  </div>
+</header>
 
-<section class="form-section">
-<h1>بيع منتجك</h1>
+<main class="container">
+  <div class="section-head">
+    <h2>بيع منتجك</h2>
+    <a href="../index.html">الرئيسية ‹</a>
+  </div>
 
-<label>اسم المنتج</label>
-<input type="text" id="productName" placeholder="أدخل اسم المنتج">
+  <section class="page-grid">
+    <form class="sell-form">
+      <label>اسم المنتج</label>
+      <input type="text" placeholder="أدخل اسم المنتج" required>
 
-<label>فئة المنتج</label>
-<select id="productCategory">
-<option value="electronics">إلكترونيات</option>
-<option value="cars">سيارات</option>
-<option value="realestate">عقارات</option>
-<option value="watches">ساعات</option>
-<option value="fashion">أزياء</option>
-<option value="home">منزل ومطبخ</option>
-</select>
+      <label>الفئة</label>
+      <select required>
+        <option value="">اختر الفئة</option>
+        <option value="electronics">إلكترونيات</option>
+        <option value="cars">سيارات</option>
+        <option value="watches">ساعات</option>
+        <option value="realestate">عقارات</option>
+        <option value="fashion">أزياء</option>
+        <option value="home">منزل ومطبخ</option>
+      </select>
 
-<label>السعر (ريال)</label>
-<input type="number" id="productPrice" placeholder="أدخل سعر المنتج">
+      <label>الحالة</label>
+      <select required>
+        <option value="">اختر الحالة</option>
+        <option value="جديد">جديد</option>
+        <option value="شبه جديد">شبه جديد</option>
+        <option value="مستعمل">مستعمل</option>
+      </select>
 
-<label>وصف المنتج</label>
-<textarea id="productDesc" placeholder="صف حالته ومميزاته"></textarea>
+      <label>السعر</label>
+      <input type="number" placeholder="أدخل السعر" required>
 
-<label>رابط الصورة</label>
-<input type="text" id="productImage" placeholder="https://">
+      <label>رفع صورة المنتج</label>
+      <input type="file" accept="image/*" required>
 
-<button onclick="submitProduct()">رفع المنتج</button>
-</section>
-
+      <button class="btn" type="submit">نشر المنتج</button>
+    </form>
+  </section>
 </main>
 
-<footer>© 2026 نُخبة — بيع المنتجات</footer>
+<footer class="footer">
+  <div class="footer-bottom">© 2026 نُخبة — جميع الحقوق محفوظة</div>
+</footer>
 
-<script>
-function submitProduct(){
-  let name=document.getElementById("productName").value.trim();
-  let cat=document.getElementById("productCategory").value;
-  let price=Number(document.getElementById("productPrice").value);
-  let desc=document.getElementById("productDesc").value.trim();
-  let img=document.getElementById("productImage").value.trim();
-
-  if(!name || !price || !img){
-    alert("املأ جميع الحقول المطلوبة!");
-    return;
-  }
-
-  let products=JSON.parse(localStorage.getItem("nukhba_cart"))||[];
-  products.push({name,cat,price,details:desc,image:img,qty:1});
-  localStorage.setItem("nukhba_cart",JSON.stringify(products));
-
-  alert("تم رفع المنتج ✅");
-  window.location.href="../index.html";
-}
-</script>
-
+<script src="../js/products.js"></script>
+<script src="../js/storage.js"></script>
 </body>
 </html>
