@@ -4,37 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>المفضلة | نُخبة</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
-
-<style>
-.favorites-page{
-max-width:1400px;
-margin:50px auto;
-padding:20px;
-}
-
-.empty-box{
-background:#111;
-padding:50px;
-border-radius:20px;
-text-align:center;
-border:1px solid #333;
-}
-
-.empty-box h2{
-margin-bottom:15px;
-}
-
-.empty-box p{
-color:#aaa;
-margin-bottom:20px;
-}
-</style>
-
 </head>
+<body>
 
+<main class="container" style="padding:60px 0;">
+<h1>المفضلة ❤️</h1>
+<section class="products" id="favoritesBox"></section>
+<a href="../index.html" class="btn">العودة للتسوق</a>
+</main>
+
+<script>
+let fav = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
+const box = document.getElementById("favoritesBox");
+
+if(fav.length === 0){
+  box.innerHTML = `<div class="card"><h3>لا توجد منتجات محفوظة</h3><p class="meta">اضغط على القلب في أي منتج لإضافته هنا.</p></div>`;
+}else{
+  box.innerHTML = fav.map(name=>`
+    <div class="card">
+      <h3>${name}</h3>
+      <p class="meta">منتج محفوظ في المفضلة</p>
+    </div>
+  `).join("");
+}
+</script>
+
+</body>
+</html>
 <body>
 
 <div class="favorites-page">
