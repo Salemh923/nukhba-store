@@ -870,17 +870,24 @@ footer{
 <script>
 function addToCart(name, price, image){
   let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
+
   let found = cart.find(item => item.name === name);
 
   if(found){
     found.qty += 1;
   }else{
-    cart.push({name:name, price:Number(price), image:image, qty:1});
+    cart.push({
+      name:name,
+      price:Number(price),
+      image:image,
+      qty:1
+    });
   }
 
   localStorage.setItem("nukhba_cart", JSON.stringify(cart));
+  updateCartCount();
   showToast("تمت إضافة المنتج إلى السلة ✅");
-updateCartCount();
+}
 
 function addToWishlist(name){
   let wish = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
@@ -891,6 +898,34 @@ function addToWishlist(name){
 
   localStorage.setItem("nukhba_wishlist", JSON.stringify(wish));
   showToast("تمت إضافة المنتج إلى المفضلة ❤️");
+}
+
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
+  let total = cart.reduce((sum,item)=> sum + item.qty, 0);
+  let badge = document.getElementById("cartCount");
+
+  if(badge){
+    badge.innerText = total;
+    badge.style.display = total > 0 ? "flex" : "none";
+  }
+}
+
+function showToast(message){
+  let oldToast = document.querySelector(".toast");
+  if(oldToast){
+    oldToast.remove();
+  }
+
+  let toast = document.createElement("div");
+  toast.className = "toast";
+  toast.innerText = message;
+
+  document.body.appendChild(toast);
+
+  setTimeout(()=>{
+    toast.remove();
+  },1800);
 }
 
 const searchInput = document.querySelector(".search");
@@ -904,48 +939,8 @@ if(searchInput){
     });
   });
 }
-  function updateCartCount(){
-  let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
-
-  let total = cart.reduce((sum,item)=>{
-    return sum + item.qty;
-  },0);
-
-  let badge = document.getElementById("cartCount");
-
-  if(badge){
-    badge.innerText = total;
-
-    if(total > 0){
-      badge.style.display = "flex";
-    }else{
-      badge.style.display = "none";
-    }
-  }
-}
-
-function showToast(message){
-
-  let oldToast = document.querySelector(".toast");
-
-  if(oldToast){
-    oldToast.remove();
-  }
-
-  let toast = document.createElement("div");
-
-  toast.className = "toast";
-  toast.innerText = message;
-
-  document.body.appendChild(toast);
-
-  setTimeout(()=>{
-    toast.remove();
-  },1800);
-}
 
 updateCartCount();
-  
 </script>
 
 </body>
