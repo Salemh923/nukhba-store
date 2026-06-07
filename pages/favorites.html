@@ -8,30 +8,82 @@
 <link rel="stylesheet" href="../css/style.css">
 
 <style>
-body{background:#030608;color:#fff;font-family:Tajawal,sans-serif}
-.fav-header{background:#05090c;border-bottom:1px solid #ffffff18;padding:14px 0}
+body{background:#030608;color:#fff;font-family:Tajawal,sans-serif;margin:0}
+a{text-decoration:none;color:inherit}
+.fav-header{background:#05090c;border-bottom:1px solid #ffffff18;padding:16px 0}
 .fav-nav{width:min(1200px,94%);margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.fav-logo{font-size:34px;font-weight:900;color:#fff;line-height:1.2}
+.fav-logo{font-size:34px;font-weight:900;line-height:1.1}
 .fav-logo span{color:#d8a64b}
-.fav-logo small{display:block;font-size:10px;letter-spacing:4px;color:#d8a64b}
-.fav-page{padding:40px 0}
-.fav-title{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}
+.fav-logo small{display:block;font-size:10px;letter-spacing:4px;color:#d8a64b;margin-top:5px}
+
+.fav-page{width:min(1200px,94%);margin:auto;padding:34px 0 60px}
+.fav-title{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:24px}
 .fav-title h1{font-size:40px;margin:0}
-.fav-title p{color:#aaa;margin:8px 0 0}
-.fav-layout{display:grid;grid-template-columns:1fr 330px;gap:25px;align-items:start}
+.fav-title p{color:#aaa;margin:8px 0 0;line-height:1.7}
+
+.fav-layout{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
 .fav-list{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.fav-card{background:linear-gradient(180deg,#151b20,#080b0e);border:1px solid #ffffff20;border-radius:22px;overflow:hidden;box-shadow:0 25px 70px #0008}
-.fav-card img{width:100%;height:230px;object-fit:contain;background:radial-gradient(circle,#d8a64b22,#0b1014 60%);padding:18px}
+
+.fav-card{
+  background:linear-gradient(180deg,#151b20,#080b0e);
+  border:1px solid #ffffff20;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 24px 70px #0009;
+}
+.fav-card img{
+  width:100%;
+  height:220px;
+  object-fit:contain;
+  background:radial-gradient(circle,#d8a64b22,#0b1014 60%);
+  padding:18px;
+}
 .fav-content{padding:20px}
-.fav-card h3{margin:0 0 10px;font-size:24px}
-.fav-card p{color:#aaa;line-height:1.7}
-.fav-badge{display:inline-block;padding:6px 12px;border-radius:8px;background:#d8a64b;color:#111;font-weight:900;margin-bottom:12px}
-.fav-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
-.fav-side{background:linear-gradient(180deg,#181f24,#090c0f);border:1px solid #d8a64b55;border-radius:24px;padding:26px;box-shadow:0 30px 90px #000}
-.side-row{display:flex;justify-content:space-between;border-bottom:1px solid #ffffff14;padding:14px 0;color:#ddd}
-.empty{grid-column:1/-1;background:linear-gradient(180deg,#151b20,#080b0e);border:1px solid #ffffff20;border-radius:24px;padding:60px 25px;text-align:center}
-@media(max-width:900px){.fav-layout{grid-template-columns:1fr}.fav-list{grid-template-columns:1fr}}
-@media(max-width:600px){.fav-logo{font-size:28px}.fav-nav .btn{padding:11px 14px;font-size:13px}.fav-title{flex-direction:column;align-items:flex-start}}
+.fav-badge{display:inline-block;background:#d8a64b;color:#111;font-weight:900;border-radius:8px;padding:6px 12px;margin-bottom:12px}
+.fav-card h3{font-size:22px;margin:0 0 10px}
+.fav-card p{color:#aaa;line-height:1.7;margin:0 0 12px}
+.fav-price{font-size:25px;font-weight:900;color:#f3d18a;margin:10px 0 16px}
+.fav-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+.fav-side{
+  background:linear-gradient(180deg,#181f24,#090c0f);
+  border:1px solid #d8a64b55;
+  border-radius:24px;
+  padding:24px;
+  box-shadow:0 30px 90px #000;
+}
+.fav-side h2{margin:0 0 18px;font-size:28px}
+.side-row{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid #ffffff14;padding:14px 0;color:#ddd}
+.side-row b{color:#fff}
+
+.empty{
+  grid-column:1/-1;
+  background:linear-gradient(180deg,#151b20,#080b0e);
+  border:1px solid #ffffff20;
+  border-radius:24px;
+  padding:55px 25px;
+  text-align:center;
+  box-shadow:0 25px 70px #0008;
+}
+.empty h2{font-size:30px;margin:0 0 12px}
+.empty p{color:#aaa;line-height:1.8;margin:0 0 22px}
+
+footer{text-align:center;color:#aaa;padding:30px 0;border-top:1px solid #ffffff12}
+
+@media(max-width:850px){
+  .fav-layout{grid-template-columns:1fr}
+  .fav-list{grid-template-columns:1fr}
+  .fav-side{order:2}
+}
+
+@media(max-width:600px){
+  .fav-nav{align-items:center}
+  .fav-logo{font-size:28px}
+  .fav-nav .btn{padding:11px 14px;font-size:13px}
+  .fav-title{flex-direction:column;align-items:flex-start}
+  .fav-title h1{font-size:34px}
+  .fav-actions{grid-template-columns:1fr}
+}
 </style>
 </head>
 
@@ -44,12 +96,12 @@ body{background:#030608;color:#fff;font-family:Tajawal,sans-serif}
   </div>
 </header>
 
-<main class="container fav-page">
+<main class="fav-page">
 
   <div class="fav-title">
     <div>
       <h1>المفضلة ❤️</h1>
-      <p>منتجاتك المحفوظة مع الصور والتفاصيل.</p>
+      <p>منتجاتك المحفوظة تظهر هنا بصورها وتفاصيلها بشكل منظم.</p>
     </div>
     <a href="../index.html#products" class="btn secondary">تصفح المنتجات</a>
   </div>
@@ -138,7 +190,7 @@ function renderFavorites(){
           <span class="fav-badge">محفوظ</span>
           <h3>${name}</h3>
           <p>${product.desc}</p>
-          <h2 style="color:#f3d18a;">${product.priceText}</h2>
+          <div class="fav-price">${product.priceText}</div>
           <div class="fav-actions">
             <button class="btn" onclick="addToCart('${name}')">أضف للسلة</button>
             <button class="btn secondary" onclick="removeFavorite(${index})">إزالة</button>
@@ -159,16 +211,8 @@ function addToCart(name){
   let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
   let found = cart.find(item => item.name === name);
 
-  if(found){
-    found.qty += 1;
-  }else{
-    cart.push({
-      name:name,
-      price:product.price,
-      image:product.image,
-      qty:1
-    });
-  }
+  if(found){ found.qty += 1; }
+  else{ cart.push({name:name,price:product.price,image:product.image,qty:1}); }
 
   localStorage.setItem("nukhba_cart", JSON.stringify(cart));
   alert("تمت إضافة المنتج إلى السلة ✅");
