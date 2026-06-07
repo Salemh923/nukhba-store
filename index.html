@@ -465,6 +465,52 @@ footer{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-5px)}
 }
+  .cart-link{position:relative}
+
+.cart-count{
+  position:absolute;
+  top:-8px;
+  left:-8px;
+  min-width:24px;
+  height:24px;
+  padding:0 7px;
+  border-radius:999px;
+  background:#f3d18a;
+  color:#111;
+  font-size:13px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 0 20px rgba(243,209,138,.45);
+}
+
+.toast{
+  position:fixed;
+  bottom:25px;
+  right:50%;
+  transform:translateX(50%);
+  background:linear-gradient(135deg,#171d21,#090c0f);
+  color:#fff;
+  border:1px solid rgba(216,166,75,.45);
+  padding:14px 22px;
+  border-radius:14px;
+  z-index:9999;
+  box-shadow:0 20px 60px #000;
+  font-weight:800;
+  animation:toastShow .3s ease;
+}
+
+@keyframes toastShow{
+  from{
+    opacity:0;
+    transform:translateX(50%) translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(50%) translateY(0);
+  }
+}
 
 .search{
   animation: softPulse 3.5s ease-in-out infinite;
@@ -529,7 +575,7 @@ footer{
 }
 
 .icon-item{
-  animation: iconBreath 4s ease-in-out infinite;
+  animation: iconBreath 6s ease-in-out infinite;
 }
 
 @keyframes iconBreath{
@@ -539,7 +585,7 @@ footer{
   /* ===== NUKHBA LUXURY MOTION ===== */
 
 .logo{
-  animation: floatLogo 4s ease-in-out infinite;
+  animation: floatLogo 6s ease-in-out infinite;
 }
 
 @keyframes floatLogo{
@@ -548,7 +594,7 @@ footer{
 }
 
 .search{
-  animation: searchGlow 3.5s ease-in-out infinite;
+  animation: searchGlow 5s ease-in-out infinite;
 }
 
 @keyframes searchGlow{
@@ -557,7 +603,7 @@ footer{
 }
 
 .icon-item{
-  animation: iconBreath 4s ease-in-out infinite;
+  animation: iconBreath 6s ease-in-out infinite;
 }
 
 @keyframes iconBreath{
@@ -599,7 +645,7 @@ footer{
 
 .cat img,
 .card img{
-  transition:1s ease;
+  transition:2s ease;
 }
 
 .cat:hover img,
@@ -620,7 +666,7 @@ footer{
 .cat,
 .trust,
 .sell-panel{
-  transition:.4s ease;
+  transition:.5s ease;
 }
 
 .card:hover,
@@ -656,9 +702,8 @@ footer{
       <a href="pages/sell.html" class="btn">بيع منتجك</a>
 
       <div class="icons">
-        <a class="icon-item" href="pages/cart.html">
-          <svg viewBox="0 0 24 24"><path d="M6 6h15l-2 9H8L6 6z"></path><path d="M6 6 5 3H2"></path><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle></svg>
-          <span>السلة</span>
+        <a class="icon-item cart-link" href="pages/cart.html">
+  <span class="cart-count" id="cartCount">0</span>
         </a>
 
         <a class="icon-item" href="pages/favorites.html">
@@ -828,8 +873,8 @@ function addToCart(name, price, image){
   }
 
   localStorage.setItem("nukhba_cart", JSON.stringify(cart));
-  alert("تمت إضافة المنتج إلى السلة ✅");
-}
+  showToast("تمت إضافة المنتج إلى السلة ✅");
+updateCartCount();
 
 function addToWishlist(name){
   let wish = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
@@ -839,7 +884,7 @@ function addToWishlist(name){
   }
 
   localStorage.setItem("nukhba_wishlist", JSON.stringify(wish));
-  alert("تمت إضافة المنتج إلى المفضلة ❤️");
+  showToast("تمت إضافة المنتج إلى المفضلة ❤️");
 }
 
 const searchInput = document.querySelector(".search");
@@ -853,6 +898,48 @@ if(searchInput){
     });
   });
 }
+  function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
+
+  let total = cart.reduce((sum,item)=>{
+    return sum + item.qty;
+  },0);
+
+  let badge = document.getElementById("cartCount");
+
+  if(badge){
+    badge.innerText = total;
+
+    if(total > 0){
+      badge.style.display = "flex";
+    }else{
+      badge.style.display = "none";
+    }
+  }
+}
+
+function showToast(message){
+
+  let oldToast = document.querySelector(".toast");
+
+  if(oldToast){
+    oldToast.remove();
+  }
+
+  let toast = document.createElement("div");
+
+  toast.className = "toast";
+  toast.innerText = message;
+
+  document.body.appendChild(toast);
+
+  setTimeout(()=>{
+    toast.remove();
+  },1800);
+}
+
+updateCartCount();
+  
 </script>
 
 </body>
