@@ -80,6 +80,9 @@ a{text-decoration:none;color:inherit}
 .cart-info p{color:#aaa;margin:5px 0;line-height:1.6}
 .cart-price{font-size:23px;font-weight:900;color:#f3d18a;margin-top:8px}
 
+.qty-control{display:flex;align-items:center;gap:6px;margin-top:6px}
+.qty-control button{width:28px;height:28px;border:0;border-radius:6px;background:#ffffff12;color:#fff;cursor:pointer;font-weight:900}
+
 .remove-btn{
   background:#ffffff12;
   color:#fff;
@@ -141,7 +144,6 @@ footer{text-align:center;color:#aaa;padding:30px 0;border-top:1px solid #ffffff1
   .cart-item{grid-template-columns:1fr;text-align:center;padding:18px}
   .cart-item img{width:100%;height:210px}
   .remove-btn{width:100%}
-
   .summary{padding:22px 18px}
   .empty{padding:34px 18px}
 }
@@ -234,7 +236,13 @@ function renderCart(){
         <img src="${item.image}" alt="${item.name}">
         <div class="cart-info">
           <h3>${item.name}</h3>
-          <p>الكمية: ${item.qty}</p>
+          <p>الكمية: 
+            <span class="qty-control">
+              <button onclick="changeQty(${index},-1)">-</button>
+              ${item.qty}
+              <button onclick="changeQty(${index},1)">+</button>
+            </span>
+          </p>
           <p>منتج محفوظ في سلة نُخبة</p>
           <div class="cart-price">${(item.price * item.qty).toLocaleString()} ريال</div>
         </div>
@@ -245,6 +253,13 @@ function renderCart(){
 
   countBox.innerText = count;
   totalBox.innerText = total.toLocaleString() + " ريال";
+}
+
+function changeQty(index, delta){
+  cart[index].qty += delta;
+  if(cart[index].qty < 1) cart[index].qty = 1;
+  localStorage.setItem("nukhba_cart", JSON.stringify(cart));
+  renderCart();
 }
 
 function removeItem(index){
@@ -264,7 +279,8 @@ function checkout(){
     alert("السلة فارغة");
     return;
   }
-  window.location.href = "checkout.html";
+  alert("تم الانتقال إلى صفحة الدفع 🚀");
+  // هنا يمكن إضافة الرابط الفعلي لبوابة الدفع
 }
 
 renderCart();
