@@ -5,48 +5,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>حسابي | نُخبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/responsive.css">
-<link rel="stylesheet" href="../css/animations.css">
+<style>
+body{margin:0;background:#030608;color:#fff;font-family:Tajawal,sans-serif}
+a{text-decoration:none;color:inherit}
+.page{width:min(1200px,94%);margin:auto;padding:35px 0 70px}
+.top{background:#05090c;border-bottom:1px solid #ffffff18;padding:16px 0}
+.nav{width:min(1200px,94%);margin:auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:34px;font-weight:900}.logo span{color:#d8a64b}
+.btn{border:0;cursor:pointer;color:#111;font-weight:900;border-radius:12px;padding:13px 22px;background:linear-gradient(135deg,#f3d18a,#ad762d);display:inline-block}
+h1{font-size:38px;margin:0 0 24px}
+.section{background:#111820;border:1px solid #ffffff18;border-radius:24px;padding:24px;margin-bottom:24px}
+.section h2{margin:0 0 14px;color:#f3d18a}
+.section a{display:block;margin:6px 0;color:#ddd}
+</style>
 </head>
 <body>
 
-<header class="luxury-header">
-  <div class="header-inner container">
-    <a class="logo" href="../index.html">نُخ<span>بة</span><small>NUKHBA</small></a>
+<header class="top">
+  <div class="nav">
+    <div class="logo">نُخ<span>بة</span></div>
+    <a class="btn" href="../index.html">الرئيسية</a>
   </div>
 </header>
 
-<main class="container">
-  <div class="section-head">
-    <h2>حسابي</h2>
-    <a href="../index.html">الرئيسية ‹</a>
-  </div>
+<main class="page">
+<h1>حسابي</h1>
 
-  <section class="account-layout">
-    <form>
-      <label>الاسم الكامل</label>
-      <input type="text" placeholder="أدخل الاسم الكامل">
+<section class="section">
+<h2>البيانات الشخصية</h2>
+<a href="#">تسجيل الدخول</a>
+<a href="#">إنشاء حساب</a>
+</section>
 
-      <label>البريد الإلكتروني</label>
-      <input type="email" placeholder="example@mail.com">
+<section class="section">
+<h2>طلباتي</h2>
+<a href="#">عرض الطلبات السابقة</a>
+</section>
 
-      <label>كلمة المرور</label>
-      <input type="password" placeholder="********">
+<section class="section">
+<h2>المفضلة</h2>
+<a href="favorites.html">عرض المنتجات المحفوظة</a>
+</section>
 
-      <label>تأكيد كلمة المرور</label>
-      <input type="password" placeholder="********">
+<section class="section">
+<h2>منتجاتي المعروضة</h2>
+<a href="sell.html">إضافة منتج جديد</a>
+</section>
 
-      <button class="btn" type="submit">حفظ التغييرات</button>
-    </form>
-  </section>
 </main>
 
-<footer class="footer">
-  <div class="footer-bottom">© 2026 نُخبة — جميع الحقوق محفوظة</div>
-</footer>
-
-<script src="../js/products.js"></script>
-<script src="../js/storage.js"></script>
 </body>
 </html>
