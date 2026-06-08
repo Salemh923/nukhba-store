@@ -240,6 +240,55 @@ button,input{font-family:inherit}
   margin-bottom: 4px; /* أقل من السابق */
 }
 
+  /* ==== تعديل حجم المربعات والأيقونات العلوية ==== */
+.lux-box {
+  width: 100px;          /* العرض */
+  height: 100px;         /* الارتفاع */
+  padding: 6px;          /* تقليل الفراغ الداخلي */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;              /* المسافة بين الأيقونة والنص */
+}
+
+.lux-box b {
+  font-size: 14px;       /* حجم النص داخل المربع */
+  margin-top: 2px;
+}
+
+/* ==== تعديل مسافة الصفوف ==== */
+.trust-row {
+  margin-top: 26px !important;   /* المسافة بين الصفوف */
+  gap: 16px !important;          /* المسافة بين كل مربع وآخر */
+}
+
+/* ==== تعديل مربعات trust ==== */
+.trust {
+  min-height: 132px !important;       /* ارتفاع المربع */
+  padding: 18px 12px !important;      /* padding داخل المربع */
+  font-size: 14px !important;         /* حجم النص */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* ==== نص داخل trust ==== */
+.trust b {
+  display: block;
+  color: #f3d18a;
+  font-size: 15px;
+  margin-top: 0;
+  line-height: 1.2;
+}
+
+/* ==== إضافة مسافة إضافية للـ hero لمنع التداخل ==== */
+.hero {
+  margin-bottom: 26px !important;
+}
 /* تعديل حجم المربعات نفسها */
 .lux-box {
   width: 100px;      /* العرض */
