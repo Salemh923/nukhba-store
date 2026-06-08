@@ -233,25 +233,29 @@ button,input{font-family:inherit}
   filter:drop-shadow(0 0 8px rgba(243,209,138,.45));
 }
 
-.lux-icon{
-  width:36px;
-  height:36px;
-  margin-bottom:6px;
+/* تصغير حجم الأيقونات داخل المربعات */
+.lux-icon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 4px; /* أقل من السابق */
 }
 
-.trust{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
+/* تعديل حجم المربعات نفسها */
+.lux-box {
+  width: 100px;      /* العرض */
+  height: 100px;     /* الارتفاع */
+  padding: 6px;      /* تقليل الفراغ الداخلي */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;          /* المسافة بين الأيقونة والنص */
 }
 
-.trust b{
-  display:block;
-  color:#f3d18a;
-  font-size:20px;
-  margin-top:4px;
+/* تصغير النص داخل المربع */
+.lux-box b {
+  font-size: 14px;   /* أصغر من السابق */
+  margin-top: 2px;
 }
 
   /* ===== تحسين مربعات المميزات ===== */
