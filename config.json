@@ -1,0 +1,156 @@
+{
+  "site": {
+    "name": "متجر النخبة",
+    "description": "قالب متجر إلكتروني احترافي قابل للتخصيص",
+    "currency": "ريال",
+    "direction": "rtl",
+    "language": "ar",
+    "logo": "assets/logos/logo.png",
+    "favicon": "assets/logos/logo.png"
+  },
+  "theme": {
+    "primaryColor": "#0f172a",
+    "secondaryColor": "#c9a227",
+    "accentColor": "#16a34a",
+    "backgroundColor": "#ffffff",
+    "textColor": "#111827",
+    "fontFamily": "Tajawal, Arial, sans-serif",
+    "borderRadius": "18px"
+  },
+  "banners": {
+    "hero": {
+      "title": "تسوق منتجات النخبة",
+      "subtitle": "منتجات مختارة بعناية بتجربة شراء عصرية",
+      "image": "assets/banners/hero-banner.jpg",
+      "buttonText": "تسوق الآن",
+      "buttonLink": "pages/category.html"
+    },
+    "trust": {
+      "title": "ضمان وثقة",
+      "subtitle": "دفع آمن، شحن سريع، ودعم مستمر",
+      "image": "assets/banners/trust-banner.jpg"
+    }
+  },
+  "navigation": [
+    {
+      "label": "الرئيسية",
+      "url": "index.html"
+    },
+    {
+      "label": "الأقسام",
+      "url": "pages/category.html"
+    },
+    {
+      "label": "المفضلة",
+      "url": "pages/favorites.html"
+    },
+    {
+      "label": "السلة",
+      "url": "pages/cart.html"
+    },
+    {
+      "label": "تواصل معنا",
+      "url": "pages/contact.html"
+    }
+  ],
+  "categories": [
+    {
+      "id": "electronics",
+      "name": "الإلكترونيات",
+      "image": "assets/images/electronics.jpg"
+    },
+    {
+      "id": "cars",
+      "name": "السيارات",
+      "image": "assets/images/cars.jpg"
+    },
+    {
+      "id": "realestate",
+      "name": "العقارات",
+      "image": "assets/images/realestate.jpg"
+    },
+    {
+      "id": "fashion",
+      "name": "الموضة",
+      "image": "assets/images/fashion.jpg"
+    },
+    {
+      "id": "watches",
+      "name": "الساعات",
+      "image": "assets/images/watches.jpg"
+    },
+    {
+      "id": "home",
+      "name": "المنزل",
+      "image": "assets/images/home.jpg"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "iPhone 15 Pro Max",
+      "price": 4999,
+      "oldPrice": 5499,
+      "category": "electronics",
+      "image": "assets/images/iphone15promax.jpg",
+      "badge": "الأكثر مبيعاً"
+    },
+    {
+      "id": 2,
+      "name": "MacBook Air M2",
+      "price": 5999,
+      "oldPrice": 6499,
+      "category": "electronics",
+      "image": "assets/images/macbookairm2.jpg",
+      "badge": "عرض خاص"
+    },
+    {
+      "id": 3,
+      "name": "Samsung S24 Ultra",
+      "price": 4399,
+      "oldPrice": 4899,
+      "category": "electronics",
+      "image": "assets/images/s24ultra.jpg",
+      "badge": "جديد"
+    },
+    {
+      "id": 4,
+      "name": "Sony XM5",
+      "price": 1299,
+      "oldPrice": 1499,
+      "category": "electronics",
+      "image": "assets/images/sonyxm5.jpg",
+      "badge": "خصم"
+    },
+    {
+      "id": 5,
+      "name": "Luxury Watch",
+      "price": 15000,
+      "oldPrice": 17500,
+      "category": "watches",
+      "image": "assets/images/luxury-watch.jpg",
+      "badge": "فاخر"
+    },
+    {
+      "id": 6,
+      "name": "Land Cruiser",
+      "price": 320000,
+      "oldPrice": 345000,
+      "category": "cars",
+      "image": "assets/images/landcruiser.jpg",
+      "badge": "مميز"
+    }
+  ],
+  "contact": {
+    "phone": "+966500000000",
+    "email": "info@example.com",
+    "whatsapp": "+966500000000",
+    "address": "الرياض، المملكة العربية السعودية"
+  },
+  "features": [
+    "تعديل المحتوى من ملف config.json",
+    "ألوان وخطوط قابلة للتحكم",
+    "منتجات وأقسام ديناميكية",
+    "جاهز للتطوير والربط الخلفي"
+  ]
+}
