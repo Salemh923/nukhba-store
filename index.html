@@ -246,6 +246,133 @@ button,input{font-family:inherit}
   .lux-icon{width:17px;height:17px;margin-bottom:3px}
   .trust b{font-size:12px}
 }
+
+  /* ===== لمسات حركة فاخرة مستمرة ===== */
+
+.top-strip{
+  position:relative;
+  overflow:hidden;
+}
+
+.top-strip::before{
+  content:"";
+  position:absolute;
+  top:0;
+  right:-40%;
+  width:40%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(243,209,138,.16),transparent);
+  animation:stripShine 5s linear infinite;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent 0%,rgba(243,209,138,.08) 45%,transparent 70%);
+  transform:translateX(100%);
+  animation:heroSweep 7s ease-in-out infinite;
+  pointer-events:none;
+}
+
+.logo{
+  animation:logoFloat 4s ease-in-out infinite;
+}
+
+.hero-stat{
+  animation:softPulse 3.5s ease-in-out infinite;
+}
+
+.hero-stat:nth-child(2){animation-delay:.5s}
+.hero-stat:nth-child(3){animation-delay:1s}
+
+.cat img{
+  animation:slowZoom 9s ease-in-out infinite alternate;
+}
+
+.card{
+  animation:cardBreath 5s ease-in-out infinite;
+}
+
+.card:nth-child(2){animation-delay:.4s}
+.card:nth-child(3){animation-delay:.8s}
+.card:nth-child(4){animation-delay:1.2s}
+.card:nth-child(5){animation-delay:1.6s}
+
+.trust{
+  position:relative;
+  overflow:hidden;
+}
+
+.trust::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(243,209,138,.10),transparent);
+  transform:translateX(120%);
+  animation:trustGlow 6s linear infinite;
+}
+
+.payment-icons{
+  animation:paymentFloat 4s ease-in-out infinite;
+}
+
+.social-icons a{
+  animation:socialPulse 3.5s ease-in-out infinite;
+}
+
+.social-icons a:nth-child(2){animation-delay:.3s}
+.social-icons a:nth-child(3){animation-delay:.6s}
+.social-icons a:nth-child(4){animation-delay:.9s}
+.social-icons a:nth-child(5){animation-delay:1.2s}
+.social-icons a:nth-child(6){animation-delay:1.5s}
+
+@keyframes stripShine{
+  from{right:-40%}
+  to{right:110%}
+}
+
+@keyframes heroSweep{
+  0%{transform:translateX(100%);opacity:0}
+  20%{opacity:1}
+  55%{transform:translateX(-100%);opacity:.8}
+  100%{transform:translateX(-100%);opacity:0}
+}
+
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+
+@keyframes softPulse{
+  0%,100%{box-shadow:0 0 0 rgba(243,209,138,0)}
+  50%{box-shadow:0 0 22px rgba(243,209,138,.20)}
+}
+
+@keyframes slowZoom{
+  from{transform:scale(1)}
+  to{transform:scale(1.06)}
+}
+
+@keyframes cardBreath{
+  0%,100%{box-shadow:0 24px 65px #0008}
+  50%{box-shadow:0 24px 78px rgba(216,166,75,.16)}
+}
+
+@keyframes trustGlow{
+  from{transform:translateX(120%)}
+  to{transform:translateX(-120%)}
+}
+
+@keyframes paymentFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-3px)}
+}
+
+@keyframes socialPulse{
+  0%,100%{box-shadow:0 0 0 rgba(243,209,138,0)}
+  50%{box-shadow:0 0 18px rgba(243,209,138,.25)}
+}
 </style>
 </head>
 
